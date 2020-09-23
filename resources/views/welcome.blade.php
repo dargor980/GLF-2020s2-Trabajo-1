@@ -7,10 +7,11 @@
         <title>GLF SEM2 T1</title>
 
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" />
+        <script src="{{asset('js/app.js')}}" defer></script>
 
     </head>
     <body>
-        <div class="container bg-dark mt-5">
+        <div class="container bg-dark mt-5" id="app">
             <grafo></grafo>
         </div>
     </body>
