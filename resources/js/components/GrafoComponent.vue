@@ -18,6 +18,10 @@
 export default {
     data(){
         return{
+            grafo:[],
+            vertice:{id:'', label:''},
+            arista:{from:'',to:''},
+            aristas:[],
 
         }
     },
@@ -25,7 +29,51 @@ export default {
     created(){
 
     },
+
     methods:{
+
+        createGrafo(){
+
+        },
+
+        conexo(){
+
+        },
+
+        matrizAdyacencia(n,e){   // n: numero de vértices; e: número de aristas
+            var matrix=[]; 
+            for (var i=0; i<n;i++)  // creación de la matriz 
+            {
+                matrix[i]=new Array(n);
+            }
+            for (var i=0; i<e;i++)     
+            {
+                var n1= this.aristas[i].from;
+                var n2= this.aristas[i].to;
+                matrix[n1][n2]=1;
+                matrix[n2][n1]=1;
+            }
+        },
+
+        isEuleriano(){
+
+        },
+
+        isHamiltoniano(){
+
+        },
+
+        caminoCorto(){
+
+        },
+
+        kruskal(){
+
+        },
+
+        flujoMaximo(){
+
+        }
 
     },
 
