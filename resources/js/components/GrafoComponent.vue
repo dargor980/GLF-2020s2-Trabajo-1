@@ -57,8 +57,17 @@ export default {
 
     methods:{
 
+        crearNodo(a,b){
+            let nodo={id:a,label:b};
+            this.nodos.push(nodo);
+        },
+        crearArista(a,b){
+            let arista={from:a,to:b};
+            this.aristas.push(arista);
+        },
         createGrafo(){
-            
+            this.crearNodo();
+            this.crearArista();
         },
 
         matrizAdyacencia(n,e){   // n: numero de vértices; e: número de aristas

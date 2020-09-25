@@ -1986,7 +1986,24 @@ __webpack_require__.r(__webpack_exports__);
     this.matrizAdyacencia(this.nodos.length, this.aristas.length); //test de función
   },
   methods: {
-    createGrafo: function createGrafo() {},
+    crearNodo: function crearNodo(a, b) {
+      var nodo = {
+        id: a,
+        label: b
+      };
+      this.nodos.push(nodo);
+    },
+    crearArista: function crearArista(a, b) {
+      var arista = {
+        from: a,
+        to: b
+      };
+      this.aristas.push(arista);
+    },
+    createGrafo: function createGrafo() {
+      this.crearNodo();
+      this.crearArista();
+    },
     matrizAdyacencia: function matrizAdyacencia(n, e) {
       // n: numero de vértices; e: número de aristas
       var matrix = [];
@@ -50037,8 +50054,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
