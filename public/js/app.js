@@ -1964,6 +1964,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1973,7 +1984,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       arista: {
         from: '',
-        to: ''
+        to: '',
+        value: '0'
       },
       nodos: [],
       aristas: [],
@@ -1981,7 +1993,8 @@ __webpack_require__.r(__webpack_exports__);
 
       /*variables de control */
       option: '',
-      create: false
+      create: false,
+      createAris: false
     };
   },
   created: function created() {
@@ -1991,25 +2004,42 @@ __webpack_require__.r(__webpack_exports__);
     selectGrafo: function selectGrafo() {},
     createNode: function createNode() {
       this.create = true;
+      this.createAris = false;
+    },
+    createArista: function createArista() {
+      this.createAris = true;
+      this.create = false;
     },
     crearNodo: function crearNodo() {
-      //implementado uwu
+      //agrega un nodo al array de nodos , grafo 
       this.nodos.push(this.nodo);
+      this.nodo = {
+        id: '',
+        label: ''
+      };
 
-      for (var i = 0; i < this.nodos.length; i++) {
-        console.log(this.nodos.length);
+      for (var i = 0; i < this.nodos.length; i++) // test de la funcion 
+      {
+        console.log(this.nodos.length); //largo del array de nodos 
       }
     },
     crearArista: function crearArista() {
-      var arista = {
-        from: a,
-        to: b
+      // agrega conexion entre nodos 
+      this.aristas.push(this.arista);
+      this.arista = {
+        from: '',
+        to: '',
+        value: '0'
       };
-      this.aristas.push(arista);
-    },
-    createGrafo: function createGrafo() {
-      this.crearNodo();
-      this.crearArista();
+
+      for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
+      {
+        console.log(this.aristas[i].from); // desdedonde sale la aritsa
+
+        console.log(this.aristas[i].to); //hacia donde llega la arista
+
+        console.log(this.aristas[i].value); // peso de la arista
+      }
     },
     matrizAdyacencia: function matrizAdyacencia(n, e) {
       // n: numero de vértices; e: número de aristas
@@ -37732,7 +37762,16 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.createArista }
+                      },
+                      [_vm._v("Añadir arista")]
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm.create
@@ -37809,8 +37848,104 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
+          _c("div", [
+            _vm.createAris
+              ? _c("div", [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.crearArista($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.from,
+                            expression: "arista.from"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.from },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "from", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(
+                        " Ingrese nodo desde el cual sale la arista:\n                                  "
+                      ),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.to,
+                            expression: "arista.to"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.to },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "to", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(
+                        " Ingrese nodo al cual llega la arista:\n                                  "
+                      ),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.value,
+                            expression: "arista.value"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.value },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "value", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" Ingrese el peso de la arista: "),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Agregar")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _vm.option === 2
-            ? _c("div", { staticClass: "col-md-5 card mr-3" }, [_vm._m(1)])
+            ? _c("div", { staticClass: "col-md-5 card mr-3" }, [_vm._m(0)])
             : _vm._e()
         ])
       ]),
@@ -37826,20 +37961,10 @@ var render = function() {
       _vm._v("Análisis del Grafo")
     ]),
     _vm._v(" "),
-    _vm._m(2)
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("button", { staticClass: "btn btn-success" }, [
-        _vm._v("Añadir arista")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -50099,15 +50224,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!****************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GrafoComponent_vue_vue_type_template_id_19aec86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=template&id=19aec86e& */ "./resources/js/components/GrafoComponent.vue?vue&type=template&id=19aec86e&");
 /* harmony import */ var _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -50137,7 +50261,7 @@ component.options.__file = "resources/js/components/GrafoComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50183,8 +50307,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

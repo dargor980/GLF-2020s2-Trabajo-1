@@ -20,7 +20,7 @@
                                         <button class="btn btn-success" @click="createNode">Añadir nodo</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button class="btn btn-success">Añadir arista</button>
+                                        <button class="btn btn-success" @click="createArista">Añadir arista</button>
                                     </div>
                                
                             </div>
@@ -33,7 +33,18 @@
                                     </form>
                                 </div>
                           </div>
+                          <div>
+                              <div v-if="createAris">
+                                  <form @submit.prevent="crearArista">
+                                      <input type="text" v-model="arista.from"> Ingrese nodo desde el cual sale la arista:
+                                      <input type="text" v-model="arista.to"> Ingrese nodo al cual llega la arista:
+                                      <input type="text" v-model="arista.value"> Ingrese el peso de la arista: <!--peso de la arista en caso de ser etiquetado  -->
+                                      <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                  </form>
 
+                              </div>
+                          </div>
+                            
                           <div class="col-md-5 card mr-3" v-if="option===2">
                             <div>
                                 <h3> opcion 2</h3>
@@ -59,7 +70,7 @@ export default {
     data(){
         return{
             nodo:{id:'', label:''},
-            arista:{from:'',to:''},
+            arista:{from:'',to:'',value:'0'},
             nodos:[],
 
              
@@ -72,6 +83,7 @@ export default {
 
             option:'',
             create:false,
+            createAris:false,
 
         }
     },
@@ -91,23 +103,32 @@ export default {
         createNode()
         {
             this.create=true;
+            this.createAris=false;
+        },
+        createArista(){
+            this.createAris=true;
+            this.create=false;
         },
 
-        crearNodo(){   //implementado uwu
+        crearNodo(){   //agrega un nodo al array de nodos , grafo 
             this.nodos.push(this.nodo);
-            for(var i=0;i<this.nodos.length;i++)
+            this.nodo={id:'', label:''}
+            for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
-                console.log(this.nodos.length);
+                console.log(this.nodos.length); //largo del array de nodos 
             }
         },
-        crearArista(){
-            let arista={from:a,to:b};
-            this.aristas.push(arista);
+        crearArista(){ // agrega conexion entre nodos 
+            this.aristas.push(this.arista);
+            this.arista={from:'',to:'',value:'0'}
+            for(var i=0;i<this.aristas.length;i++) // test de la funcion 
+            {
+                console.log(this.aristas[i].from); // desdedonde sale la aritsa
+                console.log(this.aristas[i].to); //hacia donde llega la arista
+                console.log(this.aristas[i].value);// peso de la arista
+            }
         },
-        createGrafo(){
-            this.crearNodo();
-            this.crearArista();
-        },
+        
 
         matrizAdyacencia(n,e){   // n: numero de vértices; e: número de aristas
             let matrix=[]; 
