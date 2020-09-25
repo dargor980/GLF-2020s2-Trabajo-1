@@ -35,7 +35,7 @@ export default {
             nodo:{id:'', label:''},
             arista:{from:'',to:''},
             nodos:[{id:1,label:'nodo 1'},  //datos para test de funcion
-                   {id:2,label:'nodo2'},
+                   {id:2,label:'nodo 2'},
                    {id:3,label:'nodo 3'},
                    {id:4,label:'nodo 4'}],
 
