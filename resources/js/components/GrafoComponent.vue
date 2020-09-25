@@ -2,7 +2,21 @@
     <div class="px-3">
         <h1 class="text-center fredoka">Crear Grafo</h1>
         <div class="row justify-content-center">
-            <div id="tarjeta" class="col-md-5 card mr-3">Aqui opciones para crear grafo</div>
+            <div  class="col-md-5 card mr-3">
+                <div class="row ml-3 mt-3">
+                    <h3>Seleccione el tipo de grafo:</h3>
+                    <form @submit.prevent="">
+                        <select  class="custom-select  mb-3">
+                            <option selected :value="0">Seleccione un tipo de grafo:</option>
+                            <option>Grafo simple /dirigido</option>
+                            <option>Grafo dirigido /etiquetado</option>     
+                        </select>
+                        <div class="container text-center">
+                            <button class="btn btn-success mb-3 text-white" type="submit">Seleccionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div id="tarjeta" class="col-md-5 card ml-3">Aqui dejaria mostrando los grafos siempre</div>
         </div>
         <hr>
@@ -18,30 +32,33 @@
 export default {
     data(){
         return{
-            grafo:[{id:1,label:'nodo 1'},  //datos para test de funcion
+            nodo:{id:'', label:''},
+            arista:{from:'',to:''},
+            nodos:[{id:1,label:'nodo 1'},  //datos para test de funcion
                    {id:2,label:'nodo2'},
                    {id:3,label:'nodo 3'},
                    {id:4,label:'nodo 4'}],
 
-            vertice:{id:'', label:''},
-            arista:{from:'',to:''},
+             
             aristas:[{from:1,to:2},
                      {from:2,to:3},
                      {from:3,to:4},
                      {from:4,to:1},
                      {from:1,to:3}],
+            addgrafo: false,
 
         }
     },
 
     created(){
-        this.matrizAdyacencia(this.grafo.length,this.aristas.length); //test de función
+        this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
     },
+
 
     methods:{
 
         createGrafo(){
-
+            
         },
 
         matrizAdyacencia(n,e){   // n: numero de vértices; e: número de aristas

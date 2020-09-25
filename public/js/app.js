@@ -1924,10 +1924,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      grafo: [{
+      nodo: {
+        id: '',
+        label: ''
+      },
+      arista: {
+        from: '',
+        to: ''
+      },
+      nodos: [{
         id: 1,
         label: 'nodo 1'
       }, //datos para test de funcion
@@ -1941,14 +1963,6 @@ __webpack_require__.r(__webpack_exports__);
         id: 4,
         label: 'nodo 4'
       }],
-      vertice: {
-        id: '',
-        label: ''
-      },
-      arista: {
-        from: '',
-        to: ''
-      },
       aristas: [{
         from: 1,
         to: 2
@@ -1964,11 +1978,12 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         from: 1,
         to: 3
-      }]
+      }],
+      addgrafo: false
     };
   },
   created: function created() {
-    this.matrizAdyacencia(this.grafo.length, this.aristas.length); //test de función
+    this.matrizAdyacencia(this.nodos.length, this.aristas.length); //test de función
   },
   methods: {
     createGrafo: function createGrafo() {},
@@ -37618,49 +37633,90 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "px-3" }, [
+    _c("h1", { staticClass: "text-center fredoka" }, [_vm._v("Crear Grafo")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-5 card mr-3" }, [
+        _c("div", { staticClass: "row ml-3 mt-3" }, [
+          _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [
+              _c("select", { staticClass: "custom-select  mb-3" }, [
+                _c(
+                  "option",
+                  { attrs: { selected: "" }, domProps: { value: 0 } },
+                  [_vm._v("Seleccione un tipo de grafo:")]
+                ),
+                _vm._v(" "),
+                _c("option", [_vm._v("Grafo simple /dirigido")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Grafo dirigido /etiquetado")])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
+        [_vm._v("Aqui dejaria mostrando los grafos siempre")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h1", { staticClass: "text-center fredoka" }, [
+      _vm._v("Análisis del Grafo")
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-3" }, [
-      _c("h1", { staticClass: "text-center fredoka" }, [_vm._v("Crear Grafo")]),
+    return _c("div", { staticClass: "container text-center" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success mb-3 text-white",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Seleccionar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-5 card mr-3", attrs: { id: "tarjeta" } },
+        [_vm._v("Aqui opciones para crear grafo")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-5 card mr-3", attrs: { id: "tarjeta" } },
-          [_vm._v("Aqui opciones para crear grafo")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
-          [_vm._v("Aqui dejaria mostrando los grafos siempre")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("h1", { staticClass: "text-center fredoka" }, [
-        _vm._v("Análisis del Grafo")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-5 card mr-3", attrs: { id: "tarjeta" } },
-          [_vm._v("Aqui opciones para crear grafo")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
-          [_vm._v("Aqui dejaria mostrando los grafos siempre")]
-        )
-      ])
+      _c(
+        "div",
+        { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
+        [_vm._v("Aqui dejaria mostrando los grafos siempre")]
+      )
     ])
   }
 ]
