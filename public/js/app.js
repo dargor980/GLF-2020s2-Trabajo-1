@@ -1938,6 +1938,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1949,51 +1975,32 @@ __webpack_require__.r(__webpack_exports__);
         from: '',
         to: ''
       },
-      nodos: [{
-        id: 1,
-        label: 'nodo 1'
-      }, //datos para test de funcion
-      {
-        id: 2,
-        label: 'nodo2'
-      }, {
-        id: 3,
-        label: 'nodo 3'
-      }, {
-        id: 4,
-        label: 'nodo 4'
-      }],
-      aristas: [{
-        from: 1,
-        to: 2
-      }, {
-        from: 2,
-        to: 3
-      }, {
-        from: 3,
-        to: 4
-      }, {
-        from: 4,
-        to: 1
-      }, {
-        from: 1,
-        to: 3
-      }],
-      addgrafo: false
+      nodos: [],
+      aristas: [],
+      addgrafo: false,
+
+      /*variables de control */
+      option: '',
+      create: false
     };
   },
   created: function created() {
     this.matrizAdyacencia(this.nodos.length, this.aristas.length); //test de función
   },
   methods: {
-    crearNodo: function crearNodo(a, b) {
-      var nodo = {
-        id: a,
-        label: b
-      };
-      this.nodos.push(nodo);
+    selectGrafo: function selectGrafo() {},
+    createNode: function createNode() {
+      this.create = true;
     },
-    crearArista: function crearArista(a, b) {
+    crearNodo: function crearNodo() {
+      //implementado uwu
+      this.nodos.push(this.nodo);
+
+      for (var i = 0; i < this.nodos.length; i++) {
+        console.log(this.nodos.length);
+      }
+    },
+    crearArista: function crearArista() {
       var arista = {
         from: a,
         to: b
@@ -37659,38 +37666,158 @@ var render = function() {
           _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
           _vm._v(" "),
           _c(
-            "form",
+            "select",
             {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.option,
+                  expression: "option"
+                }
+              ],
+              staticClass: "custom-select  mb-3",
               on: {
-                submit: function($event) {
-                  $event.preventDefault()
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.option = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
             [
-              _c("select", { staticClass: "custom-select  mb-3" }, [
-                _c(
-                  "option",
-                  { attrs: { selected: "" }, domProps: { value: 0 } },
-                  [_vm._v("Seleccione un tipo de grafo:")]
-                ),
-                _vm._v(" "),
-                _c("option", [_vm._v("Grafo simple /dirigido")]),
-                _vm._v(" "),
-                _c("option", [_vm._v("Grafo dirigido /etiquetado")])
+              _c(
+                "option",
+                { attrs: { selected: "" }, domProps: { value: 0 } },
+                [_vm._v("Seleccione un tipo de grafo:")]
+              ),
+              _vm._v(" "),
+              _c("option", { domProps: { value: 1 } }, [
+                _vm._v("Grafo simple /no dirigido")
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("option", { domProps: { value: 2 } }, [
+                _vm._v("Grafo simple /dirigido ")
+              ]),
+              _vm._v(" "),
+              _c("option", { domProps: { value: 2 } }, [
+                _vm._v("Grafo dirigido /etiquetado")
+              ])
             ]
-          )
+          ),
+          _vm._v(" "),
+          _vm.option === 1
+            ? _c("div", { staticClass: "card mr-3" }, [
+                _c("div", [
+                  _c("h3", [_vm._v("Grafo simple No dirigido")]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.createNode }
+                      },
+                      [_vm._v("Añadir nodo")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]),
+                _vm._v(" "),
+                _vm.create
+                  ? _c("div", [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.crearNodo($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.nodo.id,
+                                expression: "nodo.id"
+                              }
+                            ],
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.nodo.id },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.nodo, "id", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " ingrese el id:\n                                    "
+                          ),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.nodo.label,
+                                expression: "nodo.label"
+                              }
+                            ],
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.nodo.label },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.nodo, "label", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " ingrese nombre:\n\n                                    "
+                          ),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("Agregar")]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.option === 2
+            ? _c("div", { staticClass: "col-md-5 card mr-3" }, [_vm._m(1)])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
-        [_vm._v("Aqui dejaria mostrando los grafos siempre")]
-      )
+      _c("div", { staticClass: "col-md-5 card ml-3", attrs: { id: "grafo" } }, [
+        _vm._v("Aqui dejaria mostrando los grafos siempre")
+      ])
     ]),
     _vm._v(" "),
     _c("hr"),
@@ -37699,7 +37826,7 @@ var render = function() {
       _vm._v("Análisis del Grafo")
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -37707,16 +37834,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success mb-3 text-white",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Seleccionar")]
-      )
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("button", { staticClass: "btn btn-success" }, [
+        _vm._v("Añadir arista")
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h3", [_vm._v(" opcion 2")])])
   },
   function() {
     var _vm = this
@@ -49971,14 +50099,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!****************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GrafoComponent_vue_vue_type_template_id_19aec86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=template&id=19aec86e& */ "./resources/js/components/GrafoComponent.vue?vue&type=template&id=19aec86e&");
 /* harmony import */ var _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -50008,7 +50137,7 @@ component.options.__file = "resources/js/components/GrafoComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50054,8 +50183,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

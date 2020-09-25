@@ -5,19 +5,45 @@
             <div  class="col-md-5 card mr-3">
                 <div class="row ml-3 mt-3">
                     <h3>Seleccione el tipo de grafo:</h3>
-                    <form @submit.prevent="">
-                        <select  class="custom-select  mb-3">
+                        <select  class="custom-select  mb-3" v-model="option">
                             <option selected :value="0">Seleccione un tipo de grafo:</option>
-                            <option>Grafo simple /dirigido</option>
-                            <option>Grafo dirigido /etiquetado</option>     
-                        </select>
-                        <div class="container text-center">
-                            <button class="btn btn-success mb-3 text-white" type="submit">Seleccionar</button>
-                        </div>
-                    </form>
+                            <option :value="1">Grafo simple /no dirigido</option>
+                            <option :value="2">Grafo simple /dirigido </option>
+                            <option :value="2">Grafo dirigido /etiquetado</option>     
+                        </select> 
+                          <div class="card mr-3" v-if="option===1">
+                            <div>
+                                <h3>Grafo simple No dirigido</h3>
+                                <hr>
+                                
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success">Añadir arista</button>
+                                    </div>
+                               
+                            </div>
+                                <div v-if="create">
+                                    <form @submit.prevent="crearNodo">
+                                        <input type="text" v-model="nodo.id"> ingrese el id:
+                                        <input type="text" v-model="nodo.label"> ingrese nombre:
+
+                                        <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                    </form>
+                                </div>
+                          </div>
+
+                          <div class="col-md-5 card mr-3" v-if="option===2">
+                            <div>
+                                <h3> opcion 2</h3>
+                            </div>
+                          </div>
                 </div>
             </div>
-            <div id="tarjeta" class="col-md-5 card ml-3">Aqui dejaria mostrando los grafos siempre</div>
+
+          
+            <div id="grafo" class="col-md-5 card ml-3">Aqui dejaria mostrando los grafos siempre</div>
         </div>
         <hr>
         <h1 class="text-center fredoka">Análisis del Grafo</h1>
@@ -34,18 +60,18 @@ export default {
         return{
             nodo:{id:'', label:''},
             arista:{from:'',to:''},
-            nodos:[{id:1,label:'nodo 1'},  //datos para test de funcion
-                   {id:2,label:'nodo2'},
-                   {id:3,label:'nodo 3'},
-                   {id:4,label:'nodo 4'}],
+            nodos:[],
 
              
-            aristas:[{from:1,to:2},
-                     {from:2,to:3},
-                     {from:3,to:4},
-                     {from:4,to:1},
-                     {from:1,to:3}],
+            aristas:[],
             addgrafo: false,
+
+
+
+            /*variables de control */
+
+            option:'',
+            create:false,
 
         }
     },
@@ -57,11 +83,24 @@ export default {
 
     methods:{
 
-        crearNodo(a,b){
-            let nodo={id:a,label:b};
-            this.nodos.push(nodo);
+        selectGrafo()
+        {
+
         },
-        crearArista(a,b){
+
+        createNode()
+        {
+            this.create=true;
+        },
+
+        crearNodo(){   //implementado uwu
+            this.nodos.push(this.nodo);
+            for(var i=0;i<this.nodos.length;i++)
+            {
+                console.log(this.nodos.length);
+            }
+        },
+        crearArista(){
             let arista={from:a,to:b};
             this.aristas.push(arista);
         },
