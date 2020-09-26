@@ -4,47 +4,71 @@
         <div class="row justify-content-center">
             <div  class="col-md-5 card mr-3">
                 <div class="row ml-3 mt-3">
-                    <h3>Seleccione el tipo de grafo:</h3>
-                        <select  class="custom-select  mb-3" v-model="option">
+                    <h3>Seleccione el tipo de grafo:</h3> <!--implementación preliminar. Modificar estilos -->
+                        <select  class="custom-select  mb-3 mr-3" v-model="option">
                             <option selected :value="0">Seleccione un tipo de grafo:</option>
                             <option :value="1">Grafo simple /no dirigido</option>
                             <option :value="2">Grafo simple /dirigido </option>
                             <option :value="2">Grafo dirigido /etiquetado</option>     
                         </select> 
-                          <div class="card mr-3" v-if="option===1">
+                          <div class="container px-3" v-if="option===1">
                             <div>
-                                <h3>Grafo simple No dirigido</h3>
+                                <h3 class="mt-2">Grafo simple No dirigido</h3>
                                 <hr>
-                                
-                                    <div class="col-md-6">
-                                        <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <button class="btn btn-success" @click="createArista">Añadir arista</button>
-                                    </div>
+                                    
                                
                             </div>
-                                <div v-if="create">
-                                    <form @submit.prevent="crearNodo">
-                                        <input type="text" v-model="nodo.id"> ingrese el id:
-                                        <input type="text" v-model="nodo.label"> ingrese nombre:
+                                <div v-if="create" class="my-3">
+                                    <div class=" ml-2">
+                                        <form @submit.prevent="crearNodo">
+                                            <div class="form-group">
+                                                <label for="id">ingrese el id: </label> 
+                                                <input type="text" v-model="nodo.id" name="id" class="form-control"> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="label">ingrese nombre:</label> 
+                                                <input type="text" v-model="nodo.label" name="label" class="form-control"> 
 
-                                        <button class="btn btn-success btn-sm" type="submit">Agregar</button>
-                                    </form>
+                                            </div>
+
+                                            <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+
+                                <div v-if="createAris" class="my-3">
+                                  <form @submit.prevent="crearArista">
+                                      <div class="form-group">
+                                          <label>Ingrese nodo desde el cual sale la arista:</label>
+                                          <input type="text" v-model="arista.from" class="form-control"> 
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Ingrese nodo al cual llega la arista:</label>
+                                          <input type="text" v-model="arista.to" class="form-control"> 
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Ingrese el peso de la arista: </label>
+                                          <input type="text" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
+                                      </div>
+                               
+                                      <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                      <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
+                                  </form>
                                 </div>
                           </div>
                           <div>
-                              <div v-if="createAris">
-                                  <form @submit.prevent="crearArista">
-                                      <input type="text" v-model="arista.from"> Ingrese nodo desde el cual sale la arista:
-                                      <input type="text" v-model="arista.to"> Ingrese nodo al cual llega la arista:
-                                      <input type="text" v-model="arista.value"> Ingrese el peso de la arista: <!--peso de la arista en caso de ser etiquetado  -->
-                                      <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
-                                  </form>
-
-                              </div>
+                              
                           </div>
-                            
+                           <!--/implementación preliminar. Modificar estilos --> 
                           <div class="col-md-5 card mr-3" v-if="option===2">
                             <div>
                                 <h3> opcion 2</h3>
@@ -69,35 +93,28 @@
 export default {
     data(){
         return{
+            /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
             nodo:{id:'', label:''},
-<<<<<<< HEAD
             arista:{from:'',to:''},
-            nodos:[{id:1,label:'nodo 1'},  //datos para test de funcion
-                   {id:2,label:'nodo 2'},
-                   {id:3,label:'nodo 3'},
-                   {id:4,label:'nodo 4'}],
-=======
-            arista:{from:'',to:'',value:'0'},
-            nodos:[],
->>>>>>> 81e99261251d51aa561fa8a88c74f18f6a91efe2
-
-             
+            nodos:[],   
             aristas:[],
-            addgrafo: false,
+            
 
 
 
             /*variables de control */
-
+            addgrafo: false,
             option:'',
             create:false,
             createAris:false,
 
         }
     },
-
+    
     created(){
+        
         this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+        
     },
 
 
@@ -108,12 +125,20 @@ export default {
 
         },
 
-        createNode()
+        drawGrafo(){  //función que toma los nodos y aristas y procede a graficarlos en el container
+            var container= document.getElementById("grafo");
+            var data={nodes:this.nodos,
+                      edges:this.aristas};
+            var options={};
+            var network= new vis.Network(container,data,options);
+        },
+
+        createNode()  //funcion para el control del flujo de vistas 
         {
             this.create=true;
             this.createAris=false;
         },
-        createArista(){
+        createArista(){  //función para el control del flujo de vistas
             this.createAris=true;
             this.create=false;
         },
@@ -121,6 +146,7 @@ export default {
         crearNodo(){   //agrega un nodo al array de nodos , grafo 
             this.nodos.push(this.nodo);
             this.nodo={id:'', label:''}
+            this.drawGrafo();
             for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
                 console.log(this.nodos.length); //largo del array de nodos 
@@ -129,16 +155,17 @@ export default {
         crearArista(){ // agrega conexion entre nodos 
             this.aristas.push(this.arista);
             this.arista={from:'',to:'',value:'0'}
+            this.drawGrafo();
             for(var i=0;i<this.aristas.length;i++) // test de la funcion 
             {
-                console.log(this.aristas[i].from); // desdedonde sale la aritsa
+                console.log(this.aristas[i].from); // desde donde sale la aritsa
                 console.log(this.aristas[i].to); //hacia donde llega la arista
                 console.log(this.aristas[i].value);// peso de la arista
             }
         },
         
 
-        matrizAdyacencia(n,e){   // n: numero de vértices; e: número de aristas
+        matrizAdyacencia(n,e){   // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
             let matrix=[]; 
             for (var i=0; i<n;i++)  // creación de la matriz 
             {
@@ -163,7 +190,7 @@ export default {
             
         },
 
-        matrizAdyacenciaDirigido(n,e)
+        matrizAdyacenciaDirigido(n,e)   //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
         {
             let matrix=[];
             for(var i=0; i<n; i++)
@@ -186,7 +213,7 @@ export default {
         },
 
 
-        conexo(matCaminos,n){
+        conexo(matCaminos,n){   //Función que retorna valor booleano que determina si un grafo es o no conexo
             for(var i=0;i<n;i++)
             {
                 for(var j=0;j<n;j++)
@@ -201,19 +228,19 @@ export default {
         },
 
 
-        isEuleriano(){
+        isEuleriano(){  //Función que retorna un valor booleano que determina si un grafo es o no Euleriano
 
         },
 
-        isHamiltoniano(){
+        isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
 
         },
 
-        caminoCorto(){
+        caminoCorto(){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
 
         },
 
-        kruskal(){
+        kruskal(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
 
         },
 
