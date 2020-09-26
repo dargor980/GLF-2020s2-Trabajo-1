@@ -1938,6 +1938,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1947,8 +1984,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       arista: {
         from: '',
-        to: ''
+        to: '',
+        value: '0'
       },
+<<<<<<< HEAD
       nodos: [{
         id: 1,
         label: 'nodo 1'
@@ -1980,29 +2019,61 @@ __webpack_require__.r(__webpack_exports__);
         to: 3
       }],
       addgrafo: false
+=======
+      nodos: [],
+      aristas: [],
+      addgrafo: false,
+
+      /*variables de control */
+      option: '',
+      create: false,
+      createAris: false
+>>>>>>> 81e99261251d51aa561fa8a88c74f18f6a91efe2
     };
   },
   created: function created() {
     this.matrizAdyacencia(this.nodos.length, this.aristas.length); //test de función
   },
   methods: {
-    crearNodo: function crearNodo(a, b) {
-      var nodo = {
-        id: a,
-        label: b
-      };
-      this.nodos.push(nodo);
+    selectGrafo: function selectGrafo() {},
+    createNode: function createNode() {
+      this.create = true;
+      this.createAris = false;
     },
-    crearArista: function crearArista(a, b) {
-      var arista = {
-        from: a,
-        to: b
-      };
-      this.aristas.push(arista);
+    createArista: function createArista() {
+      this.createAris = true;
+      this.create = false;
     },
-    createGrafo: function createGrafo() {
-      this.crearNodo();
-      this.crearArista();
+    crearNodo: function crearNodo() {
+      //agrega un nodo al array de nodos , grafo 
+      this.nodos.push(this.nodo);
+      this.nodo = {
+        id: '',
+        label: ''
+      };
+
+      for (var i = 0; i < this.nodos.length; i++) // test de la funcion 
+      {
+        console.log(this.nodos.length); //largo del array de nodos 
+      }
+    },
+    crearArista: function crearArista() {
+      // agrega conexion entre nodos 
+      this.aristas.push(this.arista);
+      this.arista = {
+        from: '',
+        to: '',
+        value: '0'
+      };
+
+      for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
+      {
+        console.log(this.aristas[i].from); // desdedonde sale la aritsa
+
+        console.log(this.aristas[i].to); //hacia donde llega la arista
+
+        console.log(this.aristas[i].value); // peso de la arista
+      }
     },
     matrizAdyacencia: function matrizAdyacencia(n, e) {
       // n: numero de vértices; e: número de aristas
@@ -37659,38 +37730,263 @@ var render = function() {
           _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
           _vm._v(" "),
           _c(
-            "form",
+            "select",
             {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.option,
+                  expression: "option"
+                }
+              ],
+              staticClass: "custom-select  mb-3",
               on: {
-                submit: function($event) {
-                  $event.preventDefault()
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.option = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 }
               }
             },
             [
-              _c("select", { staticClass: "custom-select  mb-3" }, [
-                _c(
-                  "option",
-                  { attrs: { selected: "" }, domProps: { value: 0 } },
-                  [_vm._v("Seleccione un tipo de grafo:")]
-                ),
-                _vm._v(" "),
-                _c("option", [_vm._v("Grafo simple /dirigido")]),
-                _vm._v(" "),
-                _c("option", [_vm._v("Grafo dirigido /etiquetado")])
+              _c(
+                "option",
+                { attrs: { selected: "" }, domProps: { value: 0 } },
+                [_vm._v("Seleccione un tipo de grafo:")]
+              ),
+              _vm._v(" "),
+              _c("option", { domProps: { value: 1 } }, [
+                _vm._v("Grafo simple /no dirigido")
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("option", { domProps: { value: 2 } }, [
+                _vm._v("Grafo simple /dirigido ")
+              ]),
+              _vm._v(" "),
+              _c("option", { domProps: { value: 2 } }, [
+                _vm._v("Grafo dirigido /etiquetado")
+              ])
             ]
-          )
+          ),
+          _vm._v(" "),
+          _vm.option === 1
+            ? _c("div", { staticClass: "card mr-3" }, [
+                _c("div", [
+                  _c("h3", [_vm._v("Grafo simple No dirigido")]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.createNode }
+                      },
+                      [_vm._v("Añadir nodo")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.createArista }
+                      },
+                      [_vm._v("Añadir arista")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.create
+                  ? _c("div", [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.crearNodo($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.nodo.id,
+                                expression: "nodo.id"
+                              }
+                            ],
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.nodo.id },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.nodo, "id", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " ingrese el id:\n                                    "
+                          ),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.nodo.label,
+                                expression: "nodo.label"
+                              }
+                            ],
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.nodo.label },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.nodo, "label", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " ingrese nombre:\n\n                                    "
+                          ),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("Agregar")]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", [
+            _vm.createAris
+              ? _c("div", [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.crearArista($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.from,
+                            expression: "arista.from"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.from },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "from", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(
+                        " Ingrese nodo desde el cual sale la arista:\n                                  "
+                      ),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.to,
+                            expression: "arista.to"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.to },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "to", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(
+                        " Ingrese nodo al cual llega la arista:\n                                  "
+                      ),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.arista.value,
+                            expression: "arista.value"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.arista.value },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.arista, "value", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" Ingrese el peso de la arista: "),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Agregar")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm.option === 2
+            ? _c("div", { staticClass: "col-md-5 card mr-3" }, [_vm._m(0)])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
-        [_vm._v("Aqui dejaria mostrando los grafos siempre")]
-      )
+      _c("div", { staticClass: "col-md-5 card ml-3", attrs: { id: "grafo" } }, [
+        _vm._v("Aqui dejaria mostrando los grafos siempre")
+      ])
     ]),
     _vm._v(" "),
     _c("hr"),
@@ -37707,16 +38003,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success mb-3 text-white",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Seleccionar")]
-      )
-    ])
+    return _c("div", [_c("h3", [_vm._v(" opcion 2")])])
   },
   function() {
     var _vm = this
