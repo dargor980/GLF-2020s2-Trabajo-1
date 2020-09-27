@@ -8,10 +8,12 @@
 
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        
+        
         <script src="{{asset('js/app.js')}}" defer></script>
 
     </head>
-    <body>
+    <body id="particles-js">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <!--NOMBRE-->
@@ -35,8 +37,13 @@
                 <!--/OPCIONES NAVBAR-->
             </div>
         </nav>
-        <div class="mt-5 mx-5" id="app">
-            <grafo></grafo>
+        <div>
+
+            <div class="mt-5 mx-5" id="app">
+                <particles></particles>
+            </div>
         </div>
+  
+        
     </body>
 </html>

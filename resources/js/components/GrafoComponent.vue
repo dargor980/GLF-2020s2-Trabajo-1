@@ -117,8 +117,11 @@ export default {
         
     },
 
+    
 
     methods:{
+         
+            
 
         selectGrafo()
         {
