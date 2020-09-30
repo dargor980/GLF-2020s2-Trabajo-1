@@ -155,7 +155,7 @@ export default {
                 console.log(this.nodos.length); //largo del array de nodos 
             }
         },
-        crearArista(){ // agrega conexion entre nodos 
+        crearArista(){ // agrega conexion entre nodos
             this.aristas.push(this.arista);
             this.arista={from:'',to:'',value:'0'}
             this.drawGrafo();
@@ -239,8 +239,13 @@ export default {
 
         },
 
-        caminoCorto(){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
-
+        caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
+            var camino=[];
+            var x=nodo_inicial;
+            for(var i=1; i<nodos.length;i++)
+            {
+                
+            }
         },
 
         kruskal(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
@@ -249,7 +254,89 @@ export default {
 
         flujoMaximo(){
 
-        }
+        },
+
+
+
+        multiplicarMatriz(matrizA,matrizB)
+        {
+            var res=[];
+            var sum=0;
+            
+            for(var i=0; i<matrizA.length;i++)
+            {
+                res[i]= new array(matrizA.length);
+            }
+            
+            for(var a=0;a<matrizB.length;a++)
+            {
+                for(var i=0; i<matrizA.length;i++)
+                {
+                    sum=0;
+                    for(var j=0; j<matrizA.length;j++)
+                    {
+                        sum+= matrizA[i][j]*matrizB[j][a];
+                    }
+                    res[i][a]=sum;
+                }
+            }
+            return res;	
+        },
+
+        potencia(matriz,n)
+        {
+            var sum=0;
+            var aux=matriz;
+            var res;
+            for(var i=0; i<n;i++)
+            {
+                res=multiplicarMatriz(matriz,aux);
+                aux=res;
+            }	
+            return res;
+                
+        },
+
+        matrizCaminos(matrizadyacencia)
+        {
+            var caminos=[];
+            var matrizIdentidad=[];
+            for(var i=0; i<nodos.length;i++)
+            {
+                matrizIdentidad= new Array(nodos.length);
+            }
+            
+            for(var i=0; i<nodos.lenght;i++)
+            {
+                for(var j=0; j<nodos.length;j++)
+                {
+                    if(i===j)
+                    {
+                        matrizadyacencia[i][j]=1;
+                    }
+                    else{
+                        matrizadyacencia[i][j]=0;
+                    }
+                    
+                }
+            }
+            
+            var arraypotencias=[];
+            for(var i=0; i<nodos.length-1;i++)
+            {
+                if(i===0)
+                {
+                    arraypotencias[i]=matrizadyacencia;
+                }
+                else{
+                    arraypotencias[i]=potencia(matrizadyacencia,i+1);
+                }
+                
+            }
+            
+            caminos=sumaMat(arraypotencias);
+            return caminos;
+        },
 
     },
 
