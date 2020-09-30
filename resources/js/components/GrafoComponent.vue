@@ -113,8 +113,8 @@ export default {
     
     created(){
         
-        this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-        
+        //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+        this.sumaMat();
     },
 
     
@@ -152,7 +152,7 @@ export default {
             this.drawGrafo();
             for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
-                console.log(this.nodos.length); //largo del array de nodos 
+                //console.log(this.nodos.length); //largo del array de nodos 
             }
         },
         crearArista(){ // agrega conexion entre nodos
@@ -161,9 +161,9 @@ export default {
             this.drawGrafo();
             for(var i=0;i<this.aristas.length;i++) // test de la funcion 
             {
-                console.log(this.aristas[i].from); // desde donde sale la aritsa
-                console.log(this.aristas[i].to); //hacia donde llega la arista
-                console.log(this.aristas[i].value);// peso de la arista
+                // console.log(this.aristas[i].from); // desde donde sale la aritsa
+                // console.log(this.aristas[i].to); //hacia donde llega la arista
+                // console.log(this.aristas[i].value);// peso de la arista
             }
         },
         
@@ -300,26 +300,7 @@ export default {
         matrizCaminos(matrizadyacencia)
         {
             var caminos=[];
-            var matrizIdentidad=[];
-            for(var i=0; i<nodos.length;i++)
-            {
-                matrizIdentidad= new Array(nodos.length);
-            }
             
-            for(var i=0; i<nodos.lenght;i++)
-            {
-                for(var j=0; j<nodos.length;j++)
-                {
-                    if(i===j)
-                    {
-                        matrizadyacencia[i][j]=1;
-                    }
-                    else{
-                        matrizadyacencia[i][j]=0;
-                    }
-                    
-                }
-            }
             
             var arraypotencias=[];
             for(var i=0; i<nodos.length-1;i++)
@@ -338,7 +319,37 @@ export default {
             return caminos;
         },
 
+        sumaMat(matrizadyacencia){
+            //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
+            matrizId = this.matrizIdentidad();
+            console.log(matrizId);
+        },
+        matrizIdentidad(){
+            var matrizIdentidad=[];
+            for(var i=0; i<this.nodos.length;i++)
+            {
+                matrizIdentidad = new Array(this.nodos.length);
+            }
+            
+            for(var i=0; i<this.nodos.lenght;i++)
+            {
+                for(var j=0; j<this.nodos.length;j++)
+                {
+                    if(i===j)
+                    {
+                        matrizIdentidad[i][j]=1;
+                    }
+                    else{
+                        matrizIdentidad[i][j]=0;
+                    }
+                    
+                }
+            }
+            return matrizIdentidad;
+        }
+
     },
+    
 
 }
 </script>
