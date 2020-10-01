@@ -2011,8 +2011,26 @@ __webpack_require__.r(__webpack_exports__);
         from: '',
         to: ''
       },
-      nodos: [],
-      aristas: [],
+      nodos: [{
+        id: '1',
+        label: 'a'
+      }, {
+        id: '2',
+        label: 'b'
+      }, {
+        id: '3',
+        label: 'c'
+      }],
+      aristas: [{
+        from: '1',
+        to: '2'
+      }, {
+        from: '2',
+        to: '2'
+      }, {
+        from: '1',
+        to: '1'
+      }],
 
       /*variables de control */
       addgrafo: false,
@@ -2022,7 +2040,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.matrizAdyacencia(this.nodos.length, this.aristas.length); //test de función
+    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+    this.sumaMat(); //this.matrizIdentidad();
+    //let a = this.matrizAdyacencia();
+    //let b = this.matrizAdyacencia();
+    //this.multiplicarMatriz(a,b);
+    //this.potencia(b);
   },
   methods: {
     selectGrafo: function selectGrafo() {},
@@ -2056,12 +2079,11 @@ __webpack_require__.r(__webpack_exports__);
       this.drawGrafo();
 
       for (var i = 0; i < this.nodos.length; i++) // test de la funcion 
-      {
-        console.log(this.nodos.length); //largo del array de nodos 
+      {//console.log(this.nodos.length); //largo del array de nodos 
       }
     },
     crearArista: function crearArista() {
-      // agrega conexion entre nodos 
+      // agrega conexion entre nodos
       this.aristas.push(this.arista);
       this.arista = {
         from: '',
@@ -2071,17 +2093,17 @@ __webpack_require__.r(__webpack_exports__);
       this.drawGrafo();
 
       for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
-      {
-        console.log(this.aristas[i].from); // desde donde sale la aritsa
-
-        console.log(this.aristas[i].to); //hacia donde llega la arista
-
-        console.log(this.aristas[i].value); // peso de la arista
+      {// console.log(this.aristas[i].from); // desde donde sale la aritsa
+        // console.log(this.aristas[i].to); //hacia donde llega la arista
+        // console.log(this.aristas[i].value);// peso de la arista
       }
     },
-    matrizAdyacencia: function matrizAdyacencia(n, e) {
+    matrizAdyacencia: function matrizAdyacencia() {
       // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
       var matrix = [];
+      var n = this.nodos.length; //largo del array nodos
+
+      var e = this.aristas.length; //largo del array aristas
 
       for (var i = 0; i < n; i++) // creación de la matriz 
       {
@@ -2099,9 +2121,10 @@ __webpack_require__.r(__webpack_exports__);
         var n2 = this.aristas[i].to;
         matrix[n1 - 1][n2 - 1] = 1;
         matrix[n2 - 1][n1 - 1] = 1;
-      }
+      } //console.log(matrix);
 
-      console.log(matrix);
+
+      return matrix;
     },
     matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido(n, e) //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
     {
@@ -2139,11 +2162,106 @@ __webpack_require__.r(__webpack_exports__);
     },
     isHamiltoniano: function isHamiltoniano() {//FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
     },
-    caminoCorto: function caminoCorto() {//Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
+    caminoCorto: function caminoCorto(nodo_inicial) {
+      //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
+      var camino = [];
+      var x = nodo_inicial;
+
+      for (var i = 1; i < nodos.length; i++) {}
     },
     kruskal: function kruskal() {//Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
     },
-    flujoMaximo: function flujoMaximo() {}
+    flujoMaximo: function flujoMaximo() {},
+    multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //funcionando Multiplica 
+    {
+      var res = [];
+      var sum = 0;
+
+      for (var i = 0; i < matrizA.length; i++) //crea matriz res[][]
+      {
+        res[i] = new Array(matrizA.length);
+      }
+
+      for (var a = 0; a < matrizB.length; a++) // recorre columnas matrizB
+      {
+        for (var i = 0; i < matrizA.length; i++) // recorre filas de matrizA
+        {
+          sum = 0;
+
+          for (var j = 0; j < matrizA.length; j++) //recorre columnas matrizA
+          {
+            sum += matrizA[i][j] * matrizB[j][a];
+          }
+
+          res[i][a] = sum;
+        }
+      } //console.log(res); //comentar
+
+
+      return res;
+    },
+    potencia: function potencia(matriz) //funcionando, eleva una matriz a una potencia que corresponde a su largo-1
+    {
+      var largo = this.nodos.length - 1;
+      var sum = 0;
+      var aux = matriz;
+      var res;
+
+      for (var i = 0; i < largo; i++) {
+        res = this.multiplicarMatriz(matriz, aux);
+        aux = res;
+      } //console.log(res);	
+
+
+      return res;
+    },
+    matrizCaminos: function matrizCaminos(matrizadyacencia) {
+      var caminos = [];
+      var matrizIdentidad = this.matrizIdentidad();
+      var arraypotencias = [];
+
+      for (var i = 0; i < nodos.length - 1; i++) {
+        if (i === 0) {
+          arraypotencias[i] = matrizadyacencia;
+        } else {
+          arraypotencias[i] = potencia(matrizadyacencia, i + 1);
+        }
+      }
+
+      caminos = sumaMat(arraypotencias);
+      return caminos;
+    },
+    sumaMat: function sumaMat() {
+      //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
+      var matrizId = this.matrizIdentidad();
+      var matrizAd = this.matrizAdyacencia();
+      var matrizPo = this.potencia(matrizAd);
+      console.log(matrizId);
+      console.log(matrizAd);
+      console.log(matrizPo);
+    },
+    matrizIdentidad: function matrizIdentidad() {
+      // matriz identidad, tamaño segun length nodos FUNCIONANDO
+      var matriZIdentidad = [];
+      var largo = this.nodos.length;
+
+      for (var i = 0; i < largo; i++) {
+        matriZIdentidad[i] = new Array(largo);
+      }
+
+      for (var i = 0; i < largo; i++) {
+        for (var j = 0; j < largo; j++) {
+          if (i === j) {
+            matriZIdentidad[i][j] = 1;
+          } else {
+            matriZIdentidad[i][j] = 0;
+          }
+        }
+      } //console.log(matriZIdentidad);
+
+
+      return matriZIdentidad;
+    }
   }
 });
 
@@ -112792,8 +112910,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

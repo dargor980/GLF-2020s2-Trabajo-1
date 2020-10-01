@@ -96,8 +96,8 @@ export default {
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
             nodo:{id:'', label:''},
             arista:{from:'',to:''},
-            nodos:[],   
-            aristas:[],
+            nodos:[{id:'1', label:'a'},{id:'2', label:'b'},{id:'3', label:'c'}],   
+            aristas:[{from:'1',to:'2'},{from:'2',to:'2'},{from:'1',to:'1'}],
             
 
 
@@ -115,6 +115,11 @@ export default {
         
         //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
         this.sumaMat();
+        //this.matrizIdentidad();
+        //let a = this.matrizAdyacencia();
+        //let b = this.matrizAdyacencia();
+        //this.multiplicarMatriz(a,b);
+        //this.potencia(b);
     },
 
     
@@ -141,6 +146,7 @@ export default {
             this.create=true;
             this.createAris=false;
         },
+        
         createArista(){  //función para el control del flujo de vistas
             this.createAris=true;
             this.create=false;
@@ -155,6 +161,7 @@ export default {
                 //console.log(this.nodos.length); //largo del array de nodos 
             }
         },
+        
         crearArista(){ // agrega conexion entre nodos
             this.aristas.push(this.arista);
             this.arista={from:'',to:'',value:'0'}
@@ -167,13 +174,15 @@ export default {
             }
         },
         
-
-        matrizAdyacencia(n,e){   // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
+        matrizAdyacencia(){   // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
             let matrix=[]; 
+            var n = this.nodos.length;//largo del array nodos
+            var e = this.aristas.length;//largo del array aristas
             for (var i=0; i<n;i++)  // creación de la matriz 
             {
                 matrix[i]=new Array(n);
             }
+            
             for(var i=0; i<n; i++)
             {
                 for(var j=0; j<n; j++)
@@ -189,7 +198,8 @@ export default {
                 matrix[n1-1][n2-1]=1;
                 matrix[n2-1][n1-1]=1;
             } 
-            console.log(matrix);
+            //console.log(matrix);
+            return matrix;
             
         },
 
@@ -215,7 +225,6 @@ export default {
             }
         },
 
-
         conexo(matCaminos,n){   //Función que retorna valor booleano que determina si un grafo es o no conexo
             for(var i=0;i<n;i++)
             {
@@ -229,7 +238,6 @@ export default {
             }
             return true;
         },
-
 
         isEuleriano(){  //Función que retorna un valor booleano que determina si un grafo es o no Euleriano
 
@@ -256,53 +264,53 @@ export default {
 
         },
 
-
-
-        multiplicarMatriz(matrizA,matrizB)
+        multiplicarMatriz(matrizA,matrizB)//funcionando Multiplica 
         {
-            var res=[];
+            let res=[];
             var sum=0;
             
-            for(var i=0; i<matrizA.length;i++)
+            for(var i=0; i<matrizA.length;i++)//crea matriz res[][]
             {
-                res[i]= new array(matrizA.length);
+                res[i]= new Array(matrizA.length);
             }
             
-            for(var a=0;a<matrizB.length;a++)
+            for(var a=0;a<matrizB.length;a++)// recorre columnas matrizB
             {
-                for(var i=0; i<matrizA.length;i++)
+                for(var i=0; i<matrizA.length;i++)// recorre filas de matrizA
                 {
                     sum=0;
-                    for(var j=0; j<matrizA.length;j++)
+                    for(var j=0; j<matrizA.length;j++) //recorre columnas matrizA
                     {
                         sum+= matrizA[i][j]*matrizB[j][a];
                     }
                     res[i][a]=sum;
                 }
             }
+            //console.log(res); //comentar
             return res;	
         },
 
-        potencia(matriz,n)
+        potencia(matriz)//funcionando, eleva una matriz a una potencia que corresponde a su largo-1
         {
+            var largo = this.nodos.length-1;
             var sum=0;
             var aux=matriz;
             var res;
-            for(var i=0; i<n;i++)
+            for(var i=0; i < largo ;i++)
             {
-                res=multiplicarMatriz(matriz,aux);
+                res=this.multiplicarMatriz(matriz,aux);
                 aux=res;
-            }	
-            return res;
-                
+            }
+            //console.log(res);	
+            return res;      
         },
 
         matrizCaminos(matrizadyacencia)
         {
             var caminos=[];
-            
-            
+            var matrizIdentidad = this.matrizIdentidad();
             var arraypotencias=[];
+
             for(var i=0; i<nodos.length-1;i++)
             {
                 if(i===0)
@@ -311,45 +319,46 @@ export default {
                 }
                 else{
                     arraypotencias[i]=potencia(matrizadyacencia,i+1);
-                }
-                
+                } 
             }
-            
             caminos=sumaMat(arraypotencias);
             return caminos;
         },
 
-        sumaMat(matrizadyacencia){
+        sumaMat(){
             //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
-            matrizId = this.matrizIdentidad();
+            var matrizId = this.matrizIdentidad();
+            var matrizAd = this.matrizAdyacencia();
+            var matrizPo = this.potencia(matrizAd);
             console.log(matrizId);
+            console.log(matrizAd);
+            console.log(matrizPo);
         },
-        matrizIdentidad(){
-            var matrizIdentidad=[];
-            for(var i=0; i<this.nodos.length;i++)
+        
+        matrizIdentidad(){ // matriz identidad, tamaño segun length nodos FUNCIONANDO
+            let matriZIdentidad=[];
+            var largo = this.nodos.length;
+            for(var i=0; i < largo; i++)
             {
-                matrizIdentidad = new Array(this.nodos.length);
+                matriZIdentidad[i] = new Array(largo);    
             }
             
-            for(var i=0; i<this.nodos.lenght;i++)
+            for(var i=0; i < largo ; i++)
             {
-                for(var j=0; j<this.nodos.length;j++)
+                for(var j=0; j < largo ; j++)
                 {
                     if(i===j)
                     {
-                        matrizIdentidad[i][j]=1;
+                        matriZIdentidad[i][j]=1;
                     }
                     else{
-                        matrizIdentidad[i][j]=0;
+                        matriZIdentidad[i][j]=0;
                     }
-                    
                 }
             }
-            return matrizIdentidad;
+            //console.log(matriZIdentidad);
+        return matriZIdentidad;
         }
-
     },
-    
-
 }
 </script>
