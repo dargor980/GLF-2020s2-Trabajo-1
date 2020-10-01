@@ -99,6 +99,7 @@ export default {
 
             nodos:[{id:'1', label:'a'},{id:'2', label:'b'},{id:'3', label:'c'},{id:'4', label:''},{id:'5', label:''}],   
             aristas:[{from:'1',to:'2'},{from:'2',to:'3'},{from:'3',to:'1'},{from:'4',to:'2'},{from:'5',to:'2'}],
+            matrixCaminos:[],
             
 
 
@@ -126,9 +127,7 @@ export default {
     
 
     methods:{
-         
-            
-
+        
         selectGrafo()
         {
 
@@ -224,6 +223,7 @@ export default {
                 var n2=this.aristas[i].to;
                 matrix[n1-1][n2-1]=1;
             }
+            return matrix;
         },
 
         conexo(matCaminos,n){   //Función que retorna valor booleano que determina si un grafo es o no conexo
@@ -303,58 +303,45 @@ export default {
                 aux=res;
                 
             }    
-            	
-            console.log(res,"potencia");
+            console.log(`potencia ^${largo}`);	
+            console.log(res);
             return res;      
         },
 
-        matrizCaminos(matrizadyacencia)
+        matrizCaminos(matrizadyacencia)  //Función que retorna los caminos de un grafo.
         {
-            var caminos=[];
-            var matrizIdentidad = this.matrizIdentidad();
-            var arraypotencias=[];
-
-            for(var i=0; i<nodos.length-1;i++)
-            {
-                if(i===0)
-                {
-                    arraypotencias[i]=matrizadyacencia;
-                }
-                else{
-                    arraypotencias[i]=potencia(matrizadyacencia,i+1);
-                } 
-            }
-            caminos=sumaMat(arraypotencias);
-            return caminos;
+            this.matrixCaminos=this.sumaMat();
         },
 
-        sumaMat(){
+        sumaMat(){ // Funcionando! .Funcion que retorna la suma de las matrices para generar la matriz de caminos
             //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
             var matrizId = this.matrizIdentidad();
             var matrizAd = this.matrizAdyacencia();
             var largo = this.nodos.length;
-            var matrizPo = this.potencia(matrizAd,largo);
-            var aux = this.crearMatriz();
-            var sumPot;
+            let aux = this.crearMatriz();
+            let sumPot;
             
             for(var i=0 ; i<largo ; i++ ){ //suma matrizId + MatrizAd
                 for(var j=0 ; j<largo ;j++){
                     aux[i][j] =  matrizId[i][j] + matrizAd[i][j];
                 }
             }
-            // for(var i=largo ; 1<i ; i--){//suma matriz de potencia
-            //     sumPot = this.potencia(matrizAd,i);
-            //     for(var j=0 ; j<largo ; j++ ){ 
-            //         for(var k=0 ; k<largo ;k++){
-            //             aux[j][k] =  aux[j][k] + sumPot[j][k];
-            //         }
-            //     }
-            // }
-            //matrizC = matrizID + matrizAd + matrizAd^(2)+ ... + matrizAd^(n-1)
+            for(var i=largo;i>2;i--)
+            {
+                sumPot=this.potencia(matrizAd,i);
+                for(var j=0; j<this.nodos.length;j++)
+                {
+                    for(var k=0;k<this.nodos.length;k++)
+                    {
+                        aux[j][k]=aux[j][k]+sumPot[j][k];
+                    }
+                }
+            }
             console.log(matrizId,"identidad");
             console.log(matrizAd,"adyacencia");
-            //console.log(matrizPo,);
-            console.log(aux,"suma id+ad");
+            console.log(aux,"suma total");
+
+            return aux;
         },
 
         crearMatriz(){
@@ -387,7 +374,7 @@ export default {
                     }
                 }
             }
-            //console.log(matriZIdentidad);
+            console.log(matriZIdentidad);
         return matriZIdentidad;
         }
     },

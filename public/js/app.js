@@ -2043,6 +2043,7 @@ __webpack_require__.r(__webpack_exports__);
         from: '5',
         to: '2'
       }],
+      matrixCaminos: [],
 
       /*variables de control */
       addgrafo: false,
@@ -2157,6 +2158,8 @@ __webpack_require__.r(__webpack_exports__);
         var n2 = this.aristas[i].to;
         matrix[n1 - 1][n2 - 1] = 1;
       }
+
+      return matrix;
     },
     conexo: function conexo(matCaminos, n) {
       //Función que retorna valor booleano que determina si un grafo es o no conexo
@@ -2224,31 +2227,20 @@ __webpack_require__.r(__webpack_exports__);
         aux = res;
       }
 
-      console.log(res, "potencia");
+      console.log("potencia ^".concat(largo));
+      console.log(res);
       return res;
     },
-    matrizCaminos: function matrizCaminos(matrizadyacencia) {
-      var caminos = [];
-      var matrizIdentidad = this.matrizIdentidad();
-      var arraypotencias = [];
-
-      for (var i = 0; i < nodos.length - 1; i++) {
-        if (i === 0) {
-          arraypotencias[i] = matrizadyacencia;
-        } else {
-          arraypotencias[i] = potencia(matrizadyacencia, i + 1);
-        }
-      }
-
-      caminos = sumaMat(arraypotencias);
-      return caminos;
+    matrizCaminos: function matrizCaminos(matrizadyacencia) //Función que retorna los caminos de un grafo.
+    {
+      this.matrixCaminos = this.sumaMat();
     },
     sumaMat: function sumaMat() {
+      // Funcionando! .Funcion que retorna la suma de las matrices para generar la matriz de caminos
       //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
       var matrizId = this.matrizIdentidad();
       var matrizAd = this.matrizAdyacencia();
       var largo = this.nodos.length;
-      var matrizPo = this.potencia(matrizAd, largo);
       var aux = this.crearMatriz();
       var sumPot;
 
@@ -2257,21 +2249,22 @@ __webpack_require__.r(__webpack_exports__);
         for (var j = 0; j < largo; j++) {
           aux[i][j] = matrizId[i][j] + matrizAd[i][j];
         }
-      } // for(var i=largo ; 1<i ; i--){//suma matriz de potencia
-      //     sumPot = this.potencia(matrizAd,i);
-      //     for(var j=0 ; j<largo ; j++ ){ 
-      //         for(var k=0 ; k<largo ;k++){
-      //             aux[j][k] =  aux[j][k] + sumPot[j][k];
-      //         }
-      //     }
-      // }
-      //matrizC = matrizID + matrizAd + matrizAd^(2)+ ... + matrizAd^(n-1)
+      }
 
+      for (var i = largo; i > 2; i--) {
+        sumPot = this.potencia(matrizAd, i);
+
+        for (var j = 0; j < this.nodos.length; j++) {
+          for (var k = 0; k < this.nodos.length; k++) {
+            aux[j][k] = aux[j][k] + sumPot[j][k];
+          }
+        }
+      }
 
       console.log(matrizId, "identidad");
-      console.log(matrizAd, "adyacencia"); //console.log(matrizPo,);
-
-      console.log(aux, "suma id+ad");
+      console.log(matrizAd, "adyacencia");
+      console.log(aux, "suma total");
+      return aux;
     },
     crearMatriz: function crearMatriz() {
       var res = [];
@@ -2300,9 +2293,9 @@ __webpack_require__.r(__webpack_exports__);
             matriZIdentidad[i][j] = 0;
           }
         }
-      } //console.log(matriZIdentidad);
+      }
 
-
+      console.log(matriZIdentidad);
       return matriZIdentidad;
     }
   }
@@ -112953,8 +112946,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
