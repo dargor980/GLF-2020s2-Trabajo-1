@@ -96,8 +96,9 @@ export default {
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
             nodo:{id:'', label:''},
             arista:{from:'',to:''},
-            nodos:[{id:'1', label:'a'},{id:'2', label:'b'},{id:'3', label:'c'}],   
-            aristas:[{from:'1',to:'2'},{from:'2',to:'2'},{from:'1',to:'1'}],
+
+            nodos:[{id:'1', label:'a'},{id:'2', label:'b'},{id:'3', label:'c'},{id:'4', label:''},{id:'5', label:''}],   
+            aristas:[{from:'1',to:'2'},{from:'2',to:'3'},{from:'3',to:'1'},{from:'4',to:'2'},{from:'5',to:'2'}],
             
 
 
@@ -290,18 +291,20 @@ export default {
             return res;	
         },
 
-        potencia(matriz)//funcionando, eleva una matriz a una potencia que corresponde a su largo-1
+        potencia(matriz, largo )//funcionando, eleva una matriz a una potencia que corresponde a su largo-1
         {
-            var largo = this.nodos.length-1;
+            //var largo = this.nodos.length-1;
             var sum=0;
             var aux=matriz;
             var res;
-            for(var i=0; i < largo ;i++)
+            for(var i=1; i < largo-1 ;i++)
             {
                 res=this.multiplicarMatriz(matriz,aux);
                 aux=res;
-            }
-            //console.log(res);	
+                
+            }    
+            	
+            console.log(res,"potencia");
             return res;      
         },
 
@@ -329,10 +332,38 @@ export default {
             //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
             var matrizId = this.matrizIdentidad();
             var matrizAd = this.matrizAdyacencia();
-            var matrizPo = this.potencia(matrizAd);
-            console.log(matrizId);
-            console.log(matrizAd);
-            console.log(matrizPo);
+            var largo = this.nodos.length;
+            var matrizPo = this.potencia(matrizAd,largo);
+            var aux = this.crearMatriz();
+            var sumPot;
+            
+            for(var i=0 ; i<largo ; i++ ){ //suma matrizId + MatrizAd
+                for(var j=0 ; j<largo ;j++){
+                    aux[i][j] =  matrizId[i][j] + matrizAd[i][j];
+                }
+            }
+            // for(var i=largo ; 1<i ; i--){//suma matriz de potencia
+            //     sumPot = this.potencia(matrizAd,i);
+            //     for(var j=0 ; j<largo ; j++ ){ 
+            //         for(var k=0 ; k<largo ;k++){
+            //             aux[j][k] =  aux[j][k] + sumPot[j][k];
+            //         }
+            //     }
+            // }
+            //matrizC = matrizID + matrizAd + matrizAd^(2)+ ... + matrizAd^(n-1)
+            console.log(matrizId,"identidad");
+            console.log(matrizAd,"adyacencia");
+            //console.log(matrizPo,);
+            console.log(aux,"suma id+ad");
+        },
+
+        crearMatriz(){
+            var res = [];
+            for(var i=0; i<this.nodos.length;i++)//crea matriz res[][]
+            {
+                res[i]= new Array(this.nodos.length);
+            }
+            return res;
         },
         
         matrizIdentidad(){ // matriz identidad, tamaño segun length nodos FUNCIONANDO
