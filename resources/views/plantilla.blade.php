@@ -37,13 +37,16 @@
                 <!--/OPCIONES NAVBAR-->
             </div>
         </nav>
+        
         <div>
 
             <div class="mt-5 mx-5" id="app">
                 <particles></particles>
             </div>
         </div>
-  
+        <div class="container">
+            @yield('seccion')
+        </div>
         
     </body>
 </html>

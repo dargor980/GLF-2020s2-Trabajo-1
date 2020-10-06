@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('integrantes', function(){//ruta a vista integrantes
+    return view('integrantes');
+});
