@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('integrantes', function(){//ruta a vista integrantes
+Route::get('/integrantes', function(){//ruta a vista integrantes
     return view('integrantes');
 });
