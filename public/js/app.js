@@ -2009,7 +2009,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       arista: {
         from: '',
-        to: ''
+        to: '',
+        value: ''
       },
       nodos: [{
         id: '1',
@@ -2022,26 +2023,36 @@ __webpack_require__.r(__webpack_exports__);
         label: 'c'
       }, {
         id: '4',
-        label: ''
+        label: 'd'
       }, {
         id: '5',
-        label: ''
+        label: 'e'
       }],
       aristas: [{
         from: '1',
-        to: '2'
+        to: '2',
+        value: '5'
+      }, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
+      {
+        from: '1',
+        to: '3',
+        value: '7'
       }, {
-        from: '2',
-        to: '3'
-      }, {
-        from: '3',
-        to: '1'
-      }, {
-        from: '4',
-        to: '2'
+        from: '1',
+        to: '4',
+        value: '8'
       }, {
         from: '5',
-        to: '2'
+        to: '2',
+        value: '6'
+      }, {
+        from: '5',
+        to: '3',
+        value: '1'
+      }, {
+        from: '5',
+        to: '4',
+        value: '3'
       }],
       matrixCaminos: [],
 
@@ -2054,11 +2065,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-    this.sumaMat(); //this.matrizIdentidad();
+    //this.sumaMat();
+    //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
     //let b = this.matrizAdyacencia();
     //this.multiplicarMatriz(a,b);
     //this.potencia(b);
+    //console.log("conexo: ",this.conexo()); 
+    this.isEuleriano();
   },
   methods: {
     selectGrafo: function selectGrafo() {},
@@ -2118,7 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var e = this.aristas.length; //largo del array aristas
 
-      for (var i = 0; i < n; i++) // creación de la matriz 
+      for (var i = 0; i < n; i++) // creación de la matriz ***funcion crear matriz***
       {
         matrix[i] = new Array(n);
       }
@@ -2161,11 +2175,14 @@ __webpack_require__.r(__webpack_exports__);
 
       return matrix;
     },
-    conexo: function conexo(matCaminos, n) {
+    conexo: function conexo() {
       //Función que retorna valor booleano que determina si un grafo es o no conexo
-      for (var i = 0; i < n; i++) {
-        for (var j = 0; j < n; j++) {
-          if (matCaminos[i][j] === 0) {
+      var matriz = this.sumaMat();
+      var largo = this.nodos.length;
+
+      for (var i = 0; i < largo; i++) {
+        for (var j = 0; j < largo; j++) {
+          if (matriz[i][j] === 0) {
             return false;
           }
         }
@@ -2173,7 +2190,22 @@ __webpack_require__.r(__webpack_exports__);
 
       return true;
     },
-    isEuleriano: function isEuleriano() {//Función que retorna un valor booleano que determina si un grafo es o no Euleriano
+    isEuleriano: function isEuleriano() {
+      //Función que retorna un valor booleano que determina si un grafo es o no Euleriano, Camino simple contiene todas las aristas del Grafo 
+      var matriz = this.sumaMat();
+      var largo = this.aristas.length;
+      var aristas = this.aristas;
+      var i = 0;
+
+      while (i < largo) {
+        console.log(aristas[i].from, aristas[i].to, aristas[i].value);
+        i++;
+      } // for (var i = 0; i < largo ; i++){
+      //     for(var j = 0; j < largo ; j++){
+      //         matriz [i][j] 
+      //     }
+      // }
+
     },
     isHamiltoniano: function isHamiltoniano() {//FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
     },
@@ -112946,8 +112978,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
