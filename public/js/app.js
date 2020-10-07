@@ -2027,6 +2027,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: '5',
         label: 'e'
+      }, {
+        id: '6',
+        label: 'f'
       }],
       aristas: [{
         from: '1',
@@ -2038,17 +2041,13 @@ __webpack_require__.r(__webpack_exports__);
         to: '3',
         value: '7'
       }, {
-        from: '1',
-        to: '4',
-        value: '8'
-      }, {
         from: '5',
         to: '2',
         value: '6'
       }, {
         from: '5',
         to: '3',
-        value: '1'
+        value: '3'
       }, {
         from: '5',
         to: '4',
@@ -2072,7 +2071,8 @@ __webpack_require__.r(__webpack_exports__);
     //this.multiplicarMatriz(a,b);
     //this.potencia(b);
     //console.log("conexo: ",this.conexo()); 
-    this.isEuleriano();
+    var lala = this.isEuleriano();
+    console.log(lala);
   },
   methods: {
     selectGrafo: function selectGrafo() {},
@@ -2190,22 +2190,42 @@ __webpack_require__.r(__webpack_exports__);
 
       return true;
     },
+    graficarCircuitoEuleriano: function graficarCircuitoEuleriano(nodos, e) {
+      var pasos = [];
+      var aux = this.matrizAdyacencia();
+
+      for (var i = 0; i < nodos.length; i++) {
+        if (nodos[i].id == e) {}
+      }
+    },
     isEuleriano: function isEuleriano() {
       //Función que retorna un valor booleano que determina si un grafo es o no Euleriano, Camino simple contiene todas las aristas del Grafo 
-      var matriz = this.sumaMat();
-      var largo = this.aristas.length;
-      var aristas = this.aristas;
-      var i = 0;
+      if (this.conexo()) {
+        var grados = 0;
+        var matriz = this.matrizAdyacencia();
 
-      while (i < largo) {
-        console.log(aristas[i].from, aristas[i].to, aristas[i].value);
-        i++;
-      } // for (var i = 0; i < largo ; i++){
-      //     for(var j = 0; j < largo ; j++){
-      //         matriz [i][j] 
-      //     }
-      // }
+        for (var i = 0; i < this.nodos.length; i++) {
+          grados = 0;
 
+          for (var j = 0; j < this.nodos.length; j++) {
+            if (matriz[i][j] == 1) {
+              if (i == j && matriz[i][j] == 1) {
+                grados += 2;
+              } else {
+                grados++;
+              }
+            }
+          }
+
+          if (grados % 2 != 0) {
+            return false;
+          }
+        }
+
+        return true;
+      } else {
+        return false;
+      }
     },
     isHamiltoniano: function isHamiltoniano() {//FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
     },
@@ -2263,7 +2283,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(res);
       return res;
     },
-    matrizCaminos: function matrizCaminos(matrizadyacencia) //Función que retorna los caminos de un grafo.
+    matrizCaminos: function matrizCaminos() //Función que retorna los caminos de un grafo.
     {
       this.matrixCaminos = this.sumaMat();
     },
@@ -112978,8 +112998,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

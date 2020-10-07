@@ -101,13 +101,15 @@ export default {
                         {id:'2', label:'b'},
                         {id:'3', label:'c'},
                         {id:'4', label:'d'},
-                        {id:'5', label:'e'}],   
+                        {id:'5', label:'e'},
+                        {id:'6', label:'f'},
+                    ],  
             aristas:[{from:'1',to:'2',value:'5'}, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
                         {from:'1',to:'3',value:'7'},
-                        {from:'1',to:'4',value:'8'},
                         {from:'5',to:'2',value:'6'},
-                        {from:'5',to:'3',value:'1'},
-                        {from:'5',to:'4',value:'3'}],
+                        {from:'5',to:'3',value:'3'},
+                        {from:'5',to:'4',value:'3'},
+                    ],
             matrixCaminos:[],
             
             /*variables de control */
@@ -129,7 +131,8 @@ export default {
         //this.multiplicarMatriz(a,b);
         //this.potencia(b);
         //console.log("conexo: ",this.conexo()); 
-        this.isEuleriano();
+        var lala= this.isEuleriano();
+        console.log(lala);
     },
 
     
@@ -251,23 +254,51 @@ export default {
             return true;
         },
 
-        isEuleriano(){  //Función que retorna un valor booleano que determina si un grafo es o no Euleriano, Camino simple contiene todas las aristas del Grafo 
-            var matriz = this.sumaMat();
-            var largo = this.aristas.length;
-            var aristas = this.aristas
-            
-            
-            var i = 0;
-            while(i<largo){
+        graficarCircuitoEuleriano(nodos,e){
+            let pasos=[];
+            let aux=this.matrizAdyacencia();
+            for(var i=0; i<nodos.length; i++)
+            {
+                if(nodos[i].id==e)
+                {
 
-                console.log(aristas[i].from,aristas[i].to,aristas[i].value);
-                i++
+                }
             }
-            // for (var i = 0; i < largo ; i++){
-            //     for(var j = 0; j < largo ; j++){
-            //         matriz [i][j] 
-            //     }
-            // }
+
+        },
+
+        isEuleriano(){  //Función que retorna un valor booleano que determina si un grafo es o no Euleriano, Camino simple contiene todas las aristas del Grafo 
+           if(this.conexo())
+           {
+               var grados=0;
+               var matriz=this.matrizAdyacencia();
+               for(var i=0; i<this.nodos.length; i++)
+               {
+                   grados=0;
+                   for(var j=0; j<this.nodos.length;j++)
+                   {      
+                       if(matriz[i][j]==1)
+                       {
+                           if(i==j && matriz[i][j]==1)
+                           {
+                               grados+=2;
+                           }
+                           else{
+
+                               grados++;
+                           }
+                       }
+                   }
+                   if(grados%2!=0)
+                   {
+                       return false;
+                   }
+               }               
+                return true;
+           }
+           else{
+               return false;
+           }
         },
 
         isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
@@ -334,7 +365,7 @@ export default {
             return res;      
         },
 
-        matrizCaminos(matrizadyacencia)  //Función que retorna los caminos de un grafo.
+        matrizCaminos()  //Función que retorna los caminos de un grafo.
         {
             this.matrixCaminos=this.sumaMat();
         },
