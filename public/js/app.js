@@ -2096,6 +2096,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2194,6 +2203,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarOp1: function mostrarOp1() {
       this.controlanalisis = 1;
+      this.matrizCaminos();
     },
     mostrarOp2: function mostrarOp2() {
       this.controlanalisis = 2;
@@ -100730,55 +100740,65 @@ var render = function() {
                 "div",
                 { staticClass: "btn-group", attrs: { role: "group" } },
                 [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.mostrarOp1 }
-                    },
-                    [_vm._v("Matriz de caminos")]
-                  ),
+                  _c("a", { attrs: { href: "#matrizcaminos" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.mostrarOp1 }
+                      },
+                      [_vm._v("Matriz de caminos")]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.mostrarOp2 }
-                    },
-                    [_vm._v("Camino más corto")]
-                  ),
+                  _c("a", { attrs: { href: "#caminocorto" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.mostrarOp2 }
+                      },
+                      [_vm._v("Camino más corto")]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.mostrarOp3 }
-                    },
-                    [_vm._v("Hamiltoniano / Euleriano")]
-                  ),
+                  _c("a", { attrs: { href: "#hamiltoniano" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.mostrarOp3 }
+                      },
+                      [_vm._v("Hamiltoniano / Euleriano")]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.mostrarOp4 }
-                    },
-                    [_vm._v("Flujo Máximo")]
-                  ),
+                  _c("a", { attrs: { href: "#flujomaximo" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.mostrarOp4 }
+                      },
+                      [_vm._v("Flujo Máximo")]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: { click: _vm.mostrarOp5 }
-                    },
-                    [_vm._v("Arbol Generador")]
-                  )
+                  _c("a", { attrs: { href: "#arbolgenerador" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.mostrarOp5 }
+                      },
+                      [_vm._v("Arbol Generador")]
+                    )
+                  ])
                 ]
               )
             ]),
@@ -100796,11 +100816,50 @@ var render = function() {
             _vm.controlanalisis == 1
               ? _c(
                   "div",
-                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  {
+                    staticClass: "card cardaux3 col-md-10 rounded-bottom mb-3",
+                    attrs: { id: "matrizcaminos" }
+                  },
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
-                        "\n                    CASO 1: MATRIZ DE CAMINOS\n                "
+                        "\n                    CASO 1: MATRIZ DE CAMINOS Adyacencia^(n-1)\n                    "
+                      ),
+                      _c(
+                        "div",
+                        { staticClass: "container mb-2" },
+                        _vm._l(_vm.matrixCaminos, function(item, index) {
+                          return _c(
+                            "div",
+                            { key: index },
+                            _vm._l(item, function(indice, lalacaminos) {
+                              return _c(
+                                "div",
+                                {
+                                  key: lalacaminos,
+                                  staticClass: "d-inline-block"
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "d-inline-block bg-dark pl-2",
+                                      staticStyle: {
+                                        width: "40px",
+                                        height: "40px",
+                                        "font-size": "25px"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(indice))]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        }),
+                        0
                       )
                     ])
                   ]
@@ -100820,7 +100879,10 @@ var render = function() {
             _vm.controlanalisis == 2
               ? _c(
                   "div",
-                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  {
+                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                    attrs: { id: "caminocorto" }
+                  },
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
@@ -100844,7 +100906,10 @@ var render = function() {
             _vm.controlanalisis == 3
               ? _c(
                   "div",
-                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  {
+                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                    attrs: { id: "hamiltoniano" }
+                  },
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
@@ -100868,7 +100933,10 @@ var render = function() {
             _vm.controlanalisis == 4
               ? _c(
                   "div",
-                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  {
+                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                    attrs: { id: "flujomaximo" }
+                  },
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
@@ -100892,7 +100960,10 @@ var render = function() {
             _vm.controlanalisis == 5
               ? _c(
                   "div",
-                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  {
+                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                    attrs: { id: "arbolgenerador" }
+                  },
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
@@ -113370,8 +113441,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

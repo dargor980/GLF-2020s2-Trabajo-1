@@ -113,20 +113,29 @@
             <div class="row justify-content-center">
                 <div class="card cardaux4 col-md-10 rounded-top">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" @click="mostrarOp1">Matriz de caminos</button>
-                        <button type="button" class="btn btn-secondary" @click="mostrarOp2">Camino más corto</button>
-                        <button type="button" class="btn btn-secondary" @click="mostrarOp3">Hamiltoniano / Euleriano</button>
-                        <button type="button" class="btn btn-secondary" @click="mostrarOp4">Flujo Máximo</button>
-                        <button type="button" class="btn btn-secondary" @click="mostrarOp5">Arbol Generador</button>
+                        <a href="#matrizcaminos"><button type="button" class="btn btn-secondary" @click="mostrarOp1">Matriz de caminos</button></a>
+                        <a href="#caminocorto"><button type="button" class="btn btn-secondary" @click="mostrarOp2">Camino más corto</button></a>
+                        <a href="#hamiltoniano"><button type="button" class="btn btn-secondary" @click="mostrarOp3">Hamiltoniano / Euleriano</button></a>
+                        <a href="#flujomaximo"><button type="button" class="btn btn-secondary" @click="mostrarOp4">Flujo Máximo</button></a>
+                        <a href="#arbolgenerador"><button type="button" class="btn btn-secondary" @click="mostrarOp5">Arbol Generador</button></a>
                     </div>
                 </div>
                 <!-- CASO 1: MATRIZ DE CAMINOS -->
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==1">
                     <h3 class="text-center fredoka textocolor my-3">Matriz de caminos</h3>
                 </div>
-                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==1">
+                <div id="matrizcaminos" class="card cardaux3 col-md-10 rounded-bottom mb-3" v-if="controlanalisis==1">
                     <div class="container">
-                        CASO 1: MATRIZ DE CAMINOS
+                        CASO 1: MATRIZ DE CAMINOS Adyacencia^(n-1)
+                        <div class="container mb-2">
+                            <div v-for="(item, index) in matrixCaminos"  :key="index">
+                                <div class="d-inline-block" v-for="(indice,lalacaminos) in item" :key="lalacaminos">
+                                    
+                                        <span class="d-inline-block bg-dark pl-2" style="width:40px; height:40px; font-size:25px;">{{indice}}</span>
+                                
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- / CASO 1: MATRIZ DE CAMINOS -->
@@ -135,7 +144,7 @@
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==2">
                     <h3 class="text-center fredoka textocolor my-3">Camino más corto</h3>
                 </div>
-                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==2">
+                <div id="caminocorto" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==2">
                     <div class="container">
                         CASO 2: CAMINO MAS CORTO
                     </div>
@@ -146,7 +155,7 @@
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==3">
                     <h3 class="text-center fredoka textocolor my-3">Hamiltoniano / Euleriano</h3>
                 </div>
-                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==3">
+                <div id="hamiltoniano" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==3">
                     <div class="container">
                         CASO 3: HAMILTONIANO / EULERIANO
                     </div>
@@ -157,7 +166,7 @@
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==4">
                     <h3 class="text-center fredoka textocolor my-3">Flujo Máximo</h3>
                 </div>
-                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==4">
+                <div id="flujomaximo" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==4">
                     <div class="container">
                         CASO 4: FLUJO MÁXIMO
                     </div>
@@ -168,7 +177,7 @@
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==5">
                     <h3 class="text-center fredoka textocolor my-3">Arbol Generador</h3>
                 </div>
-                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==5">
+                <div id="arbolgenerador" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==5">
                     <div class="container">
                         ARBOL GENERADO
                     </div>
@@ -284,6 +293,7 @@ export default {
 
         mostrarOp1(){
             this.controlanalisis=1;
+            this.matrizCaminos();
         },
 
         mostrarOp2(){
