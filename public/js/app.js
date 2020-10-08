@@ -2095,6 +2095,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -100443,7 +100444,7 @@ var render = function() {
                       _c("hr"),
                       _vm._v(" "),
                       _c("div", { staticClass: "row text-center" }, [
-                        _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
                           _c(
                             "button",
                             {
@@ -100454,7 +100455,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
                           _c(
                             "button",
                             {
@@ -100462,6 +100463,17 @@ var render = function() {
                               on: { click: _vm.createArista }
                             },
                             [_vm._v("Añadir arista")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: { click: _vm.delAndClear }
+                            },
+                            [_vm._v("Eliminar Grafo")]
                           )
                         ])
                       ]),
@@ -100691,13 +100703,15 @@ var render = function() {
                               ]
                             )
                           ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.option === 2
+                        ? _c(
+                            "div",
+                            { staticClass: "col-md-5 card cardaux mr-3" },
+                            [_vm._m(0)]
+                          )
                         : _vm._e()
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.option === 2
-                  ? _c("div", { staticClass: "col-md-5 card cardaux mr-3" }, [
-                      _vm._m(0)
                     ])
                   : _vm._e()
               ])
@@ -113356,8 +113370,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

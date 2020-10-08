@@ -50,11 +50,14 @@
                             <h3 class="mt-2">Grafo simple No dirigido</h3>
                             <hr>
                             <div class="row text-center">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <button class="btn btn-success" @click="createNode">Añadir nodo</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
                                 </div>
                             </div>
                             <div v-if="create" class="my-3">
@@ -67,20 +70,12 @@
                                         <div class="form-group">
                                             <label for="label">ingrese nombre:</label> 
                                             <input type="text" v-model="nodo.label" name="label" class="form-control"> 
-
                                         </div>
 
                                         <button class="btn btn-success btn-sm" type="submit">Agregar</button>
-                                    </form>
+                                    </form>       
                                 </div>
-                                        <div class="col-md-4">
-                                            <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
-                                        </div>
-                                    </div>
-                                    
-                               
                             </div>
-
                             <div v-if="createAris" class="my-3">
                                 <form @submit.prevent="crearArista">
                                     <div class="form-group">
@@ -100,11 +95,11 @@
                                     <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
                                 </form>
                             </div>
-                        </div>
-                        <!--/implementación preliminar. Modificar estilos --> 
-                        <div class="col-md-5 card cardaux mr-3" v-if="option===2">
-                            <div>
-                                <h3> opcion 2</h3>
+                            <!--/implementación preliminar. Modificar estilos --> 
+                            <div class="col-md-5 card cardaux mr-3" v-if="option===2">
+                                <div>
+                                    <h3> opcion 2</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,7 +179,7 @@
         <!-- VISTA GRAFOS -->
 
         <!-- VISTA INTEGRANTES -->
-        <div v-if="controlvista===3" class="mt-5 pt-4">
+        <div v-if ="controlvista===3" class="mt-5 pt-4">
             <h1 class="text-white">Vista Integrantes</h1>
         </div>
         <!-- VISTA INTEGRANTES -->
