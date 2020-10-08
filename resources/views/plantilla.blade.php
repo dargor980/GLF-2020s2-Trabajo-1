@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -14,29 +14,6 @@
 
     </head>
     <body id="particles-js">
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!--NOMBRE-->
-                <div class="navbar-brand text-white lato">Trabajo Unidad 1: Grafos</div>
-                <!--/NOMBRE-->
-          
-                <!--OPCIONES NAVBAR-->
-                <div class="collapse navbar-collapse justify-content-end">
-                  <ul class="navbar-nav ml-md-auto d-none d-md-flex">
-                    <li class="nav-item active">
-                      <a class="nav-link text-white lato">Introducción</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-white lato">Grafos</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-white lato">Integrantes</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--/OPCIONES NAVBAR-->
-            </div>
-        </nav>
         
         <div>
 

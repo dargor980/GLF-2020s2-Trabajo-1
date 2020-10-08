@@ -1,27 +1,78 @@
 <template>
-    <div class="px-3">
-        <h1 class="text-center fredoka">Crear Grafo</h1>
-        <div class="row justify-content-center">
-            <div  class="col-md-5 card mr-3">
-                <div class="row ml-3 mt-3">
-                    <h3>Seleccione el tipo de grafo:</h3> <!--implementación preliminar. Modificar estilos -->
-                        <select  class="custom-select  mb-3 mr-3" v-model="option">
-                            <option selected :value="0">Seleccione un tipo de grafo:</option>
-                            <option :value="1">Grafo simple /no dirigido</option>
-                            <option :value="2">Grafo simple /dirigido </option>
-                            <option :value="2">Grafo dirigido /etiquetado</option>     
-                        </select> 
-                          <div class="container px-3" v-if="option===1">
-                            <div>
-                                <h3 class="mt-2">Grafo simple No dirigido</h3>
-                                <hr>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+    <div>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!--NOMBRE-->
+                <div class="navbar-brand fredoka textocolor">Trabajo Unidad 1: Grafos</div>
+                <!--/NOMBRE-->
+          
+                <!--OPCIONES NAVBAR-->
+                <div class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav ml-md-auto d-none d-md-flex">
+                        <li class="nav-item active">
+                        <a class="nav-link lato textocolor" href="#" @click="mostrarIntroduccion">Introducción</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link lato textocolor" href="#" @click="mostrarGrafo" >Grafos</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link lato textocolor" href="#" @click="mostrarIntegrantes">Integrantes</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/OPCIONES NAVBAR-->
+            </div>
+        </nav>
+
+        <!-- VISTA INTRODUCCION -->
+        <div v-if="controlvista===1" class="mt-5 pt-4">
+            <h1 class="text-white">Vista Introducción</h1>
+            <h1 class="text-white">Apretar Grafo para seguir trabajando</h1>
+        </div>
+        <!-- VISTA INTRODUCCION -->
+
+        <!-- VISTA GRAFOS -->
+        <div v-if="controlvista===2">
+            <h1 class="text-center textocolor fredoka mt-5 pt-4">Crear Grafo</h1>
+            <div class="row justify-content-center">
+                <div class="grafo1 col-md-5 card cardaux mr-3">
+                    <div class="row ml-2 my-3">
+                        <div class="container-fluid mr-4">
+                            <h3>Seleccione el tipo de grafo:</h3> <!--implementación preliminar. Modificar estilos -->
+                            <select class="custom-select  mb-3 mr-3 mt-2" v-model="option">
+                                <option selected :value="0">Seleccione un tipo de grafo:</option>
+                                <option :value="1">Grafo simple /no dirigido</option>
+                                <option :value="2">Grafo simple /dirigido </option>
+                                <option :value="2">Grafo dirigido /etiquetado</option>     
+                            </select> 
+                        </div>
+                        <div class="container-fluid py-4 mr-4" v-if="option===1">
+                            <h3 class="mt-2">Grafo simple No dirigido</h3>
+                            <hr>
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                </div>
+                            </div>
+                            <div v-if="create" class="my-3">
+                                <div>
+                                    <form @submit.prevent="crearNodo">
+                                        <div class="form-group">
+                                            <label for="id">ingrese el id: </label> 
+                                            <input type="text" v-model="nodo.id" name="id" class="form-control"> 
                                         </div>
-                                        <div class="col-md-4">
-                                            <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                        <div class="form-group">
+                                            <label for="label">ingrese nombre:</label> 
+                                            <input type="text" v-model="nodo.label" name="label" class="form-control"> 
+
                                         </div>
+
+                                        <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                    </form>
+                                </div>
                                         <div class="col-md-4">
                                             <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
                                         </div>
@@ -29,66 +80,114 @@
                                     
                                
                             </div>
-                                <div v-if="create" class="my-3">
-                                    <div class=" ml-2">
-                                        <form @submit.prevent="crearNodo">
-                                            <div class="form-group">
-                                                <label for="id">ingrese el id: </label> 
-                                                <input type="text" v-model="nodo.id" name="id" class="form-control"> 
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="label">ingrese nombre:</label>
-                                                <input type="text" v-model="nodo.label" name="label" class="form-control"> 
 
-                                            </div>
-
-                                            <button class="btn btn-success btn-sm" type="submit">Agregar</button>
-                                        </form>
+                            <div v-if="createAris" class="my-3">
+                                <form @submit.prevent="crearArista">
+                                    <div class="form-group">
+                                        <label>Ingrese nodo desde el cual sale la arista:</label>
+                                        <input type="text" v-model="arista.from" class="form-control"> 
                                     </div>
-                                    
-                                </div>
-
-                                <div v-if="createAris" class="my-3">
-                                  <form @submit.prevent="crearArista">
-                                      <div class="form-group">
-                                          <label>Ingrese id del nodo desde el cual sale la arista:</label>
-                                          <input type="text" v-model="arista.from" class="form-control"> 
-                                      </div>
-                                      <div class="form-group">
-                                          <label>Ingrese id del nodo al cual llega la arista:</label>
-                                          <input type="text" v-model="arista.to" class="form-control"> 
-                                      </div>
-                                      <div class="form-group">
-                                          <label>Ingrese el peso de la arista: </label>
-                                          <input type="text" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
-                                      </div>
-                               
-                                      <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
-                                      <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
-                                  </form>
-                                </div>
-                          </div>
-                          <div>
-                              
-                          </div>
-                           <!--/implementación preliminar. Modificar estilos --> 
-                          <div class="col-md-5 card mr-3" v-if="option===2">
+                                    <div class="form-group">
+                                        <label>Ingrese nodo al cual llega la arista:</label>
+                                        <input type="text" v-model="arista.to" class="form-control"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ingrese el peso de la arista: </label>
+                                        <input type="text" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
+                                    </div>
+                            
+                                    <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                    <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!--/implementación preliminar. Modificar estilos --> 
+                        <div class="col-md-5 card cardaux mr-3" v-if="option===2">
                             <div>
                                 <h3> opcion 2</h3>
                             </div>
-                          </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="grafo1 col-md-5 card cardaux ml-3">
+                    <h3 class="text-center fredoka my-2">Representación</h3>
+                    <div id="grafo" class="mb-3" style="border: 1px solid lightgray;"></div>
+                </div>
+            </div>                                                 <!--/ANALISIS DEL GRAFO : PARTE 2  -->
+            <h1 class="text-center fredoka textocolor my-4">Análisis del Grafo</h1>
+            <div class="row justify-content-center">
+                <div class="card cardaux4 col-md-10 rounded-top">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary" @click="mostrarOp1">Matriz de caminos</button>
+                        <button type="button" class="btn btn-secondary" @click="mostrarOp2">Camino más corto</button>
+                        <button type="button" class="btn btn-secondary" @click="mostrarOp3">Hamiltoniano / Euleriano</button>
+                        <button type="button" class="btn btn-secondary" @click="mostrarOp4">Flujo Máximo</button>
+                        <button type="button" class="btn btn-secondary" @click="mostrarOp5">Arbol Generador</button>
+                    </div>
+                </div>
+                <!-- CASO 1: MATRIZ DE CAMINOS -->
+                <div class="cardaux2 col-md-10" v-if="controlanalisis==1">
+                    <h3 class="text-center fredoka textocolor my-3">Matriz de caminos</h3>
+                </div>
+                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==1">
+                    <div class="container">
+                        CASO 1: MATRIZ DE CAMINOS
+                    </div>
+                </div>
+                <!-- / CASO 1: MATRIZ DE CAMINOS -->
+                
+                <!-- CASO 2: CAMINO MAS CORTO -->
+                <div class="cardaux2 col-md-10" v-if="controlanalisis==2">
+                    <h3 class="text-center fredoka textocolor my-3">Camino más corto</h3>
+                </div>
+                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==2">
+                    <div class="container">
+                        CASO 2: CAMINO MAS CORTO
+                    </div>
+                </div>
+                <!-- / CASO 2: CAMINO MAS CORTO -->
 
-          
-            <div id="grafo" class="col-md-5 card ml-3">Aqui dejaria mostrando los grafos siempre</div>
+                <!-- CASO 3: HAMILTONIANO / EULERIANO -->
+                <div class="cardaux2 col-md-10" v-if="controlanalisis==3">
+                    <h3 class="text-center fredoka textocolor my-3">Hamiltoniano / Euleriano</h3>
+                </div>
+                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==3">
+                    <div class="container">
+                        CASO 3: HAMILTONIANO / EULERIANO
+                    </div>
+                </div>
+                <!-- / CASO 3: HAMILTONIANO / EULERIANO -->
+
+                <!-- CASO 4: FLUJO MÁXIMO -->
+                <div class="cardaux2 col-md-10" v-if="controlanalisis==4">
+                    <h3 class="text-center fredoka textocolor my-3">Flujo Máximo</h3>
+                </div>
+                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==4">
+                    <div class="container">
+                        CASO 4: FLUJO MÁXIMO
+                    </div>
+                </div>
+                <!-- / CASO 4: FLUJO MÁXIMO -->
+
+                <!-- CASO 5: ARBOL GENERADOR -->
+                <div class="cardaux2 col-md-10" v-if="controlanalisis==5">
+                    <h3 class="text-center fredoka textocolor my-3">Arbol Generador</h3>
+                </div>
+                <div class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==5">
+                    <div class="container">
+                        ARBOL GENERADO
+                    </div>
+                </div>
+                <!-- / CASO 5: ARBOL GENERADOR -->
+            </div>
         </div>
-        <hr>
-        <h1 class="text-center fredoka">Análisis del Grafo</h1>
-        <div class="row justify-content-center">
-            <div id="tarjeta" class="col-md-5 card mr-3">Aqui opciones para crear grafo</div>
-            <div id="tarjeta" class="col-md-5 card ml-3">Aqui dejaria mostrando los grafos siempre</div>
+        <!-- VISTA GRAFOS -->
+
+        <!-- VISTA INTEGRANTES -->
+        <div v-if="controlvista===3" class="mt-5 pt-4">
+            <h1 class="text-white">Vista Integrantes</h1>
         </div>
+        <!-- VISTA INTEGRANTES -->
     </div>
 </template>
 
@@ -100,30 +199,17 @@ export default {
             nodo:{id:'', label:''},
             arista:{from:'',to:'',value:''},
 
-            nodos:[{id:'1', label:'a'},
-                        {id:'2', label:'b'},
-                        {id:'3', label:'c'},
-                        {id:'4', label:'d'},
-                        {id:'5', label:'e'},
-                        {id:'6', label:'f'},
-                    ],  
-            aristas:[{from:'1',to:'2',value:'5'}, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
-                        {from:'1',to:'4',value:'7'},
-                        //{from:'1',to:'4',value:'7'},
-                        {from:'2',to:'3',value:'6'},
-                        {from:'4',to:'3',value:'2'},
-                        {from:'5',to:'3',value:'3'},
-                        {from:'5',to:'4',value:'3'},
-                        {from:'6',to:'4',value:'6'},
-                        {from:'6',to:'3',value:'6'},
-                    ],
+            nodos:[],   
+            aristas:[],
             matrixCaminos:[],
-            
+
             /*variables de control */
             addgrafo: false,
             option:'',
             create:false,
             createAris:false,
+            controlanalisis: '',
+            controlvista: 1,
 
         }
     },
@@ -161,7 +247,9 @@ export default {
             var container= document.getElementById("grafo");
             var data={nodes:this.nodos,
                       edges:this.aristas};
-            var options={};
+            var options = {
+                height: 520 + 'px',
+            };
             var network= new vis.Network(container,data,options);
         },
 
@@ -182,7 +270,8 @@ export default {
             this.drawGrafo();
             for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
-                //console.log(this.nodos.length); //largo del array de nodos 
+                // console.log("Cantidad de nodos >>> ")
+                // console.log(this.nodos.length); //largo del array de nodos 
             }
         },
         
@@ -193,12 +282,44 @@ export default {
             for(var i=0;i<this.aristas.length;i++) // test de la funcion 
             {
                 // console.log(this.aristas[i].from); // desde donde sale la aritsa
-                // console.log(this.aristas[i].to); //hacia donde llega la arista
-                // console.log(this.aristas[i].value);// peso de la arista
+                // console.log(this.aristas[i].to); // hacia donde llega la arista
+                // console.log(this.aristas[i].value); // peso de la arista
             }
         },
+
+        mostrarOp1(){
+            this.controlanalisis=1;
+        },
+
+        mostrarOp2(){
+            this.controlanalisis=2;
+        },
+
+        mostrarOp3(){
+            this.controlanalisis=3;
+        },
+
+        mostrarOp4(){
+            this.controlanalisis=4;
+        },
+
+        mostrarOp5(){
+            this.controlanalisis=5;
+        },
+
+        mostrarIntroduccion(){
+            this.controlvista=1;
+        },
+
+        mostrarGrafo(){
+            this.controlvista=2;
+        },
+
+        mostrarIntegrantes(){
+            this.controlvista=3;
+        },
         
-        matrizAdyacencia(){   // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
+        matrizAdyacencia(){  // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
             let matrix=[]; 
             var n = this.nodos.length;//largo del array nodos
             var e = this.aristas.length;//largo del array aristas
@@ -222,7 +343,7 @@ export default {
                 matrix[n1-1][n2-1]=1;
                 matrix[n2-1][n1-1]=1;
             } 
-            //console.log(matrix);
+            console.log(matrix);
             return matrix;
             
         },

@@ -2002,6 +2002,99 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2015,67 +2108,17 @@ __webpack_require__.r(__webpack_exports__);
         to: '',
         value: ''
       },
-      nodos: [{
-        id: '1',
-        label: 'a'
-      }, {
-        id: '2',
-        label: 'b'
-      }, {
-        id: '3',
-        label: 'c'
-      }, {
-        id: '4',
-        label: 'd'
-      }, {
-        id: '5',
-        label: 'e'
-      }, {
-        id: '6',
-        label: 'f'
-      }],
-      aristas: [{
-        from: '1',
-        to: '2',
-        value: '5'
-      }, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
-      {
-        from: '1',
-        to: '4',
-        value: '7'
-      }, //{from:'1',to:'4',value:'7'},
-      {
-        from: '2',
-        to: '3',
-        value: '6'
-      }, {
-        from: '4',
-        to: '3',
-        value: '2'
-      }, {
-        from: '5',
-        to: '3',
-        value: '3'
-      }, {
-        from: '5',
-        to: '4',
-        value: '3'
-      }, {
-        from: '6',
-        to: '4',
-        value: '6'
-      }, {
-        from: '6',
-        to: '3',
-        value: '6'
-      }],
+      nodos: [],
+      aristas: [],
       matrixCaminos: [],
 
       /*variables de control */
       addgrafo: false,
       option: '',
       create: false,
-      createAris: false
+      createAris: false,
+      controlanalisis: '',
+      controlvista: 1
     };
   },
   created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
@@ -2103,7 +2146,9 @@ __webpack_require__.r(__webpack_exports__);
         nodes: this.nodos,
         edges: this.aristas
       };
-      var options = {};
+      var options = {
+        height: 520 + 'px'
+      };
       var network = new vis.Network(container, data, options);
     },
     createNode: function createNode() //funcion para el control del flujo de vistas 
@@ -2126,7 +2171,8 @@ __webpack_require__.r(__webpack_exports__);
       this.drawGrafo();
 
       for (var i = 0; i < this.nodos.length; i++) // test de la funcion 
-      {//console.log(this.nodos.length); //largo del array de nodos 
+      {// console.log("Cantidad de nodos >>> ")
+        // console.log(this.nodos.length); //largo del array de nodos 
       }
     },
     crearArista: function crearArista() {
@@ -2141,9 +2187,33 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
       {// console.log(this.aristas[i].from); // desde donde sale la aritsa
-        // console.log(this.aristas[i].to); //hacia donde llega la arista
-        // console.log(this.aristas[i].value);// peso de la arista
+        // console.log(this.aristas[i].to); // hacia donde llega la arista
+        // console.log(this.aristas[i].value); // peso de la arista
       }
+    },
+    mostrarOp1: function mostrarOp1() {
+      this.controlanalisis = 1;
+    },
+    mostrarOp2: function mostrarOp2() {
+      this.controlanalisis = 2;
+    },
+    mostrarOp3: function mostrarOp3() {
+      this.controlanalisis = 3;
+    },
+    mostrarOp4: function mostrarOp4() {
+      this.controlanalisis = 4;
+    },
+    mostrarOp5: function mostrarOp5() {
+      this.controlanalisis = 5;
+    },
+    mostrarIntroduccion: function mostrarIntroduccion() {
+      this.controlvista = 1;
+    },
+    mostrarGrafo: function mostrarGrafo() {
+      this.controlvista = 2;
+    },
+    mostrarIntegrantes: function mostrarIntegrantes() {
+      this.controlvista = 3;
     },
     matrizAdyacencia: function matrizAdyacencia() {
       // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
@@ -2168,9 +2238,9 @@ __webpack_require__.r(__webpack_exports__);
         var n2 = this.aristas[i].to;
         matrix[n1 - 1][n2 - 1] = 1;
         matrix[n2 - 1][n1 - 1] = 1;
-      } //console.log(matrix);
+      }
 
-
+      console.log(matrix);
       return matrix;
     },
     matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido(n, e) //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
@@ -2409,24 +2479,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initParticlesJS: function initParticlesJS() {
-      /* eslint-disable */
       particlesJS('particles-js', {
         'particles': {
           'number': {
-            'value': 80,
+            'value': 25,
             'density': {
               'enable': true,
-              'value_area': 800
+              'value_area': 600
             }
           },
           'color': {
-            'value': '#000'
+            'value': '#ffffff'
           },
           'shape': {
             'type': 'circle',
             'stroke': {
               'width': 0,
-              'color': '#000000'
+              'color': '#ffffff'
             },
             'polygon': {
               'nb_sides': 5
@@ -2460,7 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
           'line_linked': {
             'enable': true,
             'distance': 400,
-            'color': '#000',
+            'color': '#ffffff',
             'opacity': 0.4,
             'width': 2
           },
@@ -100225,357 +100294,609 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "px-3" }, [
-    _c("h1", { staticClass: "text-center fredoka" }, [_vm._v("Crear Grafo")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-5 card mr-3" }, [
-        _c("div", { staticClass: "row ml-3 mt-3" }, [
-          _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
+  return _c("div", [
+    _c(
+      "nav",
+      {
+        staticClass: "navbar navbar-expand-lg navbar-light",
+        attrs: { id: "navbar" }
+      },
+      [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "navbar-brand fredoka textocolor" }, [
+            _vm._v("Trabajo Unidad 1: Grafos")
+          ]),
           _vm._v(" "),
           _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.option,
-                  expression: "option"
-                }
-              ],
-              staticClass: "custom-select  mb-3 mr-3",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.option = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
+            "div",
+            { staticClass: "collapse navbar-collapse justify-content-end" },
             [
               _c(
-                "option",
-                { attrs: { selected: "" }, domProps: { value: 0 } },
-                [_vm._v("Seleccione un tipo de grafo:")]
-              ),
-              _vm._v(" "),
-              _c("option", { domProps: { value: 1 } }, [
-                _vm._v("Grafo simple /no dirigido")
-              ]),
-              _vm._v(" "),
-              _c("option", { domProps: { value: 2 } }, [
-                _vm._v("Grafo simple /dirigido ")
-              ]),
-              _vm._v(" "),
-              _c("option", { domProps: { value: 2 } }, [
-                _vm._v("Grafo dirigido /etiquetado")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.option === 1
-            ? _c("div", { staticClass: "container px-3" }, [
-                _c("div", [
-                  _c("h3", { staticClass: "mt-2" }, [
-                    _vm._v("Grafo simple No dirigido")
+                "ul",
+                { staticClass: "navbar-nav ml-md-auto d-none d-md-flex" },
+                [
+                  _c("li", { staticClass: "nav-item active" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link lato textocolor",
+                        attrs: { href: "#" },
+                        on: { click: _vm.mostrarIntroduccion }
+                      },
+                      [_vm._v("Introducción")]
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("hr"),
+                  _c("li", { staticClass: "nav-item active" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link lato textocolor",
+                        attrs: { href: "#" },
+                        on: { click: _vm.mostrarGrafo }
+                      },
+                      [_vm._v("Grafos")]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          on: { click: _vm.createNode }
-                        },
-                        [_vm._v("Añadir nodo")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          on: { click: _vm.createArista }
-                        },
-                        [_vm._v("Añadir arista")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: { click: _vm.delAndClear }
-                        },
-                        [_vm._v("Eliminar Grafo")]
-                      )
-                    ])
+                  _c("li", { staticClass: "nav-item active" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link lato textocolor",
+                        attrs: { href: "#" },
+                        on: { click: _vm.mostrarIntegrantes }
+                      },
+                      [_vm._v("Integrantes")]
+                    )
                   ])
+                ]
+              )
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _vm.controlvista === 1
+      ? _c("div", { staticClass: "mt-5 pt-4" }, [
+          _c("h1", { staticClass: "text-white" }, [
+            _vm._v("Vista Introducción")
+          ]),
+          _vm._v(" "),
+          _c("h1", { staticClass: "text-white" }, [
+            _vm._v("Apretar Grafo para seguir trabajando")
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.controlvista === 2
+      ? _c("div", [
+          _c(
+            "h1",
+            { staticClass: "text-center textocolor fredoka mt-5 pt-4" },
+            [_vm._v("Crear Grafo")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
+              _c("div", { staticClass: "row ml-2 my-3" }, [
+                _c("div", { staticClass: "container-fluid mr-4" }, [
+                  _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.option,
+                          expression: "option"
+                        }
+                      ],
+                      staticClass: "custom-select  mb-3 mr-3 mt-2",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.option = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { selected: "" }, domProps: { value: 0 } },
+                        [_vm._v("Seleccione un tipo de grafo:")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { domProps: { value: 1 } }, [
+                        _vm._v("Grafo simple /no dirigido")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { domProps: { value: 2 } }, [
+                        _vm._v("Grafo simple /dirigido ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { domProps: { value: 2 } }, [
+                        _vm._v("Grafo dirigido /etiquetado")
+                      ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
-                _vm.create
-                  ? _c("div", { staticClass: "my-3" }, [
-                      _c("div", { staticClass: " ml-2" }, [
-                        _c(
-                          "form",
-                          {
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.crearNodo($event)
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "id" } }, [
-                                _vm._v("ingrese el id: ")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.nodo.id,
-                                    expression: "nodo.id"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { type: "text", name: "id" },
-                                domProps: { value: _vm.nodo.id },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                _vm.option === 1
+                  ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
+                      _c("h3", { staticClass: "mt-2" }, [
+                        _vm._v("Grafo simple No dirigido")
+                      ]),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row text-center" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: { click: _vm.createNode }
+                            },
+                            [_vm._v("Añadir nodo")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: { click: _vm.createArista }
+                            },
+                            [_vm._v("Añadir arista")]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.create
+                        ? _c("div", { staticClass: "my-3" }, [
+                            _c("div", [
+                              _c(
+                                "form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.crearNodo($event)
                                     }
-                                    _vm.$set(
-                                      _vm.nodo,
-                                      "id",
-                                      $event.target.value
-                                    )
                                   }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "label" } }, [
-                                _vm._v("ingrese nombre:")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.nodo.label,
-                                    expression: "nodo.label"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { type: "text", name: "label" },
-                                domProps: { value: _vm.nodo.label },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.nodo,
-                                      "label",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
+                                },
+                                [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", { attrs: { for: "id" } }, [
+                                      _vm._v("ingrese el id: ")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.nodo.id,
+                                          expression: "nodo.id"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { type: "text", name: "id" },
+                                      domProps: { value: _vm.nodo.id },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.nodo,
+                                            "id",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", { attrs: { for: "label" } }, [
+                                      _vm._v("ingrese nombre:")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.nodo.label,
+                                          expression: "nodo.label"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { type: "text", name: "label" },
+                                      domProps: { value: _vm.nodo.label },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.nodo,
+                                            "label",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success btn-sm",
+                                      attrs: { type: "submit" }
+                                    },
+                                    [_vm._v("Agregar")]
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.createAris
+                        ? _c("div", { staticClass: "my-3" }, [
                             _c(
-                              "button",
+                              "form",
                               {
-                                staticClass: "btn btn-success btn-sm",
-                                attrs: { type: "submit" }
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.crearArista($event)
+                                  }
+                                }
                               },
-                              [_vm._v("Agregar")]
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [
+                                    _vm._v(
+                                      "Ingrese nodo desde el cual sale la arista:"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.arista.from,
+                                        expression: "arista.from"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.arista.from },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.arista,
+                                          "from",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [
+                                    _vm._v(
+                                      "Ingrese nodo al cual llega la arista:"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.arista.to,
+                                        expression: "arista.to"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.arista.to },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.arista,
+                                          "to",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [
+                                    _vm._v("Ingrese el peso de la arista: ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.arista.value,
+                                        expression: "arista.value"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.arista.value },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.arista,
+                                          "value",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Agregar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    on: { click: _vm.drawGrafo }
+                                  },
+                                  [_vm._v("dibujar")]
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      ])
+                          ])
+                        : _vm._e()
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.createAris
-                  ? _c("div", { staticClass: "my-3" }, [
-                      _c(
-                        "form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.crearArista($event)
-                            }
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [
-                              _vm._v(
-                                "Ingrese id del nodo desde el cual sale la arista:"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.arista.from,
-                                  expression: "arista.from"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.arista.from },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.arista,
-                                    "from",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [
-                              _vm._v(
-                                "Ingrese id del nodo al cual llega la arista:"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.arista.to,
-                                  expression: "arista.to"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.arista.to },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.arista,
-                                    "to",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [
-                              _vm._v("Ingrese el peso de la arista: ")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.arista.value,
-                                  expression: "arista.value"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.arista.value },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.arista,
-                                    "value",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              attrs: { type: "submit" }
-                            },
-                            [_vm._v("Agregar")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              on: { click: _vm.drawGrafo }
-                            },
-                            [_vm._v("dibujar")]
-                          )
-                        ]
-                      )
+                _vm.option === 2
+                  ? _c("div", { staticClass: "col-md-5 card cardaux mr-3" }, [
+                      _vm._m(0)
                     ])
                   : _vm._e()
               ])
-            : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ]),
           _vm._v(" "),
-          _c("div"),
+          _c("h1", { staticClass: "text-center fredoka textocolor my-4" }, [
+            _vm._v("Análisis del Grafo")
+          ]),
           _vm._v(" "),
-          _vm.option === 2
-            ? _c("div", { staticClass: "col-md-5 card mr-3" }, [_vm._m(0)])
-            : _vm._e()
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "card cardaux4 col-md-10 rounded-top" }, [
+              _c(
+                "div",
+                { staticClass: "btn-group", attrs: { role: "group" } },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.mostrarOp1 }
+                    },
+                    [_vm._v("Matriz de caminos")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.mostrarOp2 }
+                    },
+                    [_vm._v("Camino más corto")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.mostrarOp3 }
+                    },
+                    [_vm._v("Hamiltoniano / Euleriano")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.mostrarOp4 }
+                    },
+                    [_vm._v("Flujo Máximo")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.mostrarOp5 }
+                    },
+                    [_vm._v("Arbol Generador")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.controlanalisis == 1
+              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-center fredoka textocolor my-3" },
+                    [_vm._v("Matriz de caminos")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 1
+              ? _c(
+                  "div",
+                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _vm._v(
+                        "\n                    CASO 1: MATRIZ DE CAMINOS\n                "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 2
+              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-center fredoka textocolor my-3" },
+                    [_vm._v("Camino más corto")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 2
+              ? _c(
+                  "div",
+                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _vm._v(
+                        "\n                    CASO 2: CAMINO MAS CORTO\n                "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 3
+              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-center fredoka textocolor my-3" },
+                    [_vm._v("Hamiltoniano / Euleriano")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 3
+              ? _c(
+                  "div",
+                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _vm._v(
+                        "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 4
+              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-center fredoka textocolor my-3" },
+                    [_vm._v("Flujo Máximo")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 4
+              ? _c(
+                  "div",
+                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _vm._v(
+                        "\n                    CASO 4: FLUJO MÁXIMO\n                "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 5
+              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-center fredoka textocolor my-3" },
+                    [_vm._v("Arbol Generador")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.controlanalisis == 5
+              ? _c(
+                  "div",
+                  { staticClass: "card cardaux3 col-md-10 rounded-bottom" },
+                  [
+                    _c("div", { staticClass: "container" }, [
+                      _vm._v(
+                        "\n                    ARBOL GENERADO\n                "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-5 card ml-3", attrs: { id: "grafo" } }, [
-        _vm._v("Aqui dejaria mostrando los grafos siempre")
-      ])
-    ]),
+      : _vm._e(),
     _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c("h1", { staticClass: "text-center fredoka" }, [
-      _vm._v("Análisis del Grafo")
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
+    _vm.controlvista === 3
+      ? _c("div", { staticClass: "mt-5 pt-4" }, [
+          _c("h1", { staticClass: "text-white" }, [_vm._v("Vista Integrantes")])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -100589,18 +100910,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-5 card mr-3", attrs: { id: "tarjeta" } },
-        [_vm._v("Aqui opciones para crear grafo")]
-      ),
+    return _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-3" }, [
+      _c("h3", { staticClass: "text-center fredoka my-2" }, [
+        _vm._v("Representación")
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-5 card ml-3", attrs: { id: "tarjeta" } },
-        [_vm._v("Aqui dejaria mostrando los grafos siempre")]
-      )
+      _c("div", {
+        staticClass: "mb-3",
+        staticStyle: { border: "1px solid lightgray" },
+        attrs: { id: "grafo" }
+      })
     ])
   }
 ]

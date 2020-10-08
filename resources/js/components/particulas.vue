@@ -17,24 +17,23 @@ export default {
     
     methods:{
         initParticlesJS () {
-            /* eslint-disable */
             particlesJS('particles-js', {
                 'particles': {
                 'number': {
-                    'value': 80,
+                    'value': 25,
                     'density': {
                     'enable': true,
-                    'value_area': 800
+                    'value_area': 600
                     }
                 },
                 'color': {
-                    'value': '#000'
+                    'value': '#ffffff'
                 },
                 'shape': {
                     'type': 'circle',
                     'stroke': {
                     'width': 0,
-                    'color': '#000000'
+                    'color': '#ffffff'
                     },
                     'polygon': {
                     'nb_sides': 5
@@ -68,7 +67,7 @@ export default {
                 'line_linked': {
                     'enable': true,
                     'distance': 400,
-                    'color': '#000',
+                    'color': '#ffffff',
                     'opacity': 0.4,
                     'width': 2
                 },

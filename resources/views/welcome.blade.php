@@ -13,37 +13,11 @@
         <script src="{{asset('js/app.js')}}" defer></script>
 
     </head>
-    <body id="particles-js">
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!--NOMBRE-->
-                <div class="navbar-brand text-white lato">Trabajo Unidad 1: Grafos</div>
-                <!--/NOMBRE-->
-          
-                <!--OPCIONES NAVBAR-->
-                <div class="collapse navbar-collapse justify-content-end">
-                  <ul class="navbar-nav ml-md-auto d-none d-md-flex">
-                    <li class="nav-item active">
-                      <a class="nav-link text-white lato">Introducción</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-white lato">Grafos</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-white lato">Integrantes</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--/OPCIONES NAVBAR-->
-            </div>
-        </nav>
-        <div>
+    <body id="particles-js" style="background-color:#3b4044;" >
 
-            <div class="mt-5 mx-5" id="app">
-                <particles></particles>
-            </div>
+        <div id="app">
+            <particles></particles>
         </div>
-  
         
     </body>
 </html>
