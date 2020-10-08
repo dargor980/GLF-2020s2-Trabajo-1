@@ -16,11 +16,14 @@
                                 <h3 class="mt-2">Grafo simple No dirigido</h3>
                                 <hr>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <button class="btn btn-success" @click="createNode">Añadir nodo</button>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
                                         </div>
                                     </div>
                                     
@@ -34,7 +37,7 @@
                                                 <input type="text" v-model="nodo.id" name="id" class="form-control"> 
                                             </div>
                                             <div class="form-group">
-                                                <label for="label">ingrese nombre:</label> 
+                                                <label for="label">ingrese nombre:</label>
                                                 <input type="text" v-model="nodo.label" name="label" class="form-control"> 
 
                                             </div>
@@ -48,11 +51,11 @@
                                 <div v-if="createAris" class="my-3">
                                   <form @submit.prevent="crearArista">
                                       <div class="form-group">
-                                          <label>Ingrese nodo desde el cual sale la arista:</label>
+                                          <label>Ingrese id del nodo desde el cual sale la arista:</label>
                                           <input type="text" v-model="arista.from" class="form-control"> 
                                       </div>
                                       <div class="form-group">
-                                          <label>Ingrese nodo al cual llega la arista:</label>
+                                          <label>Ingrese id del nodo al cual llega la arista:</label>
                                           <input type="text" v-model="arista.to" class="form-control"> 
                                       </div>
                                       <div class="form-group">
@@ -105,10 +108,14 @@ export default {
                         {id:'6', label:'f'},
                     ],  
             aristas:[{from:'1',to:'2',value:'5'}, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
-                        {from:'1',to:'3',value:'7'},
-                        {from:'5',to:'2',value:'6'},
+                        {from:'1',to:'4',value:'7'},
+                        //{from:'1',to:'4',value:'7'},
+                        {from:'2',to:'3',value:'6'},
+                        {from:'4',to:'3',value:'2'},
                         {from:'5',to:'3',value:'3'},
                         {from:'5',to:'4',value:'3'},
+                        {from:'6',to:'4',value:'6'},
+                        {from:'6',to:'3',value:'6'},
                     ],
             matrixCaminos:[],
             
@@ -131,13 +138,19 @@ export default {
         //this.multiplicarMatriz(a,b);
         //this.potencia(b);
         //console.log("conexo: ",this.conexo()); 
-        var lala= this.isEuleriano();
-        console.log(lala);
+        //var lala= this.isEuleriano();
+        //console.log(lala);
+        //this.eliminarGrafo();
     },
 
     
 
     methods:{
+        
+        delAndClear(){
+            this.eliminarGrafo();
+            this.drawGrafo();
+        },
         
         selectGrafo()
         {
@@ -433,7 +446,15 @@ export default {
             }
             console.log(matriZIdentidad);
         return matriZIdentidad;
+        },
+        
+        eliminarGrafo(){ //borra todos los elementos del grafo.
+            this.nodos=[];
+            this.aristas=[];
+            //console.log(this.nodos);
+            //console.log(this.aristas);
         }
+
     },
 }
 </script>

@@ -1999,6 +1999,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2038,12 +2041,17 @@ __webpack_require__.r(__webpack_exports__);
       }, // 5 a 3, 3 a 1, 1 a 4, 4 a 5, 5 a 2, 2 a 1
       {
         from: '1',
-        to: '3',
+        to: '4',
         value: '7'
-      }, {
-        from: '5',
-        to: '2',
+      }, //{from:'1',to:'4',value:'7'},
+      {
+        from: '2',
+        to: '3',
         value: '6'
+      }, {
+        from: '4',
+        to: '3',
+        value: '2'
       }, {
         from: '5',
         to: '3',
@@ -2052,6 +2060,14 @@ __webpack_require__.r(__webpack_exports__);
         from: '5',
         to: '4',
         value: '3'
+      }, {
+        from: '6',
+        to: '4',
+        value: '6'
+      }, {
+        from: '6',
+        to: '3',
+        value: '6'
       }],
       matrixCaminos: [],
 
@@ -2062,8 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
       createAris: false
     };
   },
-  created: function created() {
-    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
     //this.sumaMat();
     //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
@@ -2071,10 +2086,15 @@ __webpack_require__.r(__webpack_exports__);
     //this.multiplicarMatriz(a,b);
     //this.potencia(b);
     //console.log("conexo: ",this.conexo()); 
-    var lala = this.isEuleriano();
-    console.log(lala);
+    //var lala= this.isEuleriano();
+    //console.log(lala);
+    //this.eliminarGrafo();
   },
   methods: {
+    delAndClear: function delAndClear() {
+      this.eliminarGrafo();
+      this.drawGrafo();
+    },
     selectGrafo: function selectGrafo() {},
     drawGrafo: function drawGrafo() {
       //función que toma los nodos y aristas y procede a graficarlos en el container
@@ -2349,6 +2369,12 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(matriZIdentidad);
       return matriZIdentidad;
+    },
+    eliminarGrafo: function eliminarGrafo() {
+      //borra todos los elementos del grafo.
+      this.nodos = [];
+      this.aristas = []; //console.log(this.nodos);
+      //console.log(this.aristas);
     }
   }
 });
@@ -100266,7 +100292,7 @@ var render = function() {
                   _c("hr"),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c(
                         "button",
                         {
@@ -100277,7 +100303,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c(
                         "button",
                         {
@@ -100285,6 +100311,17 @@ var render = function() {
                           on: { click: _vm.createArista }
                         },
                         [_vm._v("Añadir arista")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: { click: _vm.delAndClear }
+                        },
+                        [_vm._v("Eliminar Grafo")]
                       )
                     ])
                   ])
@@ -100398,7 +100435,7 @@ var render = function() {
                           _c("div", { staticClass: "form-group" }, [
                             _c("label", [
                               _vm._v(
-                                "Ingrese nodo desde el cual sale la arista:"
+                                "Ingrese id del nodo desde el cual sale la arista:"
                               )
                             ]),
                             _vm._v(" "),
@@ -100431,7 +100468,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("label", [
-                              _vm._v("Ingrese nodo al cual llega la arista:")
+                              _vm._v(
+                                "Ingrese id del nodo al cual llega la arista:"
+                              )
                             ]),
                             _vm._v(" "),
                             _c("input", {
@@ -112998,8 +113037,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
