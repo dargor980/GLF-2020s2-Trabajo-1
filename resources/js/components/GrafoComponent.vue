@@ -65,7 +65,7 @@
                                     <form @submit.prevent="crearNodo">
                                         <div class="form-group">
                                             <label for="id">ingrese el id: </label> 
-                                            <input type="text" v-model="nodo.id" name="id" class="form-control"> 
+                                            <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
                                         </div>
                                         <div class="form-group">
                                             <label for="label">ingrese nombre:</label> 
@@ -80,15 +80,15 @@
                                 <form @submit.prevent="crearArista">
                                     <div class="form-group">
                                         <label>Ingrese nodo desde el cual sale la arista:</label>
-                                        <input type="text" v-model="arista.from" class="form-control"> 
+                                        <input type="number" min="1" v-model="arista.from" class="form-control"> 
                                     </div>
                                     <div class="form-group">
                                         <label>Ingrese nodo al cual llega la arista:</label>
-                                        <input type="text" v-model="arista.to" class="form-control"> 
+                                        <input type="number" min="1" v-model="arista.to" class="form-control"> 
                                     </div>
                                     <div class="form-group">
                                         <label>Ingrese el peso de la arista: </label>
-                                        <input type="text" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
+                                        <input type="number" min="0" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
                                     </div>
                             
                                     <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
@@ -269,6 +269,20 @@ export default {
         },
 
         crearNodo(){   //agrega un nodo al array de nodos , grafo 
+
+            if(this.nodo.id==='')  //verificación que el campo no esté vacío
+            {
+                alert('Debe ingresar un id.');
+                return;
+            }
+            for(var i=0; i<this.nodos.length;i++)  //verificación de un nodo preexistente en el arreglo de nodos.
+            {
+                if(this.nodos[i].id==this.nodo.id)
+                {
+                    alert('El nodo ya existe. Ingrese otro id.');
+                    return;
+                }
+            }
             this.nodos.push(this.nodo);
             this.nodo={id:'', label:''}
             this.drawGrafo();
@@ -280,6 +294,20 @@ export default {
         },
         
         crearArista(){ // agrega conexion entre nodos
+
+            if(this.arista.from==='' || this.arista.to==='') //verifica que los extremos de la arista no estén vacíos.
+            {
+                alert('Debe ingresar los extremos de la arista.');
+                return;
+            }
+            for(var i=0; i<this.aristas.length;i++)
+            {
+                if(this.arista.from===this.aristas[i].from && this.arista.to===this.aristas[i].to)
+                {
+                    alert('ya existe la arista. Igrese otra');
+                    return;
+                }
+            }
             this.aristas.push(this.arista);
             this.arista={from:'',to:'',value:'0'}
             this.drawGrafo();
@@ -291,6 +319,7 @@ export default {
             }
         },
 
+//funciones que controla la visualización de las vistas
         mostrarOp1(){
             this.controlanalisis=1;
             this.matrizCaminos();

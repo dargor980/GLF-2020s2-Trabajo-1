@@ -2173,6 +2173,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     crearNodo: function crearNodo() {
       //agrega un nodo al array de nodos , grafo 
+      if (this.nodo.id === '') //verificación que el campo no esté vacío
+        {
+          alert('Debe ingresar un id.');
+          return;
+        }
+
+      for (var i = 0; i < this.nodos.length; i++) //verificación de un nodo preexistente en el arreglo de nodos.
+      {
+        if (this.nodos[i].id == this.nodo.id) {
+          alert('El nodo ya existe. Ingrese otro id.');
+          return;
+        }
+      }
+
       this.nodos.push(this.nodo);
       this.nodo = {
         id: '',
@@ -2187,6 +2201,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     crearArista: function crearArista() {
       // agrega conexion entre nodos
+      if (this.arista.from === '' || this.arista.to === '') //verifica que los extremos de la arista no estén vacíos.
+        {
+          alert('Debe ingresar los extremos de la arista.');
+          return;
+        }
+
+      for (var i = 0; i < this.aristas.length; i++) {
+        if (this.arista.from === this.aristas[i].from && this.arista.to === this.aristas[i].to) {
+          alert('ya existe la arista. Igrese otra');
+          return;
+        }
+      }
+
       this.aristas.push(this.arista);
       this.arista = {
         from: '',
@@ -2201,6 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(this.aristas[i].value); // peso de la arista
       }
     },
+    //funciones que controla la visualización de las vistas
     mostrarOp1: function mostrarOp1() {
       this.controlanalisis = 1;
       this.matrizCaminos();
@@ -100517,7 +100545,11 @@ var render = function() {
                                         }
                                       ],
                                       staticClass: "form-control",
-                                      attrs: { type: "text", name: "id" },
+                                      attrs: {
+                                        type: "number",
+                                        min: "1",
+                                        name: "id"
+                                      },
                                       domProps: { value: _vm.nodo.id },
                                       on: {
                                         input: function($event) {
@@ -100610,7 +100642,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "form-control",
-                                    attrs: { type: "text" },
+                                    attrs: { type: "number", min: "1" },
                                     domProps: { value: _vm.arista.from },
                                     on: {
                                       input: function($event) {
@@ -100644,7 +100676,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "form-control",
-                                    attrs: { type: "text" },
+                                    attrs: { type: "number", min: "1" },
                                     domProps: { value: _vm.arista.to },
                                     on: {
                                       input: function($event) {
@@ -100676,7 +100708,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "form-control",
-                                    attrs: { type: "text" },
+                                    attrs: { type: "number", min: "0" },
                                     domProps: { value: _vm.arista.value },
                                     on: {
                                       input: function($event) {
