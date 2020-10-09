@@ -112,7 +112,7 @@
             <h1 class="text-center fredoka textocolor my-4">Análisis del Grafo</h1>
             <div class="row justify-content-center">
                 <div class="card cardaux4 col-md-10 rounded-top">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group justify-content-center" role="group">
                         <a href="#matrizcaminos"><button type="button" class="btn btn-secondary" @click="mostrarOp1">Matriz de caminos</button></a>
                         <a href="#caminocorto"><button type="button" class="btn btn-secondary" @click="mostrarOp2">Camino más corto</button></a>
                         <a href="#hamiltoniano"><button type="button" class="btn btn-secondary" @click="mostrarOp3">Hamiltoniano / Euleriano</button></a>
@@ -474,11 +474,32 @@ export default {
         },
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
-            var camino=[];
-            var x=nodo_inicial;
-            for(var i=1; i<nodos.length;i++)
+            var vertices= this.nodos;
+            var distancias=new Array(this.nodos.length);
+            var ady=this.matrizAdyacencia();
+            var x={
+                distanciaAcumulada:0,
+                origen: null,
+            };
+            var actual=nodo_inicial
+            var finalizado=[];
+            finalizado.push(nodo_inicial);
+            while(vertices.length!==0)
             {
-                
+                for(var i=0; i<this.nodos.length;i++)
+                {
+                    for(var j=0; j<this.nodos.length;j++)
+                    {
+                        if(ady[i][j]!==null)
+                        {
+                            x={
+                                distanciaAcumulada:distanciaAcumulada+ady[i][j],
+                                origen:actual,
+                            }
+                        }
+                        vertices.splice(i,1);
+                    }
+                }
             }
         },
 

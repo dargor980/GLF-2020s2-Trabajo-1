@@ -2360,10 +2360,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     caminoCorto: function caminoCorto(nodo_inicial) {
       //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
-      var camino = [];
-      var x = nodo_inicial;
+      var vertices = this.nodos;
+      var distancias = new Array(this.nodos.length);
+      var ady = this.matrizAdyacencia();
+      var x = {
+        distanciaAcumulada: 0,
+        origen: null
+      };
+      var actual = nodo_inicial;
+      var finalizado = [];
+      finalizado.push(nodo_inicial);
 
-      for (var i = 1; i < nodos.length; i++) {}
+      while (vertices.length !== 0) {
+        for (var i = 0; i < this.nodos.length; i++) {
+          for (var j = 0; j < nodos.length; j++) {
+            if (ady[i][j] !== null) {
+              x = {
+                distanciaAcumulada: distanciaAcumulada + ady[i][j],
+                origen: actual
+              };
+            }
+          }
+        }
+      }
     },
     kruskal: function kruskal() {//Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
     },
@@ -100770,7 +100789,10 @@ var render = function() {
             _c("div", { staticClass: "card cardaux4 col-md-10 rounded-top" }, [
               _c(
                 "div",
-                { staticClass: "btn-group", attrs: { role: "group" } },
+                {
+                  staticClass: "btn-group justify-content-center",
+                  attrs: { role: "group" }
+                },
                 [
                   _c("a", { attrs: { href: "#matrizcaminos" } }, [
                     _c(
