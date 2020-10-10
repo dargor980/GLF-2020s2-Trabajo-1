@@ -203,9 +203,11 @@ export default {
             nodo:{id:'', label:''},
             arista:{from:'',to:'',value:''},
 
-            nodos:[],   
-            aristas:[],
+            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'}],   
+            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'2'},{from:'2',to:'4',value:'3'},{from:'3',to:'4',value:'3'}],
             matrixCaminos:[],
+            
+
 
             /*variables de control */
             addgrafo: false,
@@ -221,7 +223,7 @@ export default {
     created(){
         
         //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-        //this.sumaMat();
+        this.sumaMat();
         //this.matrizIdentidad();
         //let a = this.matrizAdyacencia();
         //let b = this.matrizAdyacencia();
@@ -231,6 +233,7 @@ export default {
         //var lala= this.isEuleriano();
         //console.log(lala);
         //this.eliminarGrafo();
+        //this.caminoCorto2();
     },
 
     
@@ -502,6 +505,44 @@ export default {
                 }
             }
         },
+        
+        // caminoCorto2(id_nodo){ //fallido segundo camino corto
+        //     var nuevo=[];
+        //     var camino=[];
+        //     console.log("largo aristas", this.aristas.length);
+        //     var max=0;
+        //     for(var e=0;e<this.aristas.length;e++){//calcula el maximo peso de las aristas
+        //         var min=this.aristas[e].value;      
+        //         if(max<min){
+        //             max=min;
+        //         }
+        //     }
+        //     console.log(max);//muestra maximo
+        //     //***************************************** */
+        //     for (var i=0;i<this.aristas.length;i++){
+        //         var k=0;
+        //         while(k<max){
+        //             if(this.aristas[i].from===0){
+        //                 nuevo.push(this.aristas[i]);
+        //                 console.log("nuevo",nuevo[i]);
+        //                 this.aristas[i].pop();
+        //             }
+        //             k++;
+        //         }
+        //         console.log(nuevo.values);
+        //     }
+
+                
+        //     for (var j=0;j<nuevo.length;i++){
+        //         menor = nuevo[j].value;
+        //         mayor = nuevo[j++].value;
+        //         if(mayor < menor){
+        //             menor=mayor;
+        //             camino.push(menor);
+        //         }
+        //     }
+        //     //console.log("camino",camino.values);
+        // },
 
         kruskal(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
 
@@ -629,8 +670,33 @@ export default {
             this.aristas=[];
             //console.log(this.nodos);
             //console.log(this.aristas);
-        }
+        },
+
 
     },
 }
 </script>
+
+// **Pseudocodigo Dikjstra**
+// nodos_visitados=[]
+// nodos_no_visitados=[{1,{4,5,6}},{2,{3,5}},3,{6},6,{1}] //{nodo,{nodos_llegada}}
+// suma_camino_nodos=0
+// nodo_inicial
+// for(cada_conexion_del_nodo_inicial){
+//     buscar_la_arista_de_salida_con_menor_peso adicionar suma_camino_nodos
+// }
+// añadir nodo_inicial a nodos_visitados
+// eliminar nodo_inicial de nodos_no_visitados
+// nodo_inicial = nodo_con_arista_de_menor_peso
+// repetir_hasta_vaciar nodos_no_visitados
+
+
+
+
+
+
+
+
+
+
+        

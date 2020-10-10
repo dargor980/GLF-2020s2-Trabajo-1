@@ -2118,8 +2118,36 @@ __webpack_require__.r(__webpack_exports__);
         to: '',
         value: ''
       },
-      nodos: [],
-      aristas: [],
+      nodos: [{
+        id: '1',
+        label: '1'
+      }, {
+        id: '2',
+        label: '2'
+      }, {
+        id: '3',
+        label: '3'
+      }, {
+        id: '4',
+        label: '4'
+      }],
+      aristas: [{
+        from: '1',
+        to: '2',
+        value: '1'
+      }, {
+        from: '1',
+        to: '3',
+        value: '2'
+      }, {
+        from: '2',
+        to: '4',
+        value: '3'
+      }, {
+        from: '3',
+        to: '4',
+        value: '3'
+      }],
       matrixCaminos: [],
 
       /*variables de control */
@@ -2131,9 +2159,9 @@ __webpack_require__.r(__webpack_exports__);
       controlvista: 1
     };
   },
-  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-    //this.sumaMat();
-    //this.matrizIdentidad();
+  created: function created() {
+    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+    this.sumaMat(); //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
     //let b = this.matrizAdyacencia();
     //this.multiplicarMatriz(a,b);
@@ -2142,6 +2170,7 @@ __webpack_require__.r(__webpack_exports__);
     //var lala= this.isEuleriano();
     //console.log(lala);
     //this.eliminarGrafo();
+    //this.caminoCorto2();
   },
   methods: {
     delAndClear: function delAndClear() {
@@ -2373,17 +2402,54 @@ __webpack_require__.r(__webpack_exports__);
 
       while (vertices.length !== 0) {
         for (var i = 0; i < this.nodos.length; i++) {
-          for (var j = 0; j < nodos.length; j++) {
+          for (var j = 0; j < this.nodos.length; j++) {
             if (ady[i][j] !== null) {
               x = {
                 distanciaAcumulada: distanciaAcumulada + ady[i][j],
                 origen: actual
               };
             }
+
+            vertices.splice(i, 1);
           }
         }
       }
     },
+    // caminoCorto2(id_nodo){ //fallido segundo camino corto
+    //     var nuevo=[];
+    //     var camino=[];
+    //     console.log("largo aristas", this.aristas.length);
+    //     var max=0;
+    //     for(var e=0;e<this.aristas.length;e++){//calcula el maximo peso de las aristas
+    //         var min=this.aristas[e].value;      
+    //         if(max<min){
+    //             max=min;
+    //         }
+    //     }
+    //     console.log(max);//muestra maximo
+    //     //***************************************** */
+    //     for (var i=0;i<this.aristas.length;i++){
+    //         var k=0;
+    //         while(k<max){
+    //             if(this.aristas[i].from===0){
+    //                 nuevo.push(this.aristas[i]);
+    //                 console.log("nuevo",nuevo[i]);
+    //                 this.aristas[i].pop();
+    //             }
+    //             k++;
+    //         }
+    //         console.log(nuevo.values);
+    //     }
+    //     for (var j=0;j<nuevo.length;i++){
+    //         menor = nuevo[j].value;
+    //         mayor = nuevo[j++].value;
+    //         if(mayor < menor){
+    //             menor=mayor;
+    //             camino.push(menor);
+    //         }
+    //     }
+    //     //console.log("camino",camino.values);
+    // },
     kruskal: function kruskal() {//Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
     },
     flujoMaximo: function flujoMaximo() {},
@@ -113495,8 +113561,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
