@@ -2105,6 +2105,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -100490,7 +100547,9 @@ var render = function() {
           _vm._v(" "),
           _c("h1", { staticClass: "text-white" }, [
             _vm._v("Apretar Grafo para seguir trabajando")
-          ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -100836,7 +100895,7 @@ var render = function() {
                         ? _c(
                             "div",
                             { staticClass: "col-md-5 card cardaux mr-3" },
-                            [_vm._m(0)]
+                            [_vm._m(1)]
                           )
                         : _vm._e()
                     ])
@@ -100844,7 +100903,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _vm._m(2)
           ]),
           _vm._v(" "),
           _c("h1", { staticClass: "text-center fredoka textocolor my-4" }, [
@@ -101099,12 +101158,34 @@ var render = function() {
     _vm._v(" "),
     _vm.controlvista === 3
       ? _c("div", { staticClass: "mt-5 pt-4" }, [
-          _c("h1", { staticClass: "text-white" }, [_vm._v("Vista Integrantes")])
+          _c("h1", { staticClass: "text-center textocolor fredoka " }, [
+            _vm._v("Integrantes")
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5)
         ])
       : _vm._e()
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Introduccion beta")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" })
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -101125,6 +101206,114 @@ var staticRenderFns = [
         staticStyle: { border: "1px solid lightgray" },
         attrs: { id: "grafo" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Cristóbal González Gárate")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("ul", [
+            _c("li", [_vm._v("cristobal.gonzalezg@utem.cl")]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "https://github.com/Cris-Rider" } }, [
+                _vm._v("Perfil de GitHub")
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Germán Contreras Améstica")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("ul", [
+            _c("li", [_vm._v("german.contrerasa@utem.cl")]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "https://github.com/dargor980" } }, [
+                _vm._v("Perfil de GitHub")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Luciano Grande Morales")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("ul", [
+            _c("li", [_vm._v("luciano.grandim@utem.cl")]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "https://github.com/EnduranceAHOF" } }, [
+                _vm._v("Perfil de GitHub")
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Braulio Argandoña Carrasco")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("ul", [
+            _c("li", [_vm._v("braulio.argandonac@utem.cl")]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                { attrs: { href: "https://github.com/braulioargandonac" } },
+                [_vm._v("Perfil de GitHub")]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+        _c("h3", { staticClass: "text-center fredoka my-2" }, [
+          _vm._v("Rodrigo Aguirre Rodriguez")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("ul", [
+            _c("li", [_vm._v("rodrigo.aguirrer@utem.cl")]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "" } }, [_vm._v("Falta su perfil uwu")])
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -113561,8 +113750,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
