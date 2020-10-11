@@ -164,6 +164,19 @@
                 <div id="hamiltoniano" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==3">
                     <div class="container">
                         CASO 3: HAMILTONIANO / EULERIANO
+                        <div class="container">
+                            <div class="card">
+                                
+                                <div class="card-header">
+                                    <h3>es hamiltoniano</h3>
+                                </div>
+                                <div class="card-body" v-if="controlanalisis==3">
+                                    {{hamilton}}
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <!-- / CASO 3: HAMILTONIANO / EULERIANO -->
@@ -261,8 +274,9 @@ export default {
             arista:{from:'',to:'',value:''},
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'}],   
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'2'},{from:'2',to:'4',value:'3'},{from:'3',to:'4',value:'3'}],
+            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'2'},{from:'2',to:'4',value:'3'},{from:'3',to:'4',value:'3'},{from:'4',to:'1',value:'3'}],
             matrixCaminos:[],
+            hamilton:'',
             
 
 
@@ -275,12 +289,11 @@ export default {
             controlvista: 1,
 
         }
-    },
-    
+    }, 
     created(){
         
         //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-        this.sumaMat();
+        //this.sumaMat();
         //this.matrizIdentidad();
         //let a = this.matrizAdyacencia();
         //let b = this.matrizAdyacencia();
@@ -291,12 +304,19 @@ export default {
         //console.log(lala);
         //this.eliminarGrafo();
         //this.caminoCorto2();
+        
     },
 
     
 
     methods:{
-        
+        llamarHam(){
+            var ham =this.isHamiltoniano()
+            this.hamilton= ham;
+            console.log(ham);
+            return this.hamilton;
+        },
+
         delAndClear(){
             this.eliminarGrafo();
             this.drawGrafo();
@@ -315,6 +335,8 @@ export default {
                 height: 520 + 'px',
             };
             var network= new vis.Network(container,data,options);
+            var djasd = this.matrizAdyacencia()
+            console.log(djasd);
         },
 
         createNode()  //funcion para el control del flujo de vistas 
@@ -378,7 +400,6 @@ export default {
                 // console.log(this.aristas[i].value); // peso de la arista
             }
         },
-
 //funciones que controla la visualización de las vistas
         mostrarOp1(){
             this.controlanalisis=1;
@@ -400,7 +421,7 @@ export default {
         mostrarOp5(){
             this.controlanalisis=5;
         },
-
+// ***** mas funciones******
         mostrarIntroduccion(){
             this.controlvista=1;
         },
@@ -531,6 +552,32 @@ export default {
 
         isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
             
+            if(this.conexo()){
+                //variables
+                var matrix = this.matrizAdyacencia();
+                var nodos_visitados = [];
+                var nodos_no_visitados = this.nodos;
+                //ciclo hamiltoniano 
+                if(this.nodos.length==this.aristas.length){
+                    for(var i=0; i < this.nodos.length ; i++){
+                        for(var j=0; j<this.nodos.length ; j++){
+                            var cont = 0
+                            if (matrix[i][j] != 0){
+                                cont++;
+                            }
+                        }
+                        if (cont >= 3){
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else{
+                return false;
+            }
         },
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
@@ -747,6 +794,28 @@ export default {
 // nodo_inicial = nodo_con_arista_de_menor_peso
 // repetir_hasta_vaciar nodos_no_visitados
 
+***Otro Pseudocodigo hamilton ctm
+ver si es conexo
+    si es conexo
+        nodos vistados
+            si se visito
+                eliminar del arreglo principal
+        nodos no visitados
+            si existen 
+                nodos no visitados
+                    recorrer no visitados
+
+                    si nodos no visitados esta vacio
+                        estan todos conectados
+                            return true
+
+    si no es conexo 
+        return false
+
+
+if (this.nodos.lenght){
+
+}
 
 
 

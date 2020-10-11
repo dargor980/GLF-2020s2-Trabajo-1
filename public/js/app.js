@@ -2204,8 +2204,13 @@ __webpack_require__.r(__webpack_exports__);
         from: '3',
         to: '4',
         value: '3'
+      }, {
+        from: '4',
+        to: '1',
+        value: '3'
       }],
       matrixCaminos: [],
+      hamilton: '',
 
       /*variables de control */
       addgrafo: false,
@@ -2216,9 +2221,9 @@ __webpack_require__.r(__webpack_exports__);
       controlvista: 1
     };
   },
-  created: function created() {
-    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-    this.sumaMat(); //this.matrizIdentidad();
+  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+    //this.sumaMat();
+    //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
     //let b = this.matrizAdyacencia();
     //this.multiplicarMatriz(a,b);
@@ -2230,6 +2235,12 @@ __webpack_require__.r(__webpack_exports__);
     //this.caminoCorto2();
   },
   methods: {
+    llamarHam: function llamarHam() {
+      var ham = this.isHamiltoniano();
+      this.hamilton = ham;
+      console.log(ham);
+      return this.hamilton;
+    },
     delAndClear: function delAndClear() {
       this.eliminarGrafo();
       this.drawGrafo();
@@ -2246,6 +2257,8 @@ __webpack_require__.r(__webpack_exports__);
         height: 520 + 'px'
       };
       var network = new vis.Network(container, data, options);
+      var djasd = this.matrizAdyacencia();
+      console.log(djasd);
     },
     createNode: function createNode() //funcion para el control del flujo de vistas 
     {
@@ -2331,6 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
     mostrarOp5: function mostrarOp5() {
       this.controlanalisis = 5;
     },
+    // ***** mas funciones******
     mostrarIntroduccion: function mostrarIntroduccion() {
       this.controlvista = 1;
     },
@@ -2442,7 +2456,34 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    isHamiltoniano: function isHamiltoniano() {//FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
+    isHamiltoniano: function isHamiltoniano() {
+      //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
+      if (this.conexo()) {
+        //variables
+        var matrix = this.matrizAdyacencia();
+        var nodos_visitados = [];
+        var nodos_no_visitados = this.nodos; //ciclo hamiltoniano 
+
+        if (this.nodos.length == this.aristas.length) {
+          for (var i = 0; i < this.nodos.length; i++) {
+            for (var j = 0; j < this.nodos.length; j++) {
+              var cont = 0;
+
+              if (matrix[i][j] != 0) {
+                cont++;
+              }
+            }
+
+            if (cont >= 3) {
+              return false;
+            } else {
+              return true;
+            }
+          }
+        }
+      } else {
+        return false;
+      }
     },
     caminoCorto: function caminoCorto(nodo_inicial) {
       //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
@@ -101092,8 +101133,23 @@ var render = function() {
                   [
                     _c("div", { staticClass: "container" }, [
                       _vm._v(
-                        "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                "
-                      )
+                        "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                    "
+                      ),
+                      _c("div", { staticClass: "container" }, [
+                        _c("div", { staticClass: "card" }, [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _vm.controlanalisis == 3
+                            ? _c("div", { staticClass: "card-body" }, [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.hamilton) +
+                                    "\n                            "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ])
                     ])
                   ]
                 )
