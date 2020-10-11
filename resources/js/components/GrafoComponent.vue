@@ -313,7 +313,7 @@ export default {
         llamarHam(){
             var ham =this.isHamiltoniano()
             this.hamilton= ham;
-            console.log(ham);
+            console.log(hamilton);
             return this.hamilton;
         },
 
@@ -554,7 +554,7 @@ export default {
             
             if(this.conexo()){
                 //variables
-                var matrix = this.matrizAdyacencia();
+                var matrix = this.matrizAdyacencia();  
                 var nodos_visitados = [];
                 var nodos_no_visitados = this.nodos;
                 //ciclo hamiltoniano 
@@ -562,17 +562,30 @@ export default {
                     for(var i=0; i < this.nodos.length ; i++){
                         for(var j=0; j<this.nodos.length ; j++){
                             var cont = 0
-                            if (matrix[i][j] != 0){
-                                cont++;
+                            var con2 = 0
+                            if(cont2 < (this.matrix[i][j] + cont2)){
+                                // aqui se supone que debería hacer algo
+                            //ayuda chupete suazooo unu 
+                            //salvanos jebus
+                            
+
                             }
+                            if (matrix[i][j] != 0){
+                                nodos_visitados.push(this.nodos[i].id)                                 
+                                nodos_no_visitados.pop(matrix[i][j])
+                                cont++; // [1,1 ,1,,1,1,1,1,1,1,1]   
+                            }   
                         }
-                        if (cont >= 3){
+                        if (cont > 2){
                             return false;
                         }
                         else {
-                            return true;
                         }
                     }
+                }
+                if(nodos_no_visitados.length==0)
+                {
+                    return true;
                 }
             }
             else{

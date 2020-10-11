@@ -2162,6 +2162,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2238,7 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
     llamarHam: function llamarHam() {
       var ham = this.isHamiltoniano();
       this.hamilton = ham;
-      console.log(ham);
+      console.log(hamilton);
       return this.hamilton;
     },
     delAndClear: function delAndClear() {
@@ -2468,18 +2481,28 @@ __webpack_require__.r(__webpack_exports__);
           for (var i = 0; i < this.nodos.length; i++) {
             for (var j = 0; j < this.nodos.length; j++) {
               var cont = 0;
+              var con2 = 0;
+
+              if (cont2 < this.matrix[i][j] + cont2) {// aqui se supone que debería hacer algo
+                //ayuda chupete suazooo unu 
+                //salvanos jebus
+              }
 
               if (matrix[i][j] != 0) {
-                cont++;
+                nodos_visitados.push(this.nodos[i].id);
+                nodos_no_visitados.pop(matrix[i][j]);
+                cont++; // [1,1 ,1,,1,1,1,1,1,1,1]   
               }
             }
 
-            if (cont >= 3) {
+            if (cont > 2) {
               return false;
-            } else {
-              return true;
-            }
+            } else {}
           }
+        }
+
+        if (nodos_no_visitados.length == 0) {
+          return true;
         }
       } else {
         return false;
@@ -101137,7 +101160,7 @@ var render = function() {
                       ),
                       _c("div", { staticClass: "container" }, [
                         _c("div", { staticClass: "card" }, [
-                          _vm._m(2),
+                          _vm._m(3),
                           _vm._v(" "),
                           _vm.controlanalisis == 3
                             ? _c("div", { staticClass: "card-body" }, [
@@ -101218,11 +101241,11 @@ var render = function() {
             _vm._v("Integrantes")
           ]),
           _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
           _vm._m(4),
           _vm._v(" "),
-          _vm._m(5)
+          _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6)
         ])
       : _vm._e()
   ])
@@ -101262,6 +101285,14 @@ var staticRenderFns = [
         staticStyle: { border: "1px solid lightgray" },
         attrs: { id: "grafo" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("es hamiltoniano")])
     ])
   },
   function() {
@@ -113806,8 +113837,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
