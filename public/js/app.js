@@ -2079,102 +2079,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2230,8 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
       option: '',
       create: false,
       createAris: false,
-      controlanalisis: '',
-      controlvista: 1
+      controlanalisis: ''
     };
   },
   created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
@@ -2356,16 +2259,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarOp5: function mostrarOp5() {
       this.controlanalisis = 5;
-    },
-    // ***** mas funciones******
-    mostrarIntroduccion: function mostrarIntroduccion() {
-      this.controlvista = 1;
-    },
-    mostrarGrafo: function mostrarGrafo() {
-      this.controlvista = 2;
-    },
-    mostrarIntegrantes: function mostrarIntegrantes() {
-      this.controlvista = 3;
     },
     matrizAdyacencia: function matrizAdyacencia() {
       // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
@@ -2714,7 +2607,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      controlvista: 1
+    };
+  },
   mounted: function mounted() {
     var _this = this;
 
@@ -2834,6 +2755,15 @@ __webpack_require__.r(__webpack_exports__);
         },
         'retina_detect': true
       });
+    },
+    mostrarHome: function mostrarHome() {
+      this.controlvista = 1;
+    },
+    mostrarGrafo: function mostrarGrafo() {
+      this.controlvista = 2;
+    },
+    mostrarIntegrantes: function mostrarIntegrantes() {
+      this.controlvista = 3;
     }
   }
 });
@@ -100540,731 +100470,604 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "nav",
-      {
-        staticClass: "navbar navbar-expand-lg navbar-light",
-        attrs: { id: "navbar" }
-      },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "navbar-brand fredoka textocolor" }, [
-            _vm._v("Trabajo Unidad 1: Grafos")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "collapse navbar-collapse justify-content-end" },
-            [
+    _c("div", [
+      _c("h1", { staticClass: "text-center textocolor fredoka mt-5 pt-4" }, [
+        _vm._v("Crear Grafo")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
+          _c("div", { staticClass: "row ml-2 my-3" }, [
+            _c("div", { staticClass: "container-fluid mr-4" }, [
+              _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
+              _vm._v(" "),
               _c(
-                "ul",
-                { staticClass: "navbar-nav ml-md-auto d-none d-md-flex" },
-                [
-                  _c("li", { staticClass: "nav-item active" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link lato textocolor",
-                        attrs: { href: "#" },
-                        on: { click: _vm.mostrarIntroduccion }
-                      },
-                      [_vm._v("Introducción")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item active" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link lato textocolor",
-                        attrs: { href: "#" },
-                        on: { click: _vm.mostrarGrafo }
-                      },
-                      [_vm._v("Grafos")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item active" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link lato textocolor",
-                        attrs: { href: "#" },
-                        on: { click: _vm.mostrarIntegrantes }
-                      },
-                      [_vm._v("Integrantes")]
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _vm.controlvista === 1
-      ? _c("div", { staticClass: "mt-5 pt-4" }, [
-          _c("h1", { staticClass: "text-white" }, [
-            _vm._v("Vista Introducción")
-          ]),
-          _vm._v(" "),
-          _c("h1", { staticClass: "text-white" }, [
-            _vm._v("Apretar Grafo para seguir trabajando")
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.controlvista === 2
-      ? _c("div", [
-          _c(
-            "h1",
-            { staticClass: "text-center textocolor fredoka mt-5 pt-4" },
-            [_vm._v("Crear Grafo")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
-              _c("div", { staticClass: "row ml-2 my-3" }, [
-                _c("div", { staticClass: "container-fluid mr-4" }, [
-                  _c("h3", [_vm._v("Seleccione el tipo de grafo:")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.option,
-                          expression: "option"
-                        }
-                      ],
-                      staticClass: "custom-select  mb-3 mr-3 mt-2",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.option = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { selected: "" }, domProps: { value: 0 } },
-                        [_vm._v("Seleccione un tipo de grafo:")]
-                      ),
-                      _vm._v(" "),
-                      _c("option", { domProps: { value: 1 } }, [
-                        _vm._v("Grafo simple /no dirigido")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { domProps: { value: 2 } }, [
-                        _vm._v("Grafo simple /dirigido ")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { domProps: { value: 2 } }, [
-                        _vm._v("Grafo dirigido /etiquetado")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.option === 1
-                  ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
-                      _c("h3", { staticClass: "mt-2" }, [
-                        _vm._v("Grafo simple No dirigido")
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row text-center" }, [
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success",
-                              on: { click: _vm.createNode }
-                            },
-                            [_vm._v("Añadir nodo")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success",
-                              on: { click: _vm.createArista }
-                            },
-                            [_vm._v("Añadir arista")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              on: { click: _vm.delAndClear }
-                            },
-                            [_vm._v("Eliminar Grafo")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm.create
-                        ? _c("div", { staticClass: "my-3" }, [
-                            _c("div", [
-                              _c(
-                                "form",
-                                {
-                                  on: {
-                                    submit: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.crearNodo($event)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "form-group" }, [
-                                    _c("label", { attrs: { for: "id" } }, [
-                                      _vm._v("ingrese el id: ")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.nodo.id,
-                                          expression: "nodo.id"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "number",
-                                        min: "1",
-                                        name: "id"
-                                      },
-                                      domProps: { value: _vm.nodo.id },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.nodo,
-                                            "id",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "form-group" }, [
-                                    _c("label", { attrs: { for: "label" } }, [
-                                      _vm._v("ingrese nombre:")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.nodo.label,
-                                          expression: "nodo.label"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { type: "text", name: "label" },
-                                      domProps: { value: _vm.nodo.label },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.nodo,
-                                            "label",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-success btn-sm",
-                                      attrs: { type: "submit" }
-                                    },
-                                    [_vm._v("Agregar")]
-                                  )
-                                ]
-                              )
-                            ])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.createAris
-                        ? _c("div", { staticClass: "my-3" }, [
-                            _c(
-                              "form",
-                              {
-                                on: {
-                                  submit: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.crearArista($event)
-                                  }
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("label", [
-                                    _vm._v(
-                                      "Ingrese nodo desde el cual sale la arista:"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.arista.from,
-                                        expression: "arista.from"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "number", min: "1" },
-                                    domProps: { value: _vm.arista.from },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.arista,
-                                          "from",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("label", [
-                                    _vm._v(
-                                      "Ingrese nodo al cual llega la arista:"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.arista.to,
-                                        expression: "arista.to"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "number", min: "1" },
-                                    domProps: { value: _vm.arista.to },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.arista,
-                                          "to",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("label", [
-                                    _vm._v("Ingrese el peso de la arista: ")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.arista.value,
-                                        expression: "arista.value"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "number", min: "0" },
-                                    domProps: { value: _vm.arista.value },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.arista,
-                                          "value",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success btn-sm",
-                                    attrs: { type: "submit" }
-                                  },
-                                  [_vm._v("Agregar")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success btn-sm",
-                                    on: { click: _vm.drawGrafo }
-                                  },
-                                  [_vm._v("dibujar")]
-                                )
-                              ]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.option === 2
-                        ? _c(
-                            "div",
-                            { staticClass: "col-md-5 card cardaux mr-3" },
-                            [_vm._m(1)]
-                          )
-                        : _vm._e()
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ]),
-          _vm._v(" "),
-          _c("h1", { staticClass: "text-center fredoka textocolor my-4" }, [
-            _vm._v("Análisis del Grafo")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "card cardaux4 col-md-10 rounded-top" }, [
-              _c(
-                "div",
+                "select",
                 {
-                  staticClass: "btn-group justify-content-center",
-                  attrs: { role: "group" }
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.option,
+                      expression: "option"
+                    }
+                  ],
+                  staticClass: "custom-select  mb-3 mr-3 mt-2",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.option = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
                 },
                 [
-                  _c("a", { attrs: { href: "#matrizcaminos" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.mostrarOp1 }
-                      },
-                      [_vm._v("Matriz de caminos")]
-                    )
+                  _c(
+                    "option",
+                    { attrs: { selected: "" }, domProps: { value: 0 } },
+                    [_vm._v("Seleccione un tipo de grafo:")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { domProps: { value: 1 } }, [
+                    _vm._v("Grafo simple /no dirigido")
                   ]),
                   _vm._v(" "),
-                  _c("a", { attrs: { href: "#caminocorto" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.mostrarOp2 }
-                      },
-                      [_vm._v("Camino más corto")]
-                    )
+                  _c("option", { domProps: { value: 2 } }, [
+                    _vm._v("Grafo simple /dirigido ")
                   ]),
                   _vm._v(" "),
-                  _c("a", { attrs: { href: "#hamiltoniano" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.mostrarOp3 }
-                      },
-                      [_vm._v("Hamiltoniano / Euleriano")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#flujomaximo" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.mostrarOp4 }
-                      },
-                      [_vm._v("Flujo Máximo")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#arbolgenerador" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.mostrarOp5 }
-                      },
-                      [_vm._v("Arbol Generador")]
-                    )
+                  _c("option", { domProps: { value: 2 } }, [
+                    _vm._v("Grafo dirigido /etiquetado")
                   ])
                 ]
               )
             ]),
             _vm._v(" "),
-            _vm.controlanalisis == 1
-              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-center fredoka textocolor my-3" },
-                    [_vm._v("Matriz de caminos")]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card cardaux3 col-md-10 rounded-bottom mb-3",
-                    attrs: { id: "matrizcaminos" }
-                  },
-                  [
-                    _c("div", { staticClass: "container" }, [
-                      _vm._v(
-                        "\n                    CASO 1: MATRIZ DE CAMINOS Adyacencia^(n-1)\n                    "
-                      ),
+            _vm.option === 1
+              ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
+                  _c("h3", { staticClass: "mt-2" }, [
+                    _vm._v("Grafo simple No dirigido")
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row text-center" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: { click: _vm.createNode }
+                        },
+                        [_vm._v("Añadir nodo")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: { click: _vm.createArista }
+                        },
+                        [_vm._v("Añadir arista")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: { click: _vm.delAndClear }
+                        },
+                        [_vm._v("Eliminar Grafo")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.create
+                    ? _c("div", { staticClass: "my-3" }, [
+                        _c("div", [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.crearNodo($event)
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "id" } }, [
+                                  _vm._v("ingrese el id: ")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.nodo.id,
+                                      expression: "nodo.id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "number",
+                                    min: "1",
+                                    name: "id"
+                                  },
+                                  domProps: { value: _vm.nodo.id },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.nodo,
+                                        "id",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "label" } }, [
+                                  _vm._v("ingrese nombre:")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.nodo.label,
+                                      expression: "nodo.label"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text", name: "label" },
+                                  domProps: { value: _vm.nodo.label },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.nodo,
+                                        "label",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("Agregar")]
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.createAris
+                    ? _c("div", { staticClass: "my-3" }, [
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.crearArista($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [
+                                _vm._v(
+                                  "Ingrese nodo desde el cual sale la arista:"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.arista.from,
+                                    expression: "arista.from"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number", min: "1" },
+                                domProps: { value: _vm.arista.from },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.arista,
+                                      "from",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [
+                                _vm._v("Ingrese nodo al cual llega la arista:")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.arista.to,
+                                    expression: "arista.to"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number", min: "1" },
+                                domProps: { value: _vm.arista.to },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.arista,
+                                      "to",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [
+                                _vm._v("Ingrese el peso de la arista: ")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.arista.value,
+                                    expression: "arista.value"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "number", min: "0" },
+                                domProps: { value: _vm.arista.value },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.arista,
+                                      "value",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-sm",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Agregar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-sm",
+                                on: { click: _vm.drawGrafo }
+                              },
+                              [_vm._v("dibujar")]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.option === 2
+                    ? _c("div", { staticClass: "col-md-5 card cardaux mr-3" }, [
+                        _vm._m(0)
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "text-center fredoka textocolor my-4" }, [
+        _vm._v("Análisis del Grafo")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "card cardaux4 col-md-10 rounded-top" }, [
+          _c(
+            "div",
+            {
+              staticClass: "btn-group justify-content-center",
+              attrs: { role: "group" }
+            },
+            [
+              _c("a", { attrs: { href: "#matrizcaminos" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.mostrarOp1 }
+                  },
+                  [_vm._v("Matriz de caminos")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#caminocorto" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.mostrarOp2 }
+                  },
+                  [_vm._v("Camino más corto")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#hamiltoniano" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.mostrarOp3 }
+                  },
+                  [_vm._v("Hamiltoniano / Euleriano")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#flujomaximo" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.mostrarOp4 }
+                  },
+                  [_vm._v("Flujo Máximo")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#arbolgenerador" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.mostrarOp5 }
+                  },
+                  [_vm._v("Arbol Generador")]
+                )
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm.controlanalisis == 1
+          ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+              _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
+                _vm._v("Matriz de caminos")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 1
+          ? _c(
+              "div",
+              {
+                staticClass: "card cardaux3 col-md-10 rounded-bottom mb-3",
+                attrs: { id: "matrizcaminos" }
+              },
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    CASO 1: MATRIZ DE CAMINOS Adyacencia^(n-1)\n                    "
+                  ),
+                  _c(
+                    "div",
+                    { staticClass: "container mb-2" },
+                    _vm._l(_vm.matrixCaminos, function(item, index) {
+                      return _c(
                         "div",
-                        { staticClass: "container mb-2" },
-                        _vm._l(_vm.matrixCaminos, function(item, index) {
+                        { key: index },
+                        _vm._l(item, function(indice, lalacaminos) {
                           return _c(
                             "div",
-                            { key: index },
-                            _vm._l(item, function(indice, lalacaminos) {
-                              return _c(
-                                "div",
+                            { key: lalacaminos, staticClass: "d-inline-block" },
+                            [
+                              _c(
+                                "span",
                                 {
-                                  key: lalacaminos,
-                                  staticClass: "d-inline-block"
+                                  staticClass: "d-inline-block bg-dark pl-2",
+                                  staticStyle: {
+                                    width: "40px",
+                                    height: "40px",
+                                    "font-size": "25px"
+                                  }
                                 },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-inline-block bg-dark pl-2",
-                                      staticStyle: {
-                                        width: "40px",
-                                        height: "40px",
-                                        "font-size": "25px"
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(indice))]
-                                  )
-                                ]
+                                [_vm._v(_vm._s(indice))]
                               )
-                            }),
-                            0
+                            ]
                           )
                         }),
                         0
                       )
-                    ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 2
-              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-center fredoka textocolor my-3" },
-                    [_vm._v("Camino más corto")]
+                    }),
+                    0
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 2
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
-                    attrs: { id: "caminocorto" }
-                  },
-                  [
-                    _c("div", { staticClass: "container" }, [
-                      _vm._v(
-                        "\n                    CASO 2: CAMINO MAS CORTO\n                "
-                      )
-                    ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 3
-              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-center fredoka textocolor my-3" },
-                    [_vm._v("Hamiltoniano / Euleriano")]
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 2
+          ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+              _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
+                _vm._v("Camino más corto")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 2
+          ? _c(
+              "div",
+              {
+                staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                attrs: { id: "caminocorto" }
+              },
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    CASO 2: CAMINO MAS CORTO\n                "
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 3
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
-                    attrs: { id: "hamiltoniano" }
-                  },
-                  [
-                    _c("div", { staticClass: "container" }, [
-                      _vm._v(
-                        "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                    "
-                      ),
-                      _c("div", { staticClass: "container" }, [
-                        _c("div", { staticClass: "card" }, [
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _vm.controlanalisis == 3
-                            ? _c("div", { staticClass: "card-body" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(_vm.hamilton) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 3
+          ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+              _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
+                _vm._v("Hamiltoniano / Euleriano")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 3
+          ? _c(
+              "div",
+              {
+                staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                attrs: { id: "hamiltoniano" }
+              },
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                    "
+                  ),
+                  _c("div", { staticClass: "container" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm.controlanalisis == 3
+                        ? _c("div", { staticClass: "card-body" }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.hamilton) +
+                                "\n                            "
+                            )
+                          ])
+                        : _vm._e()
                     ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 4
-              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-center fredoka textocolor my-3" },
-                    [_vm._v("Flujo Máximo")]
+                  ])
+                ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 4
+          ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+              _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
+                _vm._v("Flujo Máximo")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 4
+          ? _c(
+              "div",
+              {
+                staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                attrs: { id: "flujomaximo" }
+              },
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    CASO 4: FLUJO MÁXIMO\n                "
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 4
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
-                    attrs: { id: "flujomaximo" }
-                  },
-                  [
-                    _c("div", { staticClass: "container" }, [
-                      _vm._v(
-                        "\n                    CASO 4: FLUJO MÁXIMO\n                "
-                      )
-                    ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 5
-              ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-center fredoka textocolor my-3" },
-                    [_vm._v("Arbol Generador")]
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 5
+          ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
+              _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
+                _vm._v("Arbol Generador")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.controlanalisis == 5
+          ? _c(
+              "div",
+              {
+                staticClass: "card cardaux3 col-md-10 rounded-bottom",
+                attrs: { id: "arbolgenerador" }
+              },
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    ARBOL GENERADO\n                "
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.controlanalisis == 5
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card cardaux3 col-md-10 rounded-bottom",
-                    attrs: { id: "arbolgenerador" }
-                  },
-                  [
-                    _c("div", { staticClass: "container" }, [
-                      _vm._v(
-                        "\n                    ARBOL GENERADO\n                "
-                      )
-                    ])
-                  ]
-                )
-              : _vm._e()
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.controlvista === 3
-      ? _c("div", { staticClass: "mt-5 pt-4" }, [
-          _c("h1", { staticClass: "text-center textocolor fredoka " }, [
-            _vm._v("Integrantes")
-          ]),
-          _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6)
-        ])
-      : _vm._e()
+              ]
+            )
+          : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Introduccion beta")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -101294,109 +101097,183 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", [_vm._v("es hamiltoniano")])
     ])
-  },
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Cristóbal González Gárate")
+    return _c("div", { staticClass: "container mt-5 pt-4" }, [
+      _c("h1", { staticClass: "text-white" }, [_vm._v("Vista Enunciado")]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "text-white" }, [
+        _vm._v("Apretar Grafo para seguir trabajando")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Introduccion beta")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-5 pt-4" }, [
+      _c("h1", { staticClass: "text-center textocolor fredoka " }, [
+        _vm._v("Integrantes")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Cristóbal González Gárate")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("ul", [
+              _c("li", [_vm._v("cristobal.gonzalezg@utem.cl")]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "https://github.com/Cris-Rider" } }, [
+                  _vm._v("Perfil de GitHub")
+                ])
+              ])
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("ul", [
-            _c("li", [_vm._v("cristobal.gonzalezg@utem.cl")]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "https://github.com/Cris-Rider" } }, [
-                _vm._v("Perfil de GitHub")
+        _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Germán Contreras Améstica")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("ul", [
+              _c("li", [_vm._v("german.contrerasa@utem.cl")]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "https://github.com/dargor980" } }, [
+                  _vm._v("Perfil de GitHub")
+                ])
               ])
             ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Germán Contreras Améstica")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("ul", [
-            _c("li", [_vm._v("german.contrerasa@utem.cl")]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "https://github.com/dargor980" } }, [
-                _vm._v("Perfil de GitHub")
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Luciano Grande Morales")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("ul", [
+              _c("li", [_vm._v("luciano.grandim@utem.cl")]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  { attrs: { href: "https://github.com/EnduranceAHOF" } },
+                  [_vm._v("Perfil de GitHub")]
+                )
               ])
             ])
           ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Luciano Grande Morales")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("ul", [
-            _c("li", [_vm._v("luciano.grandim@utem.cl")]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "https://github.com/EnduranceAHOF" } }, [
-                _vm._v("Perfil de GitHub")
+        _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Braulio Argandoña Carrasco")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("ul", [
+              _c("li", [_vm._v("braulio.argandonac@utem.cl")]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  { attrs: { href: "https://github.com/braulioargandonac" } },
+                  [_vm._v("Perfil de GitHub")]
+                )
               ])
             ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "grafo1 col-md-5 card cardaux ml-5 mt-4" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Braulio Argandoña Carrasco")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("ul", [
-            _c("li", [_vm._v("braulio.argandonac@utem.cl")]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                { attrs: { href: "https://github.com/braulioargandonac" } },
-                [_vm._v("Perfil de GitHub")]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
-        _c("h3", { staticClass: "text-center fredoka my-2" }, [
-          _vm._v("Rodrigo Aguirre Rodriguez")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("ul", [
-            _c("li", [_vm._v("rodrigo.aguirrer@utem.cl")]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "" } }, [_vm._v("Falta su perfil uwu")])
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
+          _c("h3", { staticClass: "text-center fredoka my-2" }, [
+            _vm._v("Rodrigo Aguirre Rodriguez")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("ul", [
+              _c("li", [_vm._v("rodrigo.aguirrer@utem.cl")]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "" } }, [
+                  _vm._v("Falta su perfil uwu")
+                ])
+              ])
             ])
           ])
         ])
@@ -101425,7 +101302,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "particles-js" } }, [_c("grafo")], 1)
+  return _c(
+    "div",
+    { attrs: { id: "particles-js" } },
+    [
+      _c(
+        "nav",
+        {
+          staticClass: "navbar navbar-expand-lg navbar-light",
+          attrs: { id: "navbar" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "navbar-brand fredoka textocolor" }, [
+              _vm._v("Trabajo Unidad 1: Grafos")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "collapse navbar-collapse justify-content-end" },
+              [
+                _c(
+                  "ul",
+                  { staticClass: "navbar-nav ml-md-auto d-none d-md-flex" },
+                  [
+                    _c("li", { staticClass: "nav-item active" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link lato textocolor",
+                          attrs: { href: "#" },
+                          on: { click: _vm.mostrarIntroduccion }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item active" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link lato textocolor",
+                          attrs: { href: "#" },
+                          on: { click: _vm.mostrarGrafo }
+                        },
+                        [_vm._v("Grafos")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item active" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link lato textocolor",
+                          attrs: { href: "#" },
+                          on: { click: _vm.mostrarIntegrantes }
+                        },
+                        [_vm._v("Integrantes")]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm.controlvista === 1 ? _c("home") : _vm._e(),
+      _vm._v(" "),
+      _vm.controlvista === 2 ? _c("grafo") : _vm._e(),
+      _vm._v(" "),
+      _vm.controlvista === 3 ? _c("integrantes") : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -113611,6 +113562,8 @@ __webpack_require__(/*! particles.js */ "./node_modules/particles.js/particles.j
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.component('grafo', __webpack_require__(/*! ./components/GrafoComponent.vue */ "./resources/js/components/GrafoComponent.vue")["default"]);
+Vue.component('integrantes', __webpack_require__(/*! ./components/IntegrantesComponent.vue */ "./resources/js/components/IntegrantesComponent.vue")["default"]);
+Vue.component('home', __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"]);
 Vue.component('particles', __webpack_require__(/*! ./components/particulas.vue */ "./resources/js/components/particulas.vue")["default"]);
 var app = new Vue({
   el: '#app'
@@ -113732,6 +113685,112 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/HomeComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/HomeComponent.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/HomeComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/IntegrantesComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/IntegrantesComponent.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IntegrantesComponent.vue?vue&type=template&id=4570b814& */ "./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/IntegrantesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./IntegrantesComponent.vue?vue&type=template&id=4570b814& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IntegrantesComponent.vue?vue&type=template&id=4570b814&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IntegrantesComponent_vue_vue_type_template_id_4570b814___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/particulas.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/particulas.vue ***!
@@ -113837,8 +113896,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

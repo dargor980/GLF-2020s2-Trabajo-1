@@ -1,14 +1,42 @@
 <template>
     <div id="particles-js">
-        
-            <grafo ></grafo>
-        
-        
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!--NOMBRE-->
+                <div class="navbar-brand fredoka textocolor">Trabajo Unidad 1: Grafos</div>
+                <!--/NOMBRE-->
+          
+                <!--OPCIONES NAVBAR-->
+                <div class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav ml-md-auto d-none d-md-flex">
+                        <li class="nav-item active">
+                        <a class="nav-link lato textocolor" href="#" @click="mostrarIntroduccion">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link lato textocolor" href="#" @click="mostrarGrafo" >Grafos</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link lato textocolor" href="#" @click="mostrarIntegrantes">Integrantes</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/OPCIONES NAVBAR-->
+            </div>
+        </nav>
+
+        <home v-if="controlvista===1"></home>
+        <grafo v-if="controlvista===2"></grafo>
+        <integrantes v-if="controlvista===3"></integrantes>
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            controlvista: 1,
+        }
+    },
     mounted(){
         this.$nextTick(() => {
         this.initParticlesJS()
@@ -127,6 +155,17 @@ export default {
                 },
                 'retina_detect': true
             })
+        },
+        mostrarHome(){
+            this.controlvista=1;
+        },
+
+        mostrarGrafo(){
+            this.controlvista=2;
+        },
+
+        mostrarIntegrantes(){
+            this.controlvista=3;
         },
     }
 }

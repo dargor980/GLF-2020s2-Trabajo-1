@@ -1,44 +1,6 @@
 <template>
     <div>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!--NOMBRE-->
-                <div class="navbar-brand fredoka textocolor">Trabajo Unidad 1: Grafos</div>
-                <!--/NOMBRE-->
-          
-                <!--OPCIONES NAVBAR-->
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="navbar-nav ml-md-auto d-none d-md-flex">
-                        <li class="nav-item active">
-                        <a class="nav-link lato textocolor" href="#" @click="mostrarIntroduccion">Introducción</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link lato textocolor" href="#" @click="mostrarGrafo" >Grafos</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link lato textocolor" href="#" @click="mostrarIntegrantes">Integrantes</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--/OPCIONES NAVBAR-->
-            </div>
-        </nav>
-
-        <!-- VISTA INTRODUCCION -->
-        <div v-if="controlvista===1" class="mt-5 pt-4">
-            <h1 class="text-white">Vista Introducción</h1>
-            <h1 class="text-white">Apretar Grafo para seguir trabajando</h1>
-            <div class="row">
-                <div class="grafo1 col-md-5 card cardaux mr-3">
-                    <h3 class="text-center fredoka my-2">Introduccion beta</h3>
-                    <div class="mb-3"></div>
-                </div>
-            </div>
-        </div>
-        <!-- VISTA INTRODUCCION -->
-
-        <!-- VISTA GRAFOS -->
-        <div v-if="controlvista===2">
+        <div>
             <h1 class="text-center textocolor fredoka mt-5 pt-4">Crear Grafo</h1>
             <div class="row justify-content-center">
                 <div class="grafo1 col-md-5 card cardaux mr-3">
@@ -204,64 +166,6 @@
                 <!-- / CASO 5: ARBOL GENERADOR -->
             </div>
         </div>
-        <!-- VISTA GRAFOS -->
-
-        <!-- VISTA INTEGRANTES -->
-        <div v-if ="controlvista===3" class="mt-5 pt-4">
-            <h1 class="text-center textocolor fredoka ">Integrantes</h1>
-            <div class="row justify-content-center">
-                 <div class="col-md-5 card cardaux ml-3 mt-4">
-                    <h3 class="text-center fredoka my-2">Cristóbal González Gárate</h3>
-                    <div class="mb-3" >
-                        <ul>
-                            <li>cristobal.gonzalezg@utem.cl</li>
-                            <li><a href="https://github.com/Cris-Rider">Perfil de GitHub</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="grafo1 col-md-5 card cardaux ml-5 mt-4">
-                    <h3 class="text-center fredoka my-2">Germán Contreras Améstica</h3>
-                    <div  class="mb-3" >
-                        <ul>
-                            <li>german.contrerasa@utem.cl</li>
-                            <li><a href="https://github.com/dargor980">Perfil de GitHub</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                 <div class="col-md-5 card cardaux ml-3 mt-4">
-                    <h3 class="text-center fredoka my-2">Luciano Grande Morales</h3>
-                    <div class="mb-3" >
-                        <ul>
-                            <li>luciano.grandim@utem.cl</li>
-                            <li><a href="https://github.com/EnduranceAHOF">Perfil de GitHub</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="grafo1 col-md-5 card cardaux ml-5 mt-4">
-                    <h3 class="text-center fredoka my-2">Braulio Argandoña Carrasco</h3>
-                    <div  class="mb-3" >
-                        <ul>
-                            <li>braulio.argandonac@utem.cl</li>
-                            <li><a href="https://github.com/braulioargandonac">Perfil de GitHub</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                 <div class="col-md-5 card cardaux ml-3 mt-4">
-                    <h3 class="text-center fredoka my-2">Rodrigo Aguirre Rodriguez</h3>
-                    <div class="mb-3" >
-                        <ul>
-                            <li>rodrigo.aguirrer@utem.cl</li>
-                            <li><a href="">Falta su perfil uwu</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- VISTA INTEGRANTES -->
     </div>
 </template>
 
@@ -286,8 +190,6 @@ export default {
             create:false,
             createAris:false,
             controlanalisis: '',
-            controlvista: 1,
-
         }
     }, 
     created(){
@@ -421,18 +323,7 @@ export default {
         mostrarOp5(){
             this.controlanalisis=5;
         },
-// ***** mas funciones******
-        mostrarIntroduccion(){
-            this.controlvista=1;
-        },
 
-        mostrarGrafo(){
-            this.controlvista=2;
-        },
-
-        mostrarIntegrantes(){
-            this.controlvista=3;
-        },
         
         matrizAdyacencia(){  // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
             let matrix=[]; 
