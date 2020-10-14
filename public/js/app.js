@@ -101332,7 +101332,7 @@ var render = function() {
                         {
                           staticClass: "nav-link lato textocolor",
                           attrs: { href: "#" },
-                          on: { click: _vm.mostrarIntroduccion }
+                          on: { click: _vm.mostrarHome }
                         },
                         [_vm._v("Home")]
                       )

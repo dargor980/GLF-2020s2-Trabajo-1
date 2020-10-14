@@ -10,7 +10,7 @@
                 <div class="collapse navbar-collapse justify-content-end">
                     <ul class="navbar-nav ml-md-auto d-none d-md-flex">
                         <li class="nav-item active">
-                        <a class="nav-link lato textocolor" href="#" @click="mostrarIntroduccion">Home</a>
+                        <a class="nav-link lato textocolor" href="#" @click="mostrarHome">Home</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link lato textocolor" href="#" @click="mostrarGrafo" >Grafos</a>
