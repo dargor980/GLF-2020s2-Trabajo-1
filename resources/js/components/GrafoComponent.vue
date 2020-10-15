@@ -131,13 +131,18 @@
                                 <div v-if="controlanalisis==3">
                                     {{hamilton}}
                                 </div>
-
+    
                                 <div class="form-group">
                                     <form @submit.prevent="graficarCircuitoEuleriano">
-                                        <label>Ingrese e: </label>
+                                        <label>Ingrese id de nodo de inicio: </label>
                                         <input type="number" min="1" v-model="eleccion" class="form-control">
-                                        <button>lala</button>
+                                        <button>Consultar</button>
                                     </form>
+                                </div>
+
+                                <div >
+                                    
+                                    {{arregloEuleriano}}
                                 </div>
 
                             </div>
@@ -181,12 +186,12 @@ export default {
             nodo:{id:'', label:''},
             arista:{from:'',to:'',value:''},
 
-            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],   
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'2',to:'5',value:'1'},{from:'3',to:'4',value:'1'},
-            {from:'3',to:'5',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'},{from:'5',to:'6',value:'1'},],
+            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
+            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
             matrixCaminos:[],
+            euler:'',
             hamilton:'',
-            eleccion:'',
+            eleccion:'2',
             
 
 
@@ -196,6 +201,7 @@ export default {
             create:false,
             createAris:false,
             controlanalisis: '',
+            arregloEuleriano:[],
         }
     }, 
     created(){
@@ -212,6 +218,7 @@ export default {
         //console.log(lala);
         //this.eliminarGrafo();
         //this.caminoCorto2();
+        this.isHamiltoniano()
         
     },
 
@@ -432,14 +439,14 @@ export default {
             }else{
                 if(control==1){
                     console.log("Izq a Der: adentro");
-                    pasos.push(indice); //guardo partida
+                    pasos.push(indice+1); //guardo partida
                     for( indice; indice < this.nodos.length; indice++){
                         for(var j=0; j<this.nodos.length; j++){
                             if(aux[indice][j]==1){
                                 aux[indice][j]=2;
                                 aux[j][indice]=2;
                                 indice=j-1;
-                                pasos.push(j);
+                                pasos.push(j+1);
                                 j=this.nodo.length+1; //aqui termino el for
                             }
                         }
@@ -447,19 +454,20 @@ export default {
                     console.log(pasos);
                 }else{
                     console.log("Der a izq: adentro");
-                    pasos.push(indice); 1 
+                    pasos.push(indice+1);  
                     for( indice; indice < this.nodos.length; indice++){
                         for(var j=largo-1; j>=0; j--){
                             if(aux[indice][j]==1){
                                 aux[indice][j]=2;
                                 aux[j][indice]=2;
                                 indice=j-1;
-                                pasos.push(j);
+                                pasos.push(j+1);
                                 j=-1;
                             }
                         }
                     }
                     console.log(pasos);
+                    this.arregloEuleriano=pasos
                 }
             }
 
@@ -503,40 +511,47 @@ export default {
         isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
             
             if(this.conexo()){
-                //variables
-                var matrix = this.matrizAdyacencia();  
-                var nodos_visitados = [];
-                var nodos_no_visitados = this.nodos;
-                //ciclo hamiltoniano 
-                if(this.nodos.length==this.aristas.length){
-                    for(var i=0; i < this.nodos.length ; i++){
-                        for(var j=0; j<this.nodos.length ; j++){
-                            var cont = 0
-                            var con2 = 0
-                            if(cont2 < (this.matrix[i][j] + cont2)){
-                                // aqui se supone que debería hacer algo
-                            //ayuda chupete suazooo unu 
-                            //salvanos jebus
-                            
-
-                            }
-                            if (matrix[i][j] != 0){
-                                nodos_visitados.push(this.nodos[i].id)                                 
-                                nodos_no_visitados.pop(matrix[i][j])
-                                cont++; // [1,1 ,1,,1,1,1,1,1,1,1]   
-                            }   
-                        }
-                        if (cont > 2){
-                            return false;
-                        }
-                        else {
+                 console.log(true);
+                var matrix = this.matrizAdyacencia()
+                var grados = []
+                var nodo_inicio = this.eleccion
+                var contadorAristas = 0
+                var camino = []
+                
+                for(var i = 0; i < this.nodos.length; i++){
+                    var cont = 0 
+                    for( var j = 0 ; j < this.nodos.length; j++){
+                        if(matrix[i][j]==1){
+                            cont++;
                         }
                     }
+                    grados.push(cont)
                 }
-                if(nodos_no_visitados.length==0)
-                {
-                    return true;
-                }
+                console.log("arreglo de grados",grados);
+                console.log(grados.length);
+                camino.push(nodo_inicio)
+                console.log(camino[0]);
+                // for(var i = nodo_inicio-1; i < this.nodos.length; i++){//  ej nodo[7][0]
+                //     var id=0
+                //     for( var j = 0 ; j < this.nodos.length; j++){
+                //         if(matrix[i][j] == 1){
+                //             if(j==nodo_inicio && contadorAristas == this.nodos.length-1){
+                //                 camino.push(nodo_inicio)    
+                //                 //console.log(camino);
+                //             }
+                //             else{
+                //                 if(grados[id] > grados[j]){
+                //                     id=j
+                //                 }
+                //             }                                                         
+                //         }
+                //     }
+                //     camino.push(id)
+                //     grados[i] = grados[i] - 1
+                //     i = id
+                //     contadorAristas++
+                // }
+                // console.log(camino);
             }
             else{
                 return false;
