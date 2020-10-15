@@ -101248,20 +101248,174 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container mt-5 pt-4" }, [
-      _c("h1", { staticClass: "text-white" }, [_vm._v("Vista Enunciado")]),
-      _vm._v(" "),
-      _c("h1", { staticClass: "text-white" }, [
-        _vm._v("Apretar Grafo para seguir trabajando")
+      _c("h1", { staticClass: "fredoka textocolor my-2" }, [
+        _vm._v(
+          "Tipos de grafos con los que se trabajara en esta aplicacion web:"
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "grafo1 col-md-5 card cardaux mr-3" }, [
-          _c("h3", { staticClass: "text-center fredoka my-2" }, [
-            _vm._v("Introduccion beta")
-          ]),
+      _c(
+        "div",
+        {
+          staticClass: "btn-group-vertical mt-4",
+          attrs: {
+            role: "group",
+            "aria-label": "Button group with nested dropdown"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "btn-group dropright", attrs: { role: "group" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary dropdown-toggle",
+                  attrs: {
+                    id: "grafosimple",
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v("\n                Grafo simple\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dropdown-menu text-muted p-3 info",
+                  staticStyle: { "min-width": "800px", "min-height": "100px" },
+                  attrs: { "aria-labelledby": "grafosimple" }
+                },
+                [
+                  _c("p", { staticClass: "textocolor lato" }, [
+                    _vm._v(
+                      "Un grafo simple G = (V, A) costa de un conjunto no vacío de vértices V y de\n                        un conjunto A de pares no ordenados llamados aristas. En otras palabras un grafo simple es un grafo en\n                        los que existe a lo más una arista que une dos vértices distintos."
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-3" })
-        ])
+          _c(
+            "div",
+            { staticClass: "btn-group dropright", attrs: { role: "group" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary dropdown-toggle",
+                  attrs: {
+                    id: "multigrafo",
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v("\n                Multigrafos\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dropdown-menu text-muted p-3 info ",
+                  staticStyle: { "min-width": "800px", "min-height": "100px" },
+                  attrs: { "aria-labelledby": "multigrafo" }
+                },
+                [
+                  _c("p", { staticClass: "textocolor lato" }, [
+                    _vm._v(
+                      " Un multigrafo G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas, donde puede haber más de una arista entre un par de vertices y puede tener lazos/bucles. "
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "btn-group dropright", attrs: { role: "group" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary dropdown-toggle",
+                  attrs: {
+                    id: "grafodirigido",
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v("\n                Grafo dirigido\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dropdown-menu text-muted p-3 info ",
+                  staticStyle: { "min-width": "800px", "min-height": "100px" },
+                  attrs: { "aria-labelledby": "grafodirigido" }
+                },
+                [
+                  _c("p", { staticClass: "textocolor lato" }, [
+                    _vm._v(
+                      "Un grafo dirigido G, también llamado digrafo, es lo mismo que un\n                multigrafo, solo que cada arista de G tiene una dirección asignada."
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "btn-group dropright", attrs: { role: "group" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary dropdown-toggle",
+                  attrs: {
+                    id: "multidirigido",
+                    type: "button",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v("\n                Multigrafo Dirigido\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dropdown-menu text-muted p-3 info ",
+                  staticStyle: { "min-width": "800px", "min-height": "100px" },
+                  attrs: { "aria-labelledby": "multidirigido" }
+                },
+                [
+                  _c("p", { staticClass: "textocolor lato" }, [
+                    _vm._v(
+                      "Un multigrafo dirigido G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas, donde puede poseer más una arista entre un par de vertices, puede tener lazos/bucles pero las aristas tienen una direccion asignada."
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("h1", { staticClass: "textocolor fredoka mt-5" }, [
+        _vm._v("Apretar Grafo para seguir trabajando")
       ])
     ])
   }
@@ -101390,8 +101544,8 @@ var staticRenderFns = [
               _c("li", [_vm._v("rodrigo.aguirrer@utem.cl")]),
               _vm._v(" "),
               _c("li", [
-                _c("a", { attrs: { href: "" } }, [
-                  _vm._v("Falta su perfil uwu")
+                _c("a", { attrs: { href: "https://github.com/zmurfx" } }, [
+                  _vm._v("Perfil de GitHub")
                 ])
               ])
             ])
@@ -114016,8 +114170,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

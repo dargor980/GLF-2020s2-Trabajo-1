@@ -2,7 +2,7 @@
     <div class="mt-5 pt-4">
         <h1 class="text-center textocolor fredoka ">Integrantes</h1>
         <div class="row justify-content-center">
-                <div class="col-md-5 card cardaux ml-3 mt-4">
+            <div class="col-md-5 card cardaux ml-3 mt-4">
                 <h3 class="text-center fredoka my-2">Cristóbal González Gárate</h3>
                 <div class="mb-3" >
                     <ul>
@@ -47,7 +47,7 @@
                 <div class="mb-3" >
                     <ul>
                         <li>rodrigo.aguirrer@utem.cl</li>
-                        <li><a href="">Falta su perfil uwu</a></li>
+                        <li><a href="https://github.com/zmurfx">Perfil de GitHub</a></li>
                     </ul>
                 </div>
             </div>

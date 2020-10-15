@@ -104,3 +104,8 @@ a:hover{
     border-radius: 10%;
     transition: 0.3s;
 }
+
+.info{
+    background-color: rgba(108,117,125,1.0);
+}
+
