@@ -2079,6 +2079,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2104,6 +2108,12 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: '4',
         label: '4'
+      }, {
+        id: '5',
+        label: '5'
+      }, {
+        id: '6',
+        label: '6'
       }],
       aristas: [{
         from: '1',
@@ -2112,22 +2122,43 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         from: '1',
         to: '3',
-        value: '2'
+        value: '1'
+      }, {
+        from: '2',
+        to: '3',
+        value: '1'
       }, {
         from: '2',
         to: '4',
-        value: '3'
+        value: '1'
+      }, {
+        from: '2',
+        to: '5',
+        value: '1'
       }, {
         from: '3',
         to: '4',
-        value: '3'
+        value: '1'
+      }, {
+        from: '3',
+        to: '5',
+        value: '1'
       }, {
         from: '4',
-        to: '1',
-        value: '3'
+        to: '5',
+        value: '1'
+      }, {
+        from: '4',
+        to: '6',
+        value: '1'
+      }, {
+        from: '5',
+        to: '6',
+        value: '1'
       }],
       matrixCaminos: [],
       hamilton: '',
+      eleccion: '',
 
       /*variables de control */
       addgrafo: false,
@@ -2325,12 +2356,70 @@ __webpack_require__.r(__webpack_exports__);
 
       return true;
     },
-    graficarCircuitoEuleriano: function graficarCircuitoEuleriano(nodos, e) {
+    graficarCircuitoEuleriano: function graficarCircuitoEuleriano() {
+      var e = this.eleccion;
       var pasos = [];
       var aux = this.matrizAdyacencia();
+      var control = 3;
+      var indice;
+      var largo = this.nodos.length; // let aristaslargo = this.aristas.length;
 
-      for (var i = 0; i < nodos.length; i++) {
-        if (nodos[i].id == e) {}
+      for (var i = 0; i < this.nodos.length; i++) {
+        if (this.nodos[i].id == e) {
+          if (i < this.nodos.length / 2) {
+            console.log("Der a izq");
+            control = 0;
+          } else {
+            if (i >= this.nodos.length / 2) {
+              console.log("Izq a Der");
+              control = 1;
+            }
+          }
+
+          indice = i;
+        }
+      }
+
+      if (control == 3) {
+        alert("Ingrese Id valido");
+        return;
+      } else {
+        if (control == 1) {
+          console.log("Izq a Der: adentro");
+          pasos.push(indice); //guardo partida
+
+          for (indice; indice < this.nodos.length; indice++) {
+            for (var j = 0; j < this.nodos.length; j++) {
+              if (aux[indice][j] == 1) {
+                aux[indice][j] = 2;
+                aux[j][indice] = 2;
+                indice = j - 1;
+                pasos.push(j);
+                j = this.nodo.length + 1; //aqui termino el for
+              }
+            }
+          }
+
+          console.log(pasos);
+        } else {
+          console.log("Der a izq: adentro");
+          pasos.push(indice);
+          1;
+
+          for (indice; indice < this.nodos.length; indice++) {
+            for (var j = largo - 1; j >= 0; j--) {
+              if (aux[indice][j] == 1) {
+                aux[indice][j] = 2;
+                aux[j][indice] = 2;
+                indice = j - 1;
+                pasos.push(j);
+                j = -1;
+              }
+            }
+          }
+
+          console.log(pasos);
+        }
       }
     },
     isEuleriano: function isEuleriano() {
@@ -100995,18 +101084,57 @@ var render = function() {
                     "\n                    CASO 3: HAMILTONIANO / EULERIANO\n                    "
                   ),
                   _c("div", { staticClass: "container" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _vm._m(2),
-                      _vm._v(" "),
+                    _c("div", {}, [
                       _vm.controlanalisis == 3
-                        ? _c("div", { staticClass: "card-body" }, [
+                        ? _c("div", [
                             _vm._v(
                               "\n                                " +
                                 _vm._s(_vm.hamilton) +
                                 "\n                            "
                             )
                           ])
-                        : _vm._e()
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.graficarCircuitoEuleriano($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("label", [_vm._v("Ingrese e: ")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.eleccion,
+                                  expression: "eleccion"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number", min: "1" },
+                              domProps: { value: _vm.eleccion },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.eleccion = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("button", [_vm._v("lala")])
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ])
@@ -101088,14 +101216,6 @@ var staticRenderFns = [
         staticStyle: { border: "1px solid lightgray" },
         attrs: { id: "grafo" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", [_vm._v("es hamiltoniano")])
     ])
   }
 ]

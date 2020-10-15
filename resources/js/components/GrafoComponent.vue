@@ -127,13 +127,17 @@
                     <div class="container">
                         CASO 3: HAMILTONIANO / EULERIANO
                         <div class="container">
-                            <div class="card">
-                                
-                                <div class="card-header">
-                                    <h3>es hamiltoniano</h3>
-                                </div>
-                                <div class="card-body" v-if="controlanalisis==3">
+                            <div class="">
+                                <div v-if="controlanalisis==3">
                                     {{hamilton}}
+                                </div>
+
+                                <div class="form-group">
+                                    <form @submit.prevent="graficarCircuitoEuleriano">
+                                        <label>Ingrese e: </label>
+                                        <input type="number" min="1" v-model="eleccion" class="form-control">
+                                        <button>lala</button>
+                                    </form>
                                 </div>
 
                             </div>
@@ -177,10 +181,12 @@ export default {
             nodo:{id:'', label:''},
             arista:{from:'',to:'',value:''},
 
-            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'}],   
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'2'},{from:'2',to:'4',value:'3'},{from:'3',to:'4',value:'3'},{from:'4',to:'1',value:'3'}],
+            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],   
+            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'2',to:'5',value:'1'},{from:'3',to:'4',value:'1'},
+            {from:'3',to:'5',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'},{from:'5',to:'6',value:'1'},],
             matrixCaminos:[],
             hamilton:'',
+            eleccion:'',
             
 
 
@@ -394,16 +400,69 @@ export default {
             return true;
         },
 
-        graficarCircuitoEuleriano(nodos,e){
+        graficarCircuitoEuleriano(){
+            var e=this.eleccion;
             let pasos=[];
             let aux=this.matrizAdyacencia();
-            for(var i=0; i<nodos.length; i++)
-            {
-                if(nodos[i].id==e)
-                {
+            let control=3;
+            let indice;
+            let largo=this.nodos.length;
 
+            // let aristaslargo = this.aristas.length;
+            for(var i=0; i<this.nodos.length; i++)
+            {
+                if(this.nodos[i].id==e)
+                {
+                    if( i < (this.nodos.length/2) ){
+                        console.log("Der a izq");
+                        control=0;
+                    }else{
+                        if( i >= (this.nodos.length/2) ){
+                            console.log("Izq a Der");
+                            control=1;
+                        }
+                    }
+                    indice=i;
                 }
             }
+
+            if(control==3){
+                alert("Ingrese Id valido")
+                return;
+            }else{
+                if(control==1){
+                    console.log("Izq a Der: adentro");
+                    pasos.push(indice); //guardo partida
+                    for( indice; indice < this.nodos.length; indice++){
+                        for(var j=0; j<this.nodos.length; j++){
+                            if(aux[indice][j]==1){
+                                aux[indice][j]=2;
+                                aux[j][indice]=2;
+                                indice=j-1;
+                                pasos.push(j);
+                                j=this.nodo.length+1; //aqui termino el for
+                            }
+                        }
+                    }
+                    console.log(pasos);
+                }else{
+                    console.log("Der a izq: adentro");
+                    pasos.push(indice); 1 
+                    for( indice; indice < this.nodos.length; indice++){
+                        for(var j=largo-1; j>=0; j--){
+                            if(aux[indice][j]==1){
+                                aux[indice][j]=2;
+                                aux[j][indice]=2;
+                                indice=j-1;
+                                pasos.push(j);
+                                j=-1;
+                            }
+                        }
+                    }
+                    console.log(pasos);
+                }
+            }
+
 
         },
 
