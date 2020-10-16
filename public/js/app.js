@@ -2088,6 +2088,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2325,6 +2349,7 @@ __webpack_require__.r(__webpack_exports__);
       this.controlanalisis = 2;
     },
     mostrarOp3: function mostrarOp3() {
+      this.euler = this.isEuleriano();
       this.controlanalisis = 3;
     },
     mostrarOp4: function mostrarOp4() {
@@ -2642,7 +2667,32 @@ __webpack_require__.r(__webpack_exports__);
     // },
     kruskal: function kruskal() {//Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
     },
-    flujoMaximo: function flujoMaximo() {},
+    flujoMaximo: function flujoMaximo() {
+      var menor = 1; //capacidad minima entre las ramas
+
+      var rama;
+      var camino;
+      var acumulado = 0;
+
+      if (this.camino(this.inicio, this.destino)) {
+        camino = this.caminoflujo();
+      }
+
+      for (var i = 0; i < camino.length; i++) {
+        if (camino[i].value < menor) {
+          menor = camino[i].value;
+          rama = camino[i];
+        }
+      }
+
+      for (var i = 0; i < caminos.length; i++) {
+        caminos[i].value = caminos[i].value - rama.value;
+        acumulado = acumulado + caminos[i].value;
+      }
+
+      return acumulado;
+    },
+    camino: function camino() {},
     multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //funcionando Multiplica 
     {
       var res = [];
@@ -101174,11 +101224,74 @@ var render = function() {
                     _c("div", {}, [
                       _vm.controlanalisis == 3
                         ? _c("div", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.hamilton) +
-                                "\n                            "
-                            )
+                            _vm.euler
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                                    Este grafo es Euleriano.\n                                    \n                                    "
+                                  ),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.graficarCircuitoEuleriano(
+                                              $event
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("label", [
+                                          _vm._v(
+                                            "Ingrese id de nodo de inicio: "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.eleccion,
+                                              expression: "eleccion"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: { type: "number", min: "1" },
+                                          domProps: { value: _vm.eleccion },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.eleccion = $event.target.value
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("button", [_vm._v("Consultar")])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.arregloEuleriano) +
+                                        "\n                                    "
+                                    )
+                                  ])
+                                ])
+                              : !_vm.euler
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                                    Este grafo no es Euleriano.\n\n                                     \n                                    \n                                    "
+                                  ),
+                                  _c("div")
+                                ])
+                              : _vm._e()
                           ])
                         : _vm._e(),
                       _vm._v(" "),
@@ -114261,8 +114374,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -129,7 +129,31 @@
                         <div class="container">
                             <div class="">
                                 <div v-if="controlanalisis==3">
-                                    {{hamilton}}
+                                    <div v-if="euler">
+                                        Este grafo es Euleriano.
+                                        
+                                        <div class="form-group">
+                                            <form @submit.prevent="graficarCircuitoEuleriano">
+                                                <label>Ingrese id de nodo de inicio: </label>
+                                                <input type="number" min="1" v-model="eleccion" class="form-control">
+                                                <button>Consultar</button>
+                                            </form>
+                                        </div>
+                                        
+                                        <div>
+                                            {{arregloEuleriano}}
+                                        </div>
+
+                                    </div>
+                                    <div v-else-if="!euler">
+                                        Este grafo no es Euleriano.
+
+                                         
+                                        
+                                        <div>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
     
                                 <div class="form-group">
@@ -326,6 +350,7 @@ export default {
         },
 
         mostrarOp3(){
+            this.euler=this.isEuleriano();
             this.controlanalisis=3;
         },
 
@@ -657,6 +682,34 @@ export default {
 
         flujoMaximo(){
 
+            var menor=1; //capacidad minima entre las ramas
+            var rama;
+            var camino;
+            var acumulado=0;
+            if(this.camino(this.inicio,this.destino))
+            {
+                camino=this.caminoflujo();
+            }
+            for(var i=0; i<camino.length;i++)
+            {
+                if(camino[i].value<menor)
+                {
+                    menor=camino[i].value;
+                    rama=camino[i];
+                }
+            }
+            for(var i=0; i<caminos.length;i++)
+            {
+                caminos[i].value=caminos[i].value-rama.value;
+                acumulado=acumulado+caminos[i].value;
+            }
+
+            return acumulado;
+
+        },
+
+        camino(){
+            
         },
 
         multiplicarMatriz(matrizA,matrizB)//funcionando Multiplica 
