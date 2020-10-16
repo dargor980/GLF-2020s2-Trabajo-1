@@ -133,7 +133,7 @@
                                 </div>
     
                                 <div class="form-group">
-                                    <form @submit.prevent="graficarCircuitoEuleriano">
+                                    <form @submit.prevent="isHamiltoniano">
                                         <label>Ingrese id de nodo de inicio: </label>
                                         <input type="number" min="1" v-model="eleccion" class="form-control">
                                         <button>Consultar</button>
@@ -142,7 +142,7 @@
 
                                 <div >
                                     
-                                    {{arregloEuleriano}}
+                                    <!-- {{arregloEuleriano}} -->
                                 </div>
 
                             </div>
@@ -191,7 +191,7 @@ export default {
             matrixCaminos:[],
             euler:'',
             hamilton:'',
-            eleccion:'2',
+            eleccion:'',
             
 
 
@@ -218,7 +218,7 @@ export default {
         //console.log(lala);
         //this.eliminarGrafo();
         //this.caminoCorto2();
-        this.isHamiltoniano()
+        //this.isHamiltoniano()
         
     },
 
@@ -511,12 +511,13 @@ export default {
         isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
             
             if(this.conexo()){
-                 console.log(true);
-                var matrix = this.matrizAdyacencia()
-                var grados = []
-                var nodo_inicio = this.eleccion
-                var contadorAristas = 0
-                var camino = []
+                var matrix = this.matrizAdyacencia();
+                var grados = [];
+                var nodo_inicio = this.eleccion;
+                var posicion = nodo_inicio-1;
+                var contadorAristas = 1;
+                var camino = [];
+                var control=1;
                 
                 for(var i = 0; i < this.nodos.length; i++){
                     var cont = 0 
@@ -528,34 +529,58 @@ export default {
                     grados.push(cont)
                 }
                 console.log("arreglo de grados",grados);
-                console.log(grados.length);
-                camino.push(nodo_inicio)
-                console.log(camino[0]);
-                // for(var i = nodo_inicio-1; i < this.nodos.length; i++){//  ej nodo[7][0]
-                //     var id=0
-                //     for( var j = 0 ; j < this.nodos.length; j++){
-                //         if(matrix[i][j] == 1){
-                //             if(j==nodo_inicio && contadorAristas == this.nodos.length-1){
-                //                 camino.push(nodo_inicio)    
-                //                 //console.log(camino);
-                //             }
-                //             else{
-                //                 if(grados[id] > grados[j]){
-                //                     id=j
-                //                 }
-                //             }                                                         
-                //         }
-                //     }
-                //     camino.push(id)
-                //     grados[i] = grados[i] - 1
-                //     i = id
-                //     contadorAristas++
-                // }
-                // console.log(camino);
+
+                while(contadorAristas!=this.nodos.length){
+                    contadorAristas++;
+                    var adyacencia=[];
+                    for(var j=0; j<this.nodos.length; j++){
+                        if(this.esta(camino, j)==false){
+                            console.log("toi dentro");
+                            if( matrix[posicion][j] == 1 && j != nodo_inicio-1 ){
+                                adyacencia.push(j);
+                            }else{
+                                if( matrix[posicion][j] == 1 && j == nodo_inicio-1 && contadorAristas==this.nodos.length){
+                                    adyacencia.push(j);
+                                }
+                            }
+                        }
+                    }
+                    var menor=grados[adyacencia[0]];
+                    var aux=0;
+                    console.log("arreglo de adyacencia",adyacencia);
+                    for(var k=0; k<adyacencia.length; k++){
+                        if( grados[adyacencia[aux]] > grados[adyacencia[k]] && k != nodo_inicio-1 ){
+                            console.log("Grados de",adyacencia[k]," - ", grados[adyacencia[k]]);
+                            aux=k;
+                            menor=adyacencia[k];
+                        }
+                    }
+                    camino.push(posicion);
+                    posicion=menor;
+                    console.log("Menor",posicion);
+                    if(control!=1){
+                        for(var n=0; n<this.nodos.length; n++){
+                            matrix[posicion][n]=0;
+                        }
+                        grados[posicion]=0;
+                    }else{
+                        control=0;
+                    }
+                    console.log("arreglo de caminos",camino);
+                }
             }
             else{
                 return false;
             }
+        },
+
+        esta(camino, num){
+            for(var i=1; i<camino.length; i++){
+                if(num==camino[i]){
+                    return true;
+                }
+            }
+            return false;
         },
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.

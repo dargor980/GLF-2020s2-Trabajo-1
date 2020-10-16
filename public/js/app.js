@@ -2198,7 +2198,7 @@ __webpack_require__.r(__webpack_exports__);
       matrixCaminos: [],
       euler: '',
       hamilton: '',
-      eleccion: '2',
+      eleccion: '',
 
       /*variables de control */
       addgrafo: false,
@@ -2209,8 +2209,7 @@ __webpack_require__.r(__webpack_exports__);
       arregloEuleriano: []
     };
   },
-  created: function created() {
-    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
     //this.sumaMat();
     //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
@@ -2222,7 +2221,7 @@ __webpack_require__.r(__webpack_exports__);
     //console.log(lala);
     //this.eliminarGrafo();
     //this.caminoCorto2();
-    this.isHamiltoniano();
+    //this.isHamiltoniano()
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -2497,12 +2496,13 @@ __webpack_require__.r(__webpack_exports__);
     isHamiltoniano: function isHamiltoniano() {
       //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
       if (this.conexo()) {
-        console.log(true);
         var matrix = this.matrizAdyacencia();
         var grados = [];
         var nodo_inicio = this.eleccion;
-        var contadorAristas = 0;
+        var posicion = nodo_inicio - 1;
+        var contadorAristas = 1;
         var camino = [];
+        var control = 1;
 
         for (var i = 0; i < this.nodos.length; i++) {
           var cont = 0;
@@ -2517,32 +2517,65 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         console.log("arreglo de grados", grados);
-        console.log(grados.length);
-        camino.push(nodo_inicio);
-        console.log(camino[0]); // for(var i = nodo_inicio-1; i < this.nodos.length; i++){//  ej nodo[7][0]
-        //     var id=0
-        //     for( var j = 0 ; j < this.nodos.length; j++){
-        //         if(matrix[i][j] == 1){
-        //             if(j==nodo_inicio && contadorAristas == this.nodos.length-1){
-        //                 camino.push(nodo_inicio)    
-        //                 //console.log(camino);
-        //             }
-        //             else{
-        //                 if(grados[id] > grados[j]){
-        //                     id=j
-        //                 }
-        //             }                                                         
-        //         }
-        //     }
-        //     camino.push(id)
-        //     grados[i] = grados[i] - 1
-        //     i = id
-        //     contadorAristas++
-        // }
-        // console.log(camino);
+
+        while (contadorAristas != this.nodos.length) {
+          contadorAristas++;
+          var adyacencia = [];
+
+          for (var j = 0; j < this.nodos.length; j++) {
+            if (this.esta(camino, j) == false) {
+              console.log("toi dentro");
+
+              if (matrix[posicion][j] == 1 && j != nodo_inicio - 1) {
+                adyacencia.push(j);
+              } else {
+                if (matrix[posicion][j] == 1 && j == nodo_inicio - 1 && contadorAristas == this.nodos.length) {
+                  adyacencia.push(j);
+                }
+              }
+            }
+          }
+
+          var menor = grados[adyacencia[0]];
+          var aux = 0;
+          console.log("arreglo de adyacencia", adyacencia);
+
+          for (var k = 0; k < adyacencia.length; k++) {
+            if (grados[adyacencia[aux]] > grados[adyacencia[k]] && k != nodo_inicio - 1) {
+              console.log("Grados de", adyacencia[k], " - ", grados[adyacencia[k]]);
+              aux = k;
+              menor = adyacencia[k];
+            }
+          }
+
+          camino.push(posicion);
+          posicion = menor;
+          console.log("Menor", posicion);
+
+          if (control != 1) {
+            for (var n = 0; n < this.nodos.length; n++) {
+              matrix[posicion][n] = 0;
+            }
+
+            grados[posicion] = 0;
+          } else {
+            control = 0;
+          }
+
+          console.log("arreglo de caminos", camino);
+        }
       } else {
         return false;
       }
+    },
+    esta: function esta(camino, num) {
+      for (var i = 1; i < camino.length; i++) {
+        if (num == camino[i]) {
+          return true;
+        }
+      }
+
+      return false;
     },
     caminoCorto: function caminoCorto(nodo_inicial) {
       //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
@@ -101156,7 +101189,7 @@ var render = function() {
                             on: {
                               submit: function($event) {
                                 $event.preventDefault()
-                                return _vm.graficarCircuitoEuleriano($event)
+                                return _vm.isHamiltoniano($event)
                               }
                             }
                           },
@@ -101192,13 +101225,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "\n                                \n                                " +
-                            _vm._s(_vm.arregloEuleriano) +
-                            "\n                            "
-                        )
-                      ])
+                      _c("div")
                     ])
                   ])
                 ])
@@ -114234,8 +114261,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

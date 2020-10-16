@@ -97,6 +97,7 @@
 
 .textocolor{
     color: #e7e7e7 !important;
+    z-index: 100;
 }
 
 a:hover{
