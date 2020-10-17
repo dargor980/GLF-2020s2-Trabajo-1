@@ -366,14 +366,14 @@ export default {
             aristaEtiquetada:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista  etiquetada no dirigida
             aristaEtiquetadaDirigida:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista etiquetada dirigida.
 
-            /* hamiltoniano */nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            /* hamiltoniano */aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
-            
+            /* hamiltonianonodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
+            hamiltonianoaristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
+             */
             /* nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],
             aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'4',value:'1'},{from:'2',to:'3',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'}],
-             */matrixCaminos:[],
+             */
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            aristas:[{from:'1',to:'2',label:'1'},{from:'1',to:'3',label:'1'},{from:'1',to:'4',label:'1'},{from:'1',to:'5',label:'1'},{from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'1'},{from:'3',to:'4',label:'1'},{from:'3',to:'5',label:'1'},{from:'3',to:'6',label:'1'},{from:'3',to:'7',label:'1'},{from:'3',to:'8',label:'1'},{from:'4',to:'7',label:'1'},{from:'4',to:'8',label:'1'},{from:'5',to:'6',label:'1'},{from:'5',to:'7',label:'1'},{from:'6',to:'7',label:'1'},{from:'7',to:'8',label:'1'},{from:'7',to:'7',label:'1'}],
+            aristas:[{from:'1',to:'2',label:'5'},{from:'1',to:'3',label:'12'},{from:'1',to:'4',label:'3'},{from:'1',to:'5',label:'1'},{from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'11'},{from:'3',to:'4',label:'7'},{from:'3',to:'5',label:'1'},{from:'3',to:'6',label:'1'},{from:'3',to:'7',label:'1'},{from:'3',to:'8',label:'1'},{from:'4',to:'7',label:'8'},{from:'4',to:'8',label:'1'},{from:'5',to:'6',label:'1'},{from:'5',to:'7',label:'1'},{from:'6',to:'7',label:'3'},{from:'7',to:'8',label:'1'},{from:'7',to:'7',label:'2'}],
             matrixCaminos:[],
             euler:'',
             hamilton:[],
@@ -393,7 +393,7 @@ export default {
         }
     }, 
     created(){
-
+        this.kruskal()
     },
 
     
@@ -407,8 +407,7 @@ export default {
         delAndClear(){
             this.eliminarGrafo();
             this.drawGrafo();
-        },
-        
+        },     
 
         drawGrafo(){  //función que toma los nodos y aristas y procede a graficarlos en el container
             var container= document.getElementById("grafo");
@@ -435,7 +434,6 @@ export default {
             var network= new vis.Network(container,data,options);
             
         },
-
 
         drawGrafoEtiquetadoNoDirigido()
         {
@@ -899,8 +897,51 @@ export default {
         },
     
 
-        kruskal(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
+        kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
+            var agm = [];
+            var arbol = _.map(this.nodos, function(nodo) { return [nodo]; });
+            var aristasSort = _.sortBy(this.aristas, function(arista) { return -parseInt(arista.label); });
+            while(arbol.length > 1) {
+                var arista = aristasSort.pop();
+                var n1 = parseInt(arista.from),
+                    n2 = parseInt(arista.to);
 
+                var t1 = _.filter(arbol, function(linea) {
+                    return _.include(linea, n1);
+                });
+                    
+                var t2 = _.filter(arbol, function(linea) {
+                    return _.include(linea, n2);
+                });
+
+                if (t1 != t2) {
+                    arbol = _.without(arbol, t1[0], t2[0]);
+                    arbol.push(_.union(t1[0], t2[0]));
+                    agm.push(arista);
+                }
+            }
+            console.log(agm)
+            return agm;
+        },
+
+        kruskal(){
+            var agm=[];
+            var vertices= this.nodos;
+            var aristas1= this.aristas;
+            console.log("la wea sin ordenar");
+            aristas1.forEach(element => {
+                console.log(element.label)
+            });
+            this.aristasOrdenadas(aristas1);
+        },
+
+        aristasOrdenadas(aristas1){
+            aristas1=_.sortBy(aristas1, function(wea){return parseInt(wea.label);})
+            console.log("la wea ordenada");
+            aristas1.forEach(element => {
+                console.log(element.label)
+            });
+            return aristas1;
         },
 
         flujoMaximo(){
