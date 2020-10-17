@@ -102464,191 +102464,321 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "ul",
-              {
-                staticClass:
-                  "col-lg-3 col-sm-12 my-2 list-group list-group-flush"
-              },
-              [
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "list-group-item analisis collapsed info textocolor",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      "data-target": "#Grafosimple",
-                      "aria-expanded": "false",
-                      "aria-controls": "Grafosimple"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Grafo Simple\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "list-group-item analisis collapsed  info textocolor",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      "data-target": "#Multigrafo",
-                      "aria-expanded": "false",
-                      "aria-controls": "Multigrafo"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Multigrafo\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "list-group-item analisis info textocolor",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      "data-target": "#Grafodirigido",
-                      "aria-expanded": "false",
-                      "aria-controls": "Gradodirigido"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Grafo Dirigido\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "list-group-item analisis info textocolor",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      "data-target": "#Multigrafodirigido",
-                      "aria-expanded": "false",
-                      "aria-controls": "Multigrafodirigido"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Multigrafo Dirigido\n                    "
-                    )
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-7 col-sm--12 my-2" }, [
+          _c(
+            "div",
+            { staticClass: "row accordion", attrs: { id: "tiposdegrafos" } },
+            [
               _c(
-                "div",
-                { staticClass: "collapse", attrs: { id: "Grafosimple" } },
-                [
-                  _c("div", {}, [
-                    _c(
-                      "div",
-                      { staticClass: "row d-flex justify-content-center" },
-                      [
-                        _c("h4", { staticClass: "textocolor fredoka" }, [
-                          _vm._v("Grafo Simple")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "textocolor lato" }, [
-                      _vm._v(
-                        "Un grafo simple G = (V, A) costa de un conjunto no vacío de vértices V y de\n                            un conjunto A de pares no ordenados llamados aristas. En otras palabras un grafo simple es un grafo en\n                            los que existe a lo más una arista que une dos vértices distintos."
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "collapse", attrs: { id: "Multigrafo" } },
-                [
-                  _c("div", {}, [
-                    _c(
-                      "div",
-                      { staticClass: "row d-flex justify-content-center" },
-                      [
-                        _c("h4", { staticClass: "textocolor fredoka" }, [
-                          _vm._v("Multigrafo")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "textocolor lato" }, [
-                      _vm._v(
-                        " Un multigrafo G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas, donde puede haber más de una arista entre un par de vertices y puede tener lazos/bucles. "
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "collapse", attrs: { id: "Grafodirigido" } },
-                [
-                  _c("div", {}, [
-                    _c(
-                      "div",
-                      { staticClass: "row d-flex justify-content-center" },
-                      [
-                        _c("h4", { staticClass: "textocolor fredoka" }, [
-                          _vm._v("Grafo Dirigido")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "textocolor lato" }, [
-                      _vm._v(
-                        "Un grafo dirigido G, también llamado digrafo, es lo mismo que un\n                            multigrafo, solo que cada arista de G tiene una dirección asignada."
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
+                "ul",
                 {
-                  staticClass: "collapse",
-                  attrs: { id: "Multigrafodirigido" }
+                  staticClass:
+                    "col-lg-3 col-sm-12 my-2 list-group list-group-flush"
                 },
                 [
-                  _c("div", {}, [
-                    _c(
-                      "div",
-                      { staticClass: "row d-flex justify-content-center" },
-                      [
-                        _c("h4", { staticClass: "textocolor fredoka" }, [
-                          _vm._v("Multigrafo Dirigido")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "textocolor lato" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item analisis collapsed info textocolor",
+                      attrs: {
+                        "data-toggle": "collapse",
+                        "data-target": "#Grafosimple",
+                        "aria-expanded": "false",
+                        "aria-controls": "Grafosimple"
+                      }
+                    },
+                    [
                       _vm._v(
-                        "Un multigrafo dirigido G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas,\n                                 donde puede poseer más una arista entre un par de vertices, puede tener lazos/bucles pero las aristas tienen una direccion asignada."
+                        "\n                        Grafo Simple\n                    "
                       )
-                    ])
-                  ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item analisis collapsed  info textocolor",
+                      attrs: {
+                        "data-toggle": "collapse",
+                        "data-target": "#Multigrafo",
+                        "aria-expanded": "false",
+                        "aria-controls": "Multigrafo"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Multigrafo\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "list-group-item analisis info textocolor",
+                      attrs: {
+                        "data-toggle": "collapse",
+                        "data-target": "#Grafodirigido",
+                        "aria-expanded": "false",
+                        "aria-controls": "Gradodirigido"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Grafo Dirigido\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "list-group-item analisis info textocolor",
+                      attrs: {
+                        "data-toggle": "collapse",
+                        "data-target": "#Multigrafodirigido",
+                        "aria-expanded": "false",
+                        "aria-controls": "Multigrafodirigido"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Multigrafo Dirigido\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "list-group-item analisis info textocolor",
+                      attrs: {
+                        "data-toggle": "collapse",
+                        "data-target": "#Grafoetiquetado",
+                        "aria-expanded": "false",
+                        "aria-controls": "Grafoetiquetado"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Grafo Etiquetado\n                    "
+                      )
+                    ]
+                  )
                 ]
-              )
-            ])
-          ])
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-7 col-sm--12 my-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "Grafosimple",
+                      "data-parent": "#tiposdegrafos"
+                    }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c("h4", { staticClass: "textocolor fredoka" }, [
+                            _vm._v("Grafo Simple")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "textocolor lato" }, [
+                        _vm._v(
+                          "Un grafo simple G = (V, A) costa de un conjunto no vacío de vértices V y de\n                            un conjunto A de pares no ordenados llamados aristas. En otras palabras un grafo simple es un grafo en\n                            los que existe a lo más una arista que une dos vértices distintos."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "image-parent" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src:
+                                "https://sites.google.com/site/matematicasmoralesgalindo/_/rsrc/1464559450575/6-1-elementos-y-caracteristicas-de-los-grafos/6-1-2-tipos-de-grafos-simples-completos-bipartidos-planos-conexos-ponderados/grafo%20completo.png?height=145&width=200"
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: { id: "Multigrafo", "data-parent": "#tiposdegrafos" }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c("h4", { staticClass: "textocolor fredoka" }, [
+                            _vm._v("Multigrafo")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "textocolor lato" }, [
+                        _vm._v(
+                          " Un multigrafo G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas,\n                                 donde puede haber más de una arista entre un par de vertices y puede tener lazos/bucles. "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "image-parentmg" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src:
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/6n-graph2.svg/1200px-6n-graph2.svg.png"
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "Grafodirigido",
+                      "data-parent": "#tiposdegrafos"
+                    }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c("h4", { staticClass: "textocolor fredoka" }, [
+                            _vm._v("Grafo Dirigido")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "textocolor lato" }, [
+                        _vm._v(
+                          "Un grafo dirigido G, también llamado digrafo, es lo mismo que un\n                            multigrafo, solo que cada arista de G tiene una dirección asignada."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "image-parentmg" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src:
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Directed.svg/1200px-Directed.svg.png"
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "Multigrafodirigido",
+                      "data-parent": "#tiposdegrafos"
+                    }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c("h4", { staticClass: "textocolor fredoka" }, [
+                            _vm._v("Multigrafo Dirigido")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "textocolor lato" }, [
+                        _vm._v(
+                          "Un multigrafo dirigido G = (V, A) consta de un conjunto V de vértices, un conjunto A de aristas,\n                                 donde puede poseer más una arista entre un par de vertices, puede tener lazos/bucles pero las aristas tienen una direccion asignada."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "image-parent" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src:
+                                "https://sites.google.com/site/matematicasmoralesgalindo/_/rsrc/1464555806675/6-1-elementos-y-caracteristicas-de-los-grafos/6-1-2-tipos-de-grafos-simples-completos-bipartidos-planos-conexos-ponderados/grafo.png?height=182&width=200"
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: {
+                      id: "Grafoetiquetado",
+                      "data-parent": "#tiposdegrafos"
+                    }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c(
+                        "div",
+                        { staticClass: "row d-flex justify-content-center" },
+                        [
+                          _c("h4", { staticClass: "textocolor fredoka" }, [
+                            _vm._v("Grafo Etiquetado")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "textocolor lato" }, [
+                        _vm._v(
+                          "Un grafo G se dice que esta etiquetado si sus aristas tienen datos asignados. En\n                                particular, se dice que G tiene peso si cada arista e de G tiene asignado un valor numérico\n                                no negativo w (e) llamado peso o longitud de e. En este caso, a cada camino P de G se le\n                                asigna un peso o una longitud que es la suma de los pesos de las aristas que constituyen el\n                                camino P."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "image-parent" }, [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src:
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Graceful_labeling.svg/440px-Graceful_labeling.svg.png"
+                            }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -115414,8 +115544,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
