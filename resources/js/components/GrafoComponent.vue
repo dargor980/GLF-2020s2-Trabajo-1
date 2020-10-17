@@ -11,7 +11,8 @@
                                 <option selected :value="0">Seleccione un tipo de grafo:</option>
                                 <option :value="1">Grafo simple /no dirigido</option>
                                 <option :value="2">Grafo simple /dirigido </option>
-                                <option :value="2">Grafo dirigido /etiquetado</option>     
+                                <option :value="3">Grafo dirigido /etiquetado</option>  
+                                <option :value="4">Grafo no dirigido /etiquetado</option>   
                             </select> 
                         </div>
                         <div class="container-fluid py-4 mr-4" v-if="option===1">
@@ -35,10 +36,6 @@
                                             <label for="id">ingrese el id: </label> 
                                             <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
                                         </div>
-                                        <div class="form-group">
-                                            <label for="label">ingrese nombre:</label> 
-                                            <input type="text" v-model="nodo.label" name="label" class="form-control"> 
-                                        </div>
 
                                         <button class="btn btn-success btn-sm" type="submit">Agregar</button>
                                     </form>       
@@ -54,17 +51,13 @@
                                         <label>Ingrese nodo al cual llega la arista:</label>
                                         <input type="number" min="1" v-model="arista.to" class="form-control"> 
                                     </div>
-                                    <div class="form-group">
-                                        <label>Ingrese el peso de la arista: </label>
-                                        <input type="number" min="0" v-model="arista.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
-                                    </div>
                             
                                     <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
                                     <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
                                 </form>
                             </div>
                         </div>
-                         <!--/implementación preliminar. Modificar estilos --> 
+                         <!--OPCION 2: GRAFO SIMPLE DIRIGIDO--> 
                             <div class="mr-3 mt-3" v-if="option===2">
                                 <div class="ml-2">
                                     <h3 class="mt-2">Grafo simple dirigido</h3> 
@@ -88,10 +81,6 @@
                                                         <label for="id">ingrese el id: </label> 
                                                         <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="label">ingrese nombre:</label> 
-                                                        <input type="text" v-model="nodo.label" name="label" class="form-control"> 
-                                                    </div>
 
                                                     <button class="btn btn-success btn-sm" type="submit">Agregar</button>
                                                 </form>       
@@ -108,17 +97,122 @@
                                                     <label>Ingrese nodo al cual llega la arista:</label>
                                                     <input type="number" min="1" v-model="aristaDirigido.to" class="form-control"> 
                                                 </div>
+                                        
+                                                <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                                <button class="btn btn-success btn-sm" @click="drawGrafoDirigido">dibujar</button>
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/OPCION 2: GRAFO SIMPLE DIRIGIDO-->
+
+                            <!--OPCION 3: GRAFO DIRIGIDO ETIQUETADO-->
+                            <div class="mr-3 mt-3" v-if="option===3">
+                                <div class="ml-2">
+                                    <h3 class="mt-2">Grafo Dirigido Etiquetado</h3>
+                                    <hr>
+
+                                        <div class="row text-center">
+                                            <div class="col-md-4">
+                                                <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
+                                            </div>
+                                        </div>
+                                        <div v-if="create" class="my-3">
+                                            <div>
+                                                <form @submit.prevent="crearNodo">
+                                                    <div class="form-group">
+                                                        <label for="id">ingrese el id: </label> 
+                                                        <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
+                                                    </div>
+
+                                                    <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                                </form>       
+                                            </div>
+                                        </div>
+                                        <div v-if="createAris" class="my-3">
+                                            <form @submit.prevent="crearArista">
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo desde el cual sale la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaEtiquetadaDirigida.from" class="form-control"> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo al cual llega la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaEtiquetadaDirigida.to" class="form-control"> 
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Ingrese el peso de la arista: </label>
-                                                    <input type="number" min="0" v-model="aristaDirigido.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
+                                                    <input type="number" v-model="aristaEtiquetadaDirigida.value" class="form-control">
                                                 </div>
                                         
                                                 <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
                                                 <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
                                             </form>
                                         </div>
+
                                 </div>
+
                             </div>
+                            <!--/OPCION 3: GRAFO DIRIGIDO ETIQUETADO-->
+
+                            <!--OPCION 4: GRAFO NO DIRIGIDO ETIQUETADO-->
+                            <div class="mr-3 mt-3" v-if="option===4">
+                                <div class="ml-2">
+                                    <h3 class="mt-2">Grafo Dirigido no Etiquetado</h3>
+                                    <hr>
+
+                                        <div class="row text-center">
+                                            <div class="col-md-4">
+                                                <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
+                                            </div>
+                                        </div>
+                                        <div v-if="create" class="my-3">
+                                            <div>
+                                                <form @submit.prevent="crearNodo">
+                                                    <div class="form-group">
+                                                        <label for="id">ingrese el id: </label> 
+                                                        <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
+                                                    </div>
+
+                                                    <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                                </form>       
+                                            </div>
+                                        </div>
+                                        <div v-if="createAris" class="my-3">
+                                            <form @submit.prevent="crearArista">
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo desde el cual sale la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaEtiquetada.from" class="form-control"> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo al cual llega la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaEtiquetada.to" class="form-control"> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingrese el peso de la arista: </label>
+                                                    <input type="number" v-model="aristaEtiquetada.value" class="form-control">
+                                                </div>
+                                        
+                                                <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                                <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
+                                            </form>
+                                        </div>
+
+                                </div>
+
+                            </div>
+                            <!--/OPCION 4: GRAFO NO DIRIGIDO ETIQUETADO-->
                     </div>
                 </div>
                 <div class="grafo1 col-md-5 card cardaux ml-3">
@@ -257,8 +351,10 @@ export default {
         return{
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
             nodo:{id:'', label:''},
-            arista:{from:'',to:'',value:''},
-            aristaDirigido:{from:'', to:'', value:''},
+            arista:{from:'',to:''},  //arista  no dirigida
+            aristaDirigido:{from:'', to:''}, //arista e dirigida
+            aristaEtiquetada:{from:'', to:'', value:''}, //arista  etiquetada no dirigida
+            aristaEtiquetadaDirigida:{from:'', to:'', value:''}, //arista etiquetada dirigida.
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
             aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
@@ -338,6 +434,18 @@ export default {
             
         },
 
+
+        drawGrafoEtiquetadoNoDirigido()
+        {
+            var container= document.getElementById("grafo");
+            var data= {nodes:this.nodos,
+                       edges:this.aristas};
+            var options={
+                height:520 + 'px',
+            };
+            var network= new vis.Network(container,data,options);
+        },
+
         createNode()  //funcion para el control del flujo de vistas 
         {
             this.create=true;
@@ -364,6 +472,7 @@ export default {
                     return;
                 }
             }
+            this.nodo.label=this.nodo.id;
             this.nodos.push(this.nodo);
             this.nodo={id:'', label:''}
             this.drawGrafo();
@@ -408,7 +517,7 @@ export default {
                 {
                     if(this.aristaDirigido.from===this.aristas[i].from && this.aristaDirigido.to === this.aristas[i].to)
                     {
-                        alert('ya existe la arista. Igrese otra');
+                        alert('ya existe la arista. Ingrese otra');
                         return;
                     }
                 }
@@ -417,6 +526,51 @@ export default {
                 this.drawGrafoDirigido();
                 var ady= this.matrizAdyacenciaDirigido();
                 console.log(ady);
+            }
+
+            if(this.option===3)
+            {
+                if(this.aristaEtiquetadaDirigida.from==='' || this.aristaEtiquetadaDirigida.to==='' || this.aristaEtiquetadaDirigida.value==='')
+                {
+                    alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
+                    return;
+                }
+                for(var i=0; i<this.aristas.length;i++)
+                {
+                    if(this.aristaEtiquetadaDirigida.from===this.aristas[i].from && this.aristaEtiquetadaDirigida.to===this.aristas[i].to)
+                    {
+                        alert("La arista ya existe. Ingrese otra");
+                        return;
+                    }
+                    this.aristas.push(this.aristaEtiquetadaDirigida);
+                    this.aristaEtiquetadaDirigida={from:'', to:'', value:'', arrows:'to'};
+                    this.drawGrafoDirigido();
+                    var ady= this.matrizAdyacenciaDirigido();
+                    console.log(ady);  //muestra la matriz de adyacencia
+                }
+            }
+
+            if(this.option===4)
+            {
+                if(this.aristaEtiquetada.from==='' || this.aristaEtiquetada.to==='' || this.aristaEtiquetada.value==='')
+                {
+                    alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
+                    return;
+                }
+                for(var i=0; i<this.aristas.length;i++)
+                {
+                    if(this.aristaEtiquetada.from===this.aristas[i].from && this.aristaEtiquetada.to===this.aristas[i].to)
+                    {
+                        alert("La arista ya existe. Ingrese otra");
+                        return;
+                    }
+                    this.aristas.push(this.aristaEtiquetada);
+                    this.aristaEtiquetada={from:'', to:'', value:''};
+                    this.drawGrafoEtiquetadoNoDirigido();
+                    var ady=this.matrizAdyacencia();
+                    console.log(ady); //impresion de la matriz adyacencia.
+                }
+
             }
             
             for(var i=0;i<this.aristas.length;i++) // test de la funcion 
@@ -935,31 +1089,6 @@ export default {
 // eliminar nodo_inicial de nodos_no_visitados
 // nodo_inicial = nodo_con_arista_de_menor_peso
 // repetir_hasta_vaciar nodos_no_visitados
-
-***Otro Pseudocodigo hamilton ctm
-ver si es conexo
-    si es conexo
-        nodos vistados
-            si se visito
-                eliminar del arreglo principal
-        nodos no visitados
-            si existen 
-                nodos no visitados
-                    recorrer no visitados
-
-                    si nodos no visitados esta vacio
-                        estan todos conectados
-                            return true
-
-    si no es conexo 
-        return false
-
-
-if (this.nodos.lenght){
-
-}
-
-
 
 
 

@@ -2161,6 +2161,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2171,14 +2265,26 @@ __webpack_require__.r(__webpack_exports__);
       },
       arista: {
         from: '',
-        to: '',
-        value: ''
+        to: ''
       },
+      //arista  no dirigida
       aristaDirigido: {
+        from: '',
+        to: ''
+      },
+      //arista e dirigida
+      aristaEtiquetada: {
         from: '',
         to: '',
         value: ''
       },
+      //arista  etiquetada no dirigida
+      aristaEtiquetadaDirigida: {
+        from: '',
+        to: '',
+        value: ''
+      },
+      //arista etiquetada dirigida.
       nodos: [{
         id: '1',
         label: '1'
@@ -2340,6 +2446,17 @@ __webpack_require__.r(__webpack_exports__);
       };
       var network = new vis.Network(container, data, options);
     },
+    drawGrafoEtiquetadoNoDirigido: function drawGrafoEtiquetadoNoDirigido() {
+      var container = document.getElementById("grafo");
+      var data = {
+        nodes: this.nodos,
+        edges: this.aristas
+      };
+      var options = {
+        height: 520 + 'px'
+      };
+      var network = new vis.Network(container, data, options);
+    },
     createNode: function createNode() //funcion para el control del flujo de vistas 
     {
       this.create = true;
@@ -2366,6 +2483,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
+      this.nodo.label = this.nodo.id;
       this.nodos.push(this.nodo);
       this.nodo = {
         id: '',
@@ -2411,7 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
 
         for (var i = 0; i < this.aristas.length; i++) {
           if (this.aristaDirigido.from === this.aristas[i].from && this.aristaDirigido.to === this.aristas[i].to) {
-            alert('ya existe la arista. Igrese otra');
+            alert('ya existe la arista. Ingrese otra');
             return;
           }
         }
@@ -2425,6 +2543,55 @@ __webpack_require__.r(__webpack_exports__);
         this.drawGrafoDirigido();
         var ady = this.matrizAdyacenciaDirigido();
         console.log(ady);
+      }
+
+      if (this.option === 3) {
+        if (this.aristaEtiquetadaDirigida.from === '' || this.aristaEtiquetadaDirigida.to === '' || this.aristaEtiquetadaDirigida.value === '') {
+          alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
+          return;
+        }
+
+        for (var i = 0; i < this.aristas.length; i++) {
+          if (this.aristaEtiquetadaDirigida.from === this.aristas[i].from && this.aristaEtiquetadaDirigida.to === this.aristas[i].to) {
+            alert("La arista ya existe. Ingrese otra");
+            return;
+          }
+
+          this.aristas.push(this.aristaEtiquetadaDirigida);
+          this.aristaEtiquetadaDirigida = {
+            from: '',
+            to: '',
+            value: '',
+            arrows: 'to'
+          };
+          this.drawGrafoDirigido();
+          var ady = this.matrizAdyacenciaDirigido();
+          console.log(ady); //muestra la matriz de adyacencia
+        }
+      }
+
+      if (this.option === 4) {
+        if (this.aristaEtiquetada.from === '' || this.aristaEtiquetada.to === '' || this.aristaEtiquetada.value === '') {
+          alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
+          return;
+        }
+
+        for (var i = 0; i < this.aristas.length; i++) {
+          if (this.aristaEtiquetada.from === this.aristas[i].from && this.aristaEtiquetada.to === this.aristas[i].to) {
+            alert("La arista ya existe. Ingrese otra");
+            return;
+          }
+
+          this.aristas.push(this.aristaEtiquetada);
+          this.aristaEtiquetada = {
+            from: '',
+            to: '',
+            value: ''
+          };
+          this.drawGrafoEtiquetadoNoDirigido();
+          var ady = this.matrizAdyacencia();
+          console.log(ady); //impresion de la matriz adyacencia.
+        }
       }
 
       for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
@@ -100843,8 +101010,12 @@ var render = function() {
                     _vm._v("Grafo simple /dirigido ")
                   ]),
                   _vm._v(" "),
-                  _c("option", { domProps: { value: 2 } }, [
+                  _c("option", { domProps: { value: 3 } }, [
                     _vm._v("Grafo dirigido /etiquetado")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { domProps: { value: 4 } }, [
+                    _vm._v("Grafo no dirigido /etiquetado")
                   ])
                 ]
               )
@@ -100943,38 +101114,6 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "form-group" }, [
-                                _c("label", { attrs: { for: "label" } }, [
-                                  _vm._v("ingrese nombre:")
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.nodo.label,
-                                      expression: "nodo.label"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", name: "label" },
-                                  domProps: { value: _vm.nodo.label },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.nodo,
-                                        "label",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
                               _c(
                                 "button",
                                 {
@@ -101061,38 +101200,6 @@ var render = function() {
                                     _vm.$set(
                                       _vm.arista,
                                       "to",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", [
-                                _vm._v("Ingrese el peso de la arista: ")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arista.value,
-                                    expression: "arista.value"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { type: "number", min: "0" },
-                                domProps: { value: _vm.arista.value },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arista,
-                                      "value",
                                       $event.target.value
                                     )
                                   }
@@ -101218,38 +101325,6 @@ var render = function() {
                                   })
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("label", { attrs: { for: "label" } }, [
-                                    _vm._v("ingrese nombre:")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.nodo.label,
-                                        expression: "nodo.label"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "text", name: "label" },
-                                    domProps: { value: _vm.nodo.label },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.nodo,
-                                          "label",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
                                 _c(
                                   "button",
                                   {
@@ -101345,6 +101420,225 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("Agregar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  on: { click: _vm.drawGrafoDirigido }
+                                },
+                                [_vm._v("dibujar")]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.option === 3
+              ? _c("div", { staticClass: "mr-3 mt-3" }, [
+                  _c("div", { staticClass: "ml-2" }, [
+                    _c("h3", { staticClass: "mt-2" }, [
+                      _vm._v("Grafo Dirigido Etiquetado")
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row text-center" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: { click: _vm.createNode }
+                          },
+                          [_vm._v("Añadir nodo")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: { click: _vm.createArista }
+                          },
+                          [_vm._v("Añadir arista")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: { click: _vm.delAndClear }
+                          },
+                          [_vm._v("Eliminar Grafo")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.create
+                      ? _c("div", { staticClass: "my-3" }, [
+                          _c("div", [
+                            _c(
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.crearNodo($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", { attrs: { for: "id" } }, [
+                                    _vm._v("ingrese el id: ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.nodo.id,
+                                        expression: "nodo.id"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "number",
+                                      min: "1",
+                                      name: "id"
+                                    },
+                                    domProps: { value: _vm.nodo.id },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.nodo,
+                                          "id",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Agregar")]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.createAris
+                      ? _c("div", { staticClass: "my-3" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.crearArista($event)
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", [
+                                  _vm._v(
+                                    "Ingrese nodo desde el cual sale la arista:"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.aristaEtiquetadaDirigida.from,
+                                      expression:
+                                        "aristaEtiquetadaDirigida.from"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "number", min: "1" },
+                                  domProps: {
+                                    value: _vm.aristaEtiquetadaDirigida.from
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.aristaEtiquetadaDirigida,
+                                        "from",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", [
+                                  _vm._v(
+                                    "Ingrese nodo al cual llega la arista:"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.aristaEtiquetadaDirigida.to,
+                                      expression: "aristaEtiquetadaDirigida.to"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "number", min: "1" },
+                                  domProps: {
+                                    value: _vm.aristaEtiquetadaDirigida.to
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.aristaEtiquetadaDirigida,
+                                        "to",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", [
                                   _vm._v("Ingrese el peso de la arista: ")
@@ -101355,20 +101649,273 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.aristaDirigido.value,
-                                      expression: "aristaDirigido.value"
+                                      value: _vm.aristaEtiquetadaDirigida.value,
+                                      expression:
+                                        "aristaEtiquetadaDirigida.value"
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  attrs: { type: "number", min: "0" },
-                                  domProps: { value: _vm.aristaDirigido.value },
+                                  attrs: { type: "number" },
+                                  domProps: {
+                                    value: _vm.aristaEtiquetadaDirigida.value
+                                  },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
                                         return
                                       }
                                       _vm.$set(
-                                        _vm.aristaDirigido,
+                                        _vm.aristaEtiquetadaDirigida,
+                                        "value",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("Agregar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  on: { click: _vm.drawGrafo }
+                                },
+                                [_vm._v("dibujar")]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.option === 4
+              ? _c("div", { staticClass: "mr-3 mt-3" }, [
+                  _c("div", { staticClass: "ml-2" }, [
+                    _c("h3", { staticClass: "mt-2" }, [
+                      _vm._v("Grafo Dirigido no Etiquetado")
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row text-center" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: { click: _vm.createNode }
+                          },
+                          [_vm._v("Añadir nodo")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: { click: _vm.createArista }
+                          },
+                          [_vm._v("Añadir arista")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: { click: _vm.delAndClear }
+                          },
+                          [_vm._v("Eliminar Grafo")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.create
+                      ? _c("div", { staticClass: "my-3" }, [
+                          _c("div", [
+                            _c(
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.crearNodo($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", { attrs: { for: "id" } }, [
+                                    _vm._v("ingrese el id: ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.nodo.id,
+                                        expression: "nodo.id"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "number",
+                                      min: "1",
+                                      name: "id"
+                                    },
+                                    domProps: { value: _vm.nodo.id },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.nodo,
+                                          "id",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Agregar")]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.createAris
+                      ? _c("div", { staticClass: "my-3" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.crearArista($event)
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", [
+                                  _vm._v(
+                                    "Ingrese nodo desde el cual sale la arista:"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.aristaEtiquetada.from,
+                                      expression: "aristaEtiquetada.from"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "number", min: "1" },
+                                  domProps: {
+                                    value: _vm.aristaEtiquetada.from
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.aristaEtiquetada,
+                                        "from",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", [
+                                  _vm._v(
+                                    "Ingrese nodo al cual llega la arista:"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.aristaEtiquetada.to,
+                                      expression: "aristaEtiquetada.to"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "number", min: "1" },
+                                  domProps: { value: _vm.aristaEtiquetada.to },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.aristaEtiquetada,
+                                        "to",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", [
+                                  _vm._v("Ingrese el peso de la arista: ")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.aristaEtiquetada.value,
+                                      expression: "aristaEtiquetada.value"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "number" },
+                                  domProps: {
+                                    value: _vm.aristaEtiquetada.value
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.aristaEtiquetada,
                                         "value",
                                         $event.target.value
                                       )
@@ -114781,8 +115328,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
