@@ -2403,10 +2403,14 @@ __webpack_require__.r(__webpack_exports__);
         from: '7',
         to: '8',
         value: '1'
+      }, {
+        from: '7',
+        to: '7',
+        value: '1'
       }],
       matrixCaminos: [],
       euler: '',
-      hamilton: '',
+      hamilton: [],
       eleccion: '',
 
       /*variables de control */
@@ -2435,9 +2439,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     llamarHam: function llamarHam() {
       var ham = this.isHamiltoniano();
-      this.hamilton = ham;
-      console.log(hamilton);
-      return this.hamilton;
+      return ham;
     },
     delAndClear: function delAndClear() {
       this.eliminarGrafo();
@@ -2825,6 +2827,21 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
+    gradosHam: function gradosHam(grados, matrix) {
+      for (var i = 0; i < this.nodos.length; i++) {
+        var cont = 0;
+
+        for (var j = 0; j < this.nodos.length; j++) {
+          if (matrix[i][j] == 1) {
+            cont++;
+          }
+        }
+
+        grados.push(cont);
+      }
+
+      return grados;
+    },
     isHamiltoniano: function isHamiltoniano() {
       //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
       if (this.conexo()) {
@@ -2834,32 +2851,24 @@ __webpack_require__.r(__webpack_exports__);
         var posicion = nodo_inicio - 1;
         var contadorAristas = 1;
         var camino = [];
-        var control = 1;
+        var control = 0; //camino.push(posicion)
 
-        for (var i = 0; i < this.nodos.length; i++) {
-          var cont = 0;
-
-          for (var j = 0; j < this.nodos.length; j++) {
-            if (matrix[i][j] == 1) {
-              cont++;
-            }
-          }
-
-          grados.push(cont);
-        }
-
+        grados = this.gradosHam(grados, matrix);
         console.log("arreglo de grados", grados);
 
         while (contadorAristas != this.nodos.length) {
-          contadorAristas++;
+          console.log("posicion", posicion);
+          grados = [];
+          grados = this.gradosHam(grados, matrix);
+          console.log("arreglo de grados", grados);
           var adyacencia = [];
+          contadorAristas++;
 
           for (var j = 0; j < this.nodos.length; j++) {
-            if (this.esta(camino, j) == false) {
-              console.log("toi dentro");
-
+            if (this.esta(camino, j) == false && grados[j] > 0) {
+              //console.log("toi dentro");
               if (matrix[posicion][j] == 1 && j != nodo_inicio - 1) {
-                adyacencia.push(j);
+                adyacencia.push(j); //console.log("this",adyacencia);
               } else {
                 if (matrix[posicion][j] == 1 && j == nodo_inicio - 1 && contadorAristas == this.nodos.length) {
                   adyacencia.push(j);
@@ -2868,7 +2877,12 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
 
-          var menor = grados[adyacencia[0]];
+          if (adyacencia.length == 0) {
+            console.log(false);
+            return false;
+          }
+
+          var menor = adyacencia[0];
           var aux = 0;
           console.log("arreglo de adyacencia", adyacencia);
 
@@ -2880,28 +2894,53 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
 
-          camino.push(posicion);
-          posicion = menor;
           console.log("Menor", posicion);
 
-          if (control != 1) {
+          if (control != 0) {
             for (var n = 0; n < this.nodos.length; n++) {
               matrix[posicion][n] = 0;
+              matrix[n][posicion] = 0;
+              console.log(matrix);
             }
-
-            grados[posicion] = 0;
           } else {
-            control = 0;
+            control = 1;
           }
 
-          console.log("arreglo de caminos", camino);
+          camino.push(posicion);
+          posicion = menor;
+          grados[posicion] = 0;
         }
+
+        if (camino.length != this.nodos.length) {
+          console.log(false);
+          return false;
+        }
+
+        if (camino[camino.length - 1] != parseInt(nodo_inicio) - 1) {
+          console.log(false);
+          return false;
+        } //camino.push(parseInt(nodo_inicio)-1 )
+
+
+        console.log("arreglo de caminos", this.arreglomas1(camino));
+        this.hamilton = camino;
+        return true;
       } else {
         return false;
       }
     },
+    arreglomas1: function arreglomas1(arreglo) {
+      for (var i = 0; i < arreglo.length; i++) {
+        arreglo[i]++;
+      }
+
+      return arreglo;
+    },
     esta: function esta(camino, num) {
-      for (var i = 1; i < camino.length; i++) {
+      //camino=[6,0,0,0,0,0,0,0]
+      //camino[6,5,4,0,1,2,3,7]
+      //camino.lenght==nodos.lenght
+      for (var i = 0; i < camino.length - 1; i++) {
         if (num == camino[i]) {
           return true;
         }
@@ -115375,8 +115414,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

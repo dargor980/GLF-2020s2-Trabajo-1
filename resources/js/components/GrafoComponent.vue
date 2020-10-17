@@ -357,10 +357,10 @@ export default {
             aristaEtiquetadaDirigida:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista etiquetada dirigida.
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
+            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'},{from:'7',to:'7',value:'1'}],
             matrixCaminos:[],
             euler:'',
-            hamilton:'',
+            hamilton:[],
             eleccion:'',
             
 
@@ -397,9 +397,7 @@ export default {
     methods:{
         llamarHam(){
             var ham =this.isHamiltoniano()
-            this.hamilton= ham;
-            console.log(hamilton);
-            return this.hamilton;
+            return ham
         },
 
         delAndClear(){
@@ -775,6 +773,19 @@ export default {
            }
         },
 
+        gradosHam(grados,matrix){
+            for(var i = 0; i < this.nodos.length; i++){
+                    var cont = 0 
+                    for( var j = 0 ; j < this.nodos.length; j++){
+                        if(matrix[i][j]==1){
+                            cont++;
+                        }
+                    }
+                    grados.push(cont)
+                }
+            return grados
+        },
+
         isHamiltoniano(){  //FUnción que retorna un valor booleano que determina si un grafo es o no Hamiltoniano.
             
             if(this.conexo()){
@@ -784,27 +795,25 @@ export default {
                 var posicion = nodo_inicio-1;
                 var contadorAristas = 1;
                 var camino = [];
-                var control=1;
-                
-                for(var i = 0; i < this.nodos.length; i++){
-                    var cont = 0 
-                    for( var j = 0 ; j < this.nodos.length; j++){
-                        if(matrix[i][j]==1){
-                            cont++;
-                        }
-                    }
-                    grados.push(cont)
-                }
+                var control=0;
+                //camino.push(posicion)
+                grados=this.gradosHam(grados,matrix)
                 console.log("arreglo de grados",grados);
 
                 while(contadorAristas!=this.nodos.length){
-                    contadorAristas++;
+                    console.log("posicion",posicion);
+                    grados = []
+                    grados=this.gradosHam(grados,matrix)
+                    console.log("arreglo de grados",grados);
                     var adyacencia=[];
+                    contadorAristas++;
                     for(var j=0; j<this.nodos.length; j++){
-                        if(this.esta(camino, j)==false){
-                            console.log("toi dentro");
-                            if( matrix[posicion][j] == 1 && j != nodo_inicio-1 ){
+                        if(this.esta(camino, j)==false && grados[j]>0){
+                            //console.log("toi dentro");
+                            if( matrix[posicion][j] == 1 && j != nodo_inicio-1){
                                 adyacencia.push(j);
+                                
+                                //console.log("this",adyacencia);
                             }else{
                                 if( matrix[posicion][j] == 1 && j == nodo_inicio-1 && contadorAristas==this.nodos.length){
                                     adyacencia.push(j);
@@ -812,43 +821,85 @@ export default {
                             }
                         }
                     }
-                    var menor=grados[adyacencia[0]];
+                    
+                    if(adyacencia.length==0){
+                        console.log(false);
+                        return false
+                    }
+                    var menor=adyacencia[0];
                     var aux=0;
                     console.log("arreglo de adyacencia",adyacencia);
+                    
                     for(var k=0; k<adyacencia.length; k++){
                         if( grados[adyacencia[aux]] > grados[adyacencia[k]] && k != nodo_inicio-1 ){
                             console.log("Grados de",adyacencia[k]," - ", grados[adyacencia[k]]);
                             aux=k;
                             menor=adyacencia[k];
                         }
+                        
+                    }
+                    
+                    console.log("Menor",posicion);
+                    
+                    if(control!=0){
+                        for(var n=0; n<this.nodos.length; n++){
+                            matrix[posicion][n]=0;
+                            matrix[n][posicion]=0;
+                            console.log(matrix);
+                        }
+
+                    }
+                    else{
+                        control=1
+                        
                     }
                     camino.push(posicion);
                     posicion=menor;
-                    console.log("Menor",posicion);
-                    if(control!=1){
-                        for(var n=0; n<this.nodos.length; n++){
-                            matrix[posicion][n]=0;
-                        }
-                        grados[posicion]=0;
-                    }else{
-                        control=0;
-                    }
-                    console.log("arreglo de caminos",camino);
+                    grados[posicion]=0  
+                    
                 }
+                if(camino.length!=this.nodos.length){
+                    console.log(false);
+                    return false
+                }
+                if(camino[camino.length-1]!=parseInt(nodo_inicio)-1){
+                    console.log(false);
+                    return false
+                }
+                //camino.push(parseInt(nodo_inicio)-1 )
+                console.log("arreglo de caminos",this.arreglomas1(camino));
+                this.hamilton = camino
+                return true
+                
+
             }
             else{
                 return false;
             }
         },
 
+        arreglomas1(arreglo){
+            for(var i=0 ; i< arreglo.length; i++){
+                arreglo[i]++
+            }
+            return arreglo
+        },
+
         esta(camino, num){
-            for(var i=1; i<camino.length; i++){
+            //camino=[6,0,0,0,0,0,0,0]
+            //camino[6,5,4,0,1,2,3,7]
+            //camino.lenght==nodos.lenght
+            for(var i=0; i<camino.length-1; i++){
+                
                 if(num==camino[i]){
+                    
                     return true;
                 }
             }
             return false;
         },
+
+        
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
             var vertices= this.nodos;
