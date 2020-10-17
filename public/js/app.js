@@ -2255,6 +2255,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2310,6 +2320,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       //arista etiquetada dirigida.
+
+      /* hamiltoniano */
       nodos: [{
         id: '1',
         label: '1'
@@ -2335,6 +2347,8 @@ __webpack_require__.r(__webpack_exports__);
         id: '8',
         label: '8'
       }],
+
+      /* hamiltoniano */
       aristas: [{
         from: '1',
         to: '2',
@@ -2403,15 +2417,16 @@ __webpack_require__.r(__webpack_exports__);
         from: '7',
         to: '8',
         value: '1'
-      }, {
-        from: '7',
-        to: '7',
-        value: '1'
       }],
+
+      /* nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],
+      aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'4',value:'1'},{from:'2',to:'3',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'}],
+       */
       matrixCaminos: [],
       euler: '',
       hamilton: [],
       eleccion: '',
+      Adyacencia: [],
 
       /*variables de control */
       addgrafo: false,
@@ -2422,20 +2437,7 @@ __webpack_require__.r(__webpack_exports__);
       arregloEuleriano: []
     };
   },
-  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
-    //this.sumaMat();
-    //this.matrizIdentidad();
-    //let a = this.matrizAdyacencia();
-    //let b = this.matrizAdyacencia();
-    //this.multiplicarMatriz(a,b);
-    //this.potencia(b);
-    //console.log("conexo: ",this.conexo()); 
-    //var lala= this.isEuleriano();
-    //console.log(lala);
-    //this.eliminarGrafo();
-    //this.caminoCorto2();
-    //this.isHamiltoniano()
-  },
+  created: function created() {},
   methods: {
     llamarHam: function llamarHam() {
       var ham = this.isHamiltoniano();
@@ -2518,20 +2520,13 @@ __webpack_require__.r(__webpack_exports__);
         color: '#ff0000'
       };
       this.drawGrafo();
-
-      for (var i = 0; i < this.nodos.length; i++) // test de la funcion 
-      {// console.log("Cantidad de nodos >>> ")
-        // console.log(this.nodos.length); //largo del array de nodos 
-      }
     },
     crearArista: function crearArista() {
-      // agrega conexion entre nodos
       if (this.option === 1) {
-        if (this.arista.from === '' || this.arista.to === '') //verifica que los extremos de la arista no estén vacíos.
-          {
-            alert('Debe ingresar los extremos de la arista.');
-            return;
-          }
+        if (this.arista.from === '' || this.arista.to === '') {
+          alert('Debe ingresar los extremos de la arista.');
+          return;
+        }
 
         for (var i = 0; i < this.aristas.length; i++) {
           if (this.arista.from === this.aristas[i].from && this.arista.to === this.aristas[i].to) {
@@ -2610,7 +2605,7 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.drawGrafoDirigido();
         var ady = this.matrizAdyacenciaDirigido();
-        console.log(ady); //muestra la matriz de adyacencia
+        console.log(ady);
       }
 
       if (this.option === 4) {
@@ -2640,19 +2635,14 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.drawGrafoEtiquetadoNoDirigido();
         var ady = this.matrizAdyacencia();
-        console.log(ady); //impresion de la matriz adyacencia.
-      }
-
-      for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
-      {// console.log(this.aristas[i].from); // desde donde sale la aritsa
-        // console.log(this.aristas[i].to); // hacia donde llega la arista
-        // console.log(this.aristas[i].value); // peso de la arista
+        console.log(ady);
       }
     },
     //funciones que controla la visualización de las vistas
     mostrarOp1: function mostrarOp1() {
       this.controlanalisis = 1;
       this.matrizCaminos();
+      this.Adyacencia = this.matrizAdyacencia();
     },
     mostrarOp2: function mostrarOp2() {
       this.controlanalisis = 2;
@@ -2670,12 +2660,10 @@ __webpack_require__.r(__webpack_exports__);
     matrizAdyacencia: function matrizAdyacencia() {
       // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
       var matrix = [];
-      var n = this.nodos.length; //largo del array nodos
+      var n = this.nodos.length;
+      var e = this.aristas.length;
 
-      var e = this.aristas.length; //largo del array aristas
-
-      for (var i = 0; i < n; i++) // creación de la matriz ***funcion crear matriz***
-      {
+      for (var i = 0; i < n; i++) {
         matrix[i] = new Array(n);
       }
 
@@ -2695,8 +2683,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(matrix);
       return matrix;
     },
-    matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido() //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
-    {
+    matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido() {
+      //Función que genera la matriz de adyacencias de un grafo simple Dirigido.
       var matrix = [];
 
       for (var i = 0; i < this.nodos.length; i++) {
@@ -2718,7 +2706,7 @@ __webpack_require__.r(__webpack_exports__);
       return matrix;
     },
     conexo: function conexo() {
-      //Función que retorna valor booleano que determina si un grafo es o no conexo
+      //Función que retorna valor booleano que determina si un grafo es o no conexo 
       var matriz = this.sumaMat();
       var largo = this.nodos.length;
 
@@ -2738,7 +2726,7 @@ __webpack_require__.r(__webpack_exports__);
       var aux = this.matrizAdyacencia();
       var control = 3;
       var indice;
-      var largo = this.nodos.length; // let aristaslargo = this.aristas.length;
+      var largo = this.nodos.length;
 
       for (var i = 0; i < this.nodos.length; i++) {
         if (this.nodos[i].id == e) {
@@ -2849,14 +2837,14 @@ __webpack_require__.r(__webpack_exports__);
         var grados = [];
         var nodo_inicio = this.eleccion;
         var posicion = nodo_inicio - 1;
-        var contadorAristas = 1;
+        var contadorAristas = 0;
         var camino = [];
-        var control = 0; //camino.push(posicion)
-
+        var control = 0;
         grados = this.gradosHam(grados, matrix);
         console.log("arreglo de grados", grados);
 
         while (contadorAristas != this.nodos.length) {
+          camino.push(posicion);
           console.log("posicion", posicion);
           grados = [];
           grados = this.gradosHam(grados, matrix);
@@ -2865,19 +2853,14 @@ __webpack_require__.r(__webpack_exports__);
           contadorAristas++;
 
           for (var j = 0; j < this.nodos.length; j++) {
-            if (this.esta(camino, j) == false && grados[j] > 0) {
-              //console.log("toi dentro");
+            if (this.esta(camino, j) == false && grados[j] > 1) {
               if (matrix[posicion][j] == 1 && j != nodo_inicio - 1) {
-                adyacencia.push(j); //console.log("this",adyacencia);
-              } else {
-                if (matrix[posicion][j] == 1 && j == nodo_inicio - 1 && contadorAristas == this.nodos.length) {
-                  adyacencia.push(j);
-                }
+                adyacencia.push(j);
               }
             }
           }
 
-          if (adyacencia.length == 0) {
+          if (adyacencia.length == 0 && contadorAristas != this.nodos.length) {
             console.log(false);
             return false;
           }
@@ -2894,33 +2877,27 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
 
-          console.log("Menor", posicion);
-
           if (control != 0) {
             for (var n = 0; n < this.nodos.length; n++) {
               matrix[posicion][n] = 0;
               matrix[n][posicion] = 0;
-              console.log(matrix);
             }
           } else {
             control = 1;
           }
 
-          camino.push(posicion);
+          console.log("Agregue esto >>>", posicion);
+          console.log("camino", camino);
           posicion = menor;
           grados[posicion] = 0;
         }
 
-        if (camino.length != this.nodos.length) {
+        if (camino.length == this.nodos.length) {
+          camino.push(parseInt(nodo_inicio - 1));
+        } else {
           console.log(false);
           return false;
         }
-
-        if (camino[camino.length - 1] != parseInt(nodo_inicio) - 1) {
-          console.log(false);
-          return false;
-        } //camino.push(parseInt(nodo_inicio)-1 )
-
 
         console.log("arreglo de caminos", this.arreglomas1(camino));
         this.hamilton = camino;
@@ -2937,9 +2914,6 @@ __webpack_require__.r(__webpack_exports__);
       return arreglo;
     },
     esta: function esta(camino, num) {
-      //camino=[6,0,0,0,0,0,0,0]
-      //camino[6,5,4,0,1,2,3,7]
-      //camino.lenght==nodos.lenght
       for (var i = 0; i < camino.length - 1; i++) {
         if (num == camino[i]) {
           return true;
@@ -2976,41 +2950,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    // caminoCorto2(id_nodo){ //fallido segundo camino corto
-    //     var nuevo=[];
-    //     var camino=[];
-    //     console.log("largo aristas", this.aristas.length);
-    //     var max=0;
-    //     for(var e=0;e<this.aristas.length;e++){//calcula el maximo peso de las aristas
-    //         var min=this.aristas[e].value;      
-    //         if(max<min){
-    //             max=min;
-    //         }
-    //     }
-    //     console.log(max);//muestra maximo
-    //     //***************************************** */
-    //     for (var i=0;i<this.aristas.length;i++){
-    //         var k=0;
-    //         while(k<max){
-    //             if(this.aristas[i].from===0){
-    //                 nuevo.push(this.aristas[i]);
-    //                 console.log("nuevo",nuevo[i]);
-    //                 this.aristas[i].pop();
-    //             }
-    //             k++;
-    //         }
-    //         console.log(nuevo.values);
-    //     }
-    //     for (var j=0;j<nuevo.length;i++){
-    //         menor = nuevo[j].value;
-    //         mayor = nuevo[j++].value;
-    //         if(mayor < menor){
-    //             menor=mayor;
-    //             camino.push(menor);
-    //         }
-    //     }
-    //     //console.log("camino",camino.values);
-    // },
     kruskal: function kruskal() {//Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
     },
     flujoMaximo: function flujoMaximo() {
@@ -3039,7 +2978,7 @@ __webpack_require__.r(__webpack_exports__);
       return acumulado;
     },
     camino: function camino() {},
-    multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //funcionando Multiplica 
+    multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //Multiplica 
     {
       var res = [];
       var sum = 0;
@@ -3049,27 +2988,22 @@ __webpack_require__.r(__webpack_exports__);
         res[i] = new Array(matrizA.length);
       }
 
-      for (var a = 0; a < matrizB.length; a++) // recorre columnas matrizB
-      {
-        for (var i = 0; i < matrizA.length; i++) // recorre filas de matrizA
-        {
+      for (var a = 0; a < matrizB.length; a++) {
+        for (var i = 0; i < matrizA.length; i++) {
           sum = 0;
 
-          for (var j = 0; j < matrizA.length; j++) //recorre columnas matrizA
-          {
+          for (var j = 0; j < matrizA.length; j++) {
             sum += matrizA[i][j] * matrizB[j][a];
           }
 
           res[i][a] = sum;
         }
-      } //console.log(res); //comentar
-
+      }
 
       return res;
     },
-    potencia: function potencia(matriz, largo) //funcionando, eleva una matriz a una potencia que corresponde a su largo-1
+    potencia: function potencia(matriz, largo) //eleva una matriz a una potencia que corresponde a su largo-1
     {
-      //var largo = this.nodos.length-1;
       var sum = 0;
       var aux = matriz;
       var res;
@@ -3088,7 +3022,6 @@ __webpack_require__.r(__webpack_exports__);
       this.matrixCaminos = this.sumaMat();
     },
     sumaMat: function sumaMat() {
-      // Funcionando! .Funcion que retorna la suma de las matrices para generar la matriz de caminos
       //sumar matriz adyacencia + matriz adyacencia^(n-1) + mariz identidad 
       var matrizId = this.matrizIdentidad();
       var matrizAd = this.matrizAdyacencia();
@@ -101318,8 +101251,8 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _vm.option === 2
-              ? _c("div", { staticClass: "mr-3 mt-3" }, [
-                  _c("div", { staticClass: "ml-2" }, [
+              ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
+                  _c("div", [
                     _c("h3", { staticClass: "mt-2" }, [
                       _vm._v("Grafo simple dirigido")
                     ]),
@@ -101532,8 +101465,8 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _vm.option === 3
-              ? _c("div", { staticClass: "mr-3 mt-3" }, [
-                  _c("div", { staticClass: "ml-2" }, [
+              ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
+                  _c("div", [
                     _c("h3", { staticClass: "mt-2" }, [
                       _vm._v("Grafo Dirigido Etiquetado")
                     ]),
@@ -101786,8 +101719,8 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _vm.option === 4
-              ? _c("div", { staticClass: "mr-3 mt-3" }, [
-                  _c("div", { staticClass: "ml-2" }, [
+              ? _c("div", { staticClass: "container-fluid py-4 mr-4" }, [
+                  _c("div", [
                     _c("h3", { staticClass: "mt-2" }, [
                       _vm._v("Grafo No Dirigido Etiquetado")
                     ]),
@@ -102133,41 +102066,80 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "container" }, [
-                  _vm._v(
-                    "\n                    CASO 1: MATRIZ DE CAMINOS Adyacencia^(n-1)\n                    "
-                  ),
-                  _c(
-                    "div",
-                    { staticClass: "container mb-2" },
-                    _vm._l(_vm.matrixCaminos, function(item, index) {
-                      return _c(
-                        "div",
-                        { key: index },
-                        _vm._l(item, function(indice, lalacaminos) {
-                          return _c(
-                            "div",
-                            { key: lalacaminos, staticClass: "d-inline-block" },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "d-inline-block bg-dark pl-2",
-                                  staticStyle: {
-                                    width: "40px",
-                                    height: "40px",
-                                    "font-size": "25px"
-                                  }
-                                },
-                                [_vm._v(_vm._s(indice))]
-                              )
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    }),
-                    0
-                  )
+                  _c("div", { staticClass: "container my-3" }, [
+                    _vm._v(
+                      "\n                        La matriz de caminos se obtiene a partir de la siguiente formula: "
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c(
+                          "h4",
+                          {
+                            staticClass: "text-center fredoka textocolor my-3"
+                          },
+                          [_vm._v("Matriz de Adyacencia")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "table",
+                          { staticClass: "table table-dark text-center" },
+                          _vm._l(_vm.Adyacencia, function(item, index) {
+                            return _c(
+                              "tr",
+                              { key: index },
+                              _vm._l(item, function(indice, indiceAdyacencia) {
+                                return _c("td", { key: indiceAdyacencia }, [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(indice) +
+                                      "\n                                        "
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c(
+                          "h4",
+                          {
+                            staticClass: "text-center fredoka textocolor my-3"
+                          },
+                          [_vm._v("Matriz de caminos")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "table",
+                          { staticClass: "table table-dark text-center" },
+                          _vm._l(_vm.matrixCaminos, function(item, index) {
+                            return _c(
+                              "tr",
+                              { key: index },
+                              _vm._l(item, function(indice, indicecaminos) {
+                                return _c("td", { key: indicecaminos }, [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(indice) +
+                                      "\n                                        "
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ])
                 ])
               ]
             )
@@ -102225,7 +102197,7 @@ var render = function() {
                             _vm.euler
                               ? _c("div", [
                                   _vm._v(
-                                    "\n                                    Este grafo es Euleriano.\n                                    \n                                    "
+                                    "\n                                    Este grafo es Euleriano.\n                                    "
                                   ),
                                   _c("div", { staticClass: "form-group" }, [
                                     _c(
@@ -102285,9 +102257,8 @@ var render = function() {
                               : !_vm.euler
                               ? _c("div", [
                                   _vm._v(
-                                    "\n                                    Este grafo no es Euleriano.\n\n                                     \n                                    \n                                    "
-                                  ),
-                                  _c("div")
+                                    "\n                                    Este grafo no es Euleriano.\n                                "
+                                  )
                                 ])
                               : _vm._e()
                           ])
@@ -102412,6 +102383,18 @@ var staticRenderFns = [
         staticStyle: { border: "1px solid lightgray" },
         attrs: { id: "grafo" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center my-3" }, [
+      _c("b", [
+        _vm._v(
+          "Matriz de caminos = Matriz Identidad + Matriz Adyacencia + Matriz Adyacencia^2 + ... + Matriz Adyacencia^(n-1)"
+        )
+      ])
     ])
   }
 ]
@@ -115414,8 +115397,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
