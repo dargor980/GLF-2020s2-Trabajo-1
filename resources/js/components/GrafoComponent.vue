@@ -350,18 +350,19 @@ export default {
     data(){
         return{
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
-            nodo:{id:'', label:'', color:'#ff0000'},
+            nodo:{id:'', label:'',color:'#C52C0B'},
             arista:{from:'',to:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}},  //arista  no dirigida
             aristaDirigido:{from:'', to:'', color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista e dirigida
             aristaEtiquetada:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista  etiquetada no dirigida
             aristaEtiquetadaDirigida:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista etiquetada dirigida.
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'},{from:'7',to:'7',value:'1'}],
+            aristas:[{from:'1',to:'2',label:'1'},{from:'1',to:'3',label:'1'},{from:'1',to:'4',label:'1'},{from:'1',to:'5',label:'1'},{from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'1'},{from:'3',to:'4',label:'1'},{from:'3',to:'5',label:'1'},{from:'3',to:'6',label:'1'},{from:'3',to:'7',label:'1'},{from:'3',to:'8',label:'1'},{from:'4',to:'7',label:'1'},{from:'4',to:'8',label:'1'},{from:'5',to:'6',label:'1'},{from:'5',to:'7',label:'1'},{from:'6',to:'7',label:'1'},{from:'7',to:'8',label:'1'},{from:'7',to:'7',label:'1'}],
             matrixCaminos:[],
             euler:'',
             hamilton:[],
             eleccion:'',
+            matrizcostos:[],
             
 
 
@@ -389,7 +390,7 @@ export default {
         //this.eliminarGrafo();
         //this.caminoCorto2();
         //this.isHamiltoniano()
-        
+        this.matrizcostos=this.matrizCostos();
     },
 
     
@@ -472,7 +473,7 @@ export default {
             }
             this.nodo.label=this.nodo.id;
             this.nodos.push(this.nodo);
-            this.nodo={id:'', label:'',color:'#ff0000'}
+            this.nodo={id:'', label:'',color:'#C52C0B'}
             this.drawGrafo();
             for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
@@ -899,7 +900,25 @@ export default {
             return false;
         },
 
-        
+        matrizCostos(){
+            let matrix=this.crearMatriz()
+            for(var i=0; i<this.nodos.length; i++)
+            {
+                for(var j=0; j<this.nodos.length;j++)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+            for(var i=0; i<this.aristas.length;i++)
+            {
+                var n1=this.aristas[i].from;
+                var n2=this.aristas[i].to;
+                matrix[n1-1][n2-1]=parseInt(this.aristas[i].label);
+            }
+            console.log(matrix);
+            return matrix;
+
+        },
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
             var vertices= this.nodos;

@@ -2262,7 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
       nodo: {
         id: '',
         label: '',
-        color: '#ff0000'
+        color: '#C52C0B'
       },
       arista: {
         from: '',
@@ -2338,80 +2338,81 @@ __webpack_require__.r(__webpack_exports__);
       aristas: [{
         from: '1',
         to: '2',
-        value: '1'
+        label: '1'
       }, {
         from: '1',
         to: '3',
-        value: '1'
+        label: '1'
       }, {
         from: '1',
         to: '4',
-        value: '1'
+        label: '1'
       }, {
         from: '1',
         to: '5',
-        value: '1'
+        label: '1'
       }, {
         from: '2',
         to: '3',
-        value: '1'
+        label: '1'
       }, {
         from: '2',
         to: '4',
-        value: '1'
+        label: '1'
       }, {
         from: '3',
         to: '4',
-        value: '1'
+        label: '1'
       }, {
         from: '3',
         to: '5',
-        value: '1'
+        label: '1'
       }, {
         from: '3',
         to: '6',
-        value: '1'
+        label: '1'
       }, {
         from: '3',
         to: '7',
-        value: '1'
+        label: '1'
       }, {
         from: '3',
         to: '8',
-        value: '1'
+        label: '1'
       }, {
         from: '4',
         to: '7',
-        value: '1'
+        label: '1'
       }, {
         from: '4',
         to: '8',
-        value: '1'
+        label: '1'
       }, {
         from: '5',
         to: '6',
-        value: '1'
+        label: '1'
       }, {
         from: '5',
         to: '7',
-        value: '1'
+        label: '1'
       }, {
         from: '6',
         to: '7',
-        value: '1'
+        label: '1'
       }, {
         from: '7',
         to: '8',
-        value: '1'
+        label: '1'
       }, {
         from: '7',
         to: '7',
-        value: '1'
+        label: '1'
       }],
       matrixCaminos: [],
       euler: '',
       hamilton: [],
       eleccion: '',
+      matrizcostos: [],
 
       /*variables de control */
       addgrafo: false,
@@ -2422,7 +2423,8 @@ __webpack_require__.r(__webpack_exports__);
       arregloEuleriano: []
     };
   },
-  created: function created() {//this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
+  created: function created() {
+    //this.matrizAdyacencia(this.nodos.length,this.aristas.length); //test de función
     //this.sumaMat();
     //this.matrizIdentidad();
     //let a = this.matrizAdyacencia();
@@ -2435,6 +2437,7 @@ __webpack_require__.r(__webpack_exports__);
     //this.eliminarGrafo();
     //this.caminoCorto2();
     //this.isHamiltoniano()
+    this.matrizcostos = this.matrizCostos();
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -2515,7 +2518,7 @@ __webpack_require__.r(__webpack_exports__);
       this.nodo = {
         id: '',
         label: '',
-        color: '#ff0000'
+        color: '#C52C0B'
       };
       this.drawGrafo();
 
@@ -2947,6 +2950,24 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return false;
+    },
+    matrizCostos: function matrizCostos() {
+      var matrix = this.crearMatriz();
+
+      for (var i = 0; i < this.nodos.length; i++) {
+        for (var j = 0; j < this.nodos.length; j++) {
+          matrix[i][j] = 0;
+        }
+      }
+
+      for (var i = 0; i < this.aristas.length; i++) {
+        var n1 = this.aristas[i].from;
+        var n2 = this.aristas[i].to;
+        matrix[n1 - 1][n2 - 1] = parseInt(this.aristas[i].label);
+      }
+
+      console.log(matrix);
+      return matrix;
     },
     caminoCorto: function caminoCorto(nodo_inicial) {
       //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
@@ -115544,8 +115565,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
