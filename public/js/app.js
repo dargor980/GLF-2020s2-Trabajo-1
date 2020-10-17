@@ -2384,11 +2384,11 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         from: '3',
         to: '5',
-        label: '1'
+        label: '0'
       }, {
         from: '3',
         to: '6',
-        label: '1'
+        label: '2'
       }, {
         from: '3',
         to: '7',
@@ -2404,15 +2404,15 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         from: '4',
         to: '8',
-        label: '1'
+        label: '5'
       }, {
         from: '5',
         to: '6',
-        label: '1'
+        label: '2'
       }, {
         from: '5',
         to: '7',
-        label: '1'
+        label: '4'
       }, {
         from: '6',
         to: '7',
@@ -2443,7 +2443,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.kruskal();
+    //this.kruskal()
+    //this.matrizCostos()
+    this.caminoCorto2(1);
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -2690,13 +2692,9 @@ __webpack_require__.r(__webpack_exports__);
       console.log(matrix);
       return matrix;
     },
-    matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido() {
-      //Función que genera la matriz de adyacencias de un grafo simple Dirigido.
-      var matrix = [];
-
-      for (var i = 0; i < this.nodos.length; i++) {
-        matrix[i] = new Array(this.nodos.length);
-      }
+    matrizAdyacenciaDirigido: function matrizAdyacenciaDirigido() //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
+    {
+      var matrix = this.crearMatriz();
 
       for (var i = 0; i < this.nodos.length; i++) {
         for (var j = 0; j < this.nodos.length; j++) {
@@ -2934,7 +2932,7 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.nodos.length; i++) {
         for (var j = 0; j < this.nodos.length; j++) {
-          matrix[i][j] = 0;
+          matrix[i][j] = null;
         }
       }
 
@@ -2942,7 +2940,14 @@ __webpack_require__.r(__webpack_exports__);
         var n1 = this.aristas[i].from;
         var n2 = this.aristas[i].to;
         matrix[n1 - 1][n2 - 1] = parseInt(this.aristas[i].label);
-      }
+      } // for(var j=0; j<this.nodos.length; j++){
+      //     for(var k =0; k<this.nodos.length;k++){
+      //         if (matrix[j][k]==0){
+      //             matrix[j][k]=null
+      //         }
+      //     }
+      // }
+
 
       console.log(matrix);
       return matrix;
@@ -2972,6 +2977,87 @@ __webpack_require__.r(__webpack_exports__);
 
             vertices.splice(i, 1);
           }
+        }
+      }
+    },
+    caminoCorto2: function caminoCorto2(id_nodo) {
+      var matrix = this.matrizCostos();
+      var nodosNoVisitados = this.nodos;
+      console.log(this.nodos[0].id);
+      var nodosVisitados = [];
+      var distancias = [];
+      var nodoInicio = id_nodo - 1;
+      var sumas = [];
+      var distanciaAcumulada = 0;
+      var posicionActual = 0; // console.log("aqui1");
+      //console.log("no visitados",nodosNoVisitados[0].id);
+
+      var con = 0;
+
+      while (con < this.nodos.length) {
+        for (var i = nodoInicio; i < this.nodos.length; i++) {
+          distancias = []; // console.log("aqui2");
+
+          for (var j = 0; j < this.nodos.length; j++) {
+            // console.log("aqui3");
+            if (matrix[i][j] != null) {
+              // console.log("aqui4");
+              distancias.push(matrix[i][j]); //posicion.push(j)
+            }
+          }
+
+          console.log("distancias nodo", i, " ", distancias); //console.log("posicion",posicion);
+
+          if (distancias.length > 0) {
+            var aux = 0;
+            var menor = 0;
+
+            for (var k = 0; k < distancias.length; k++) {
+              if (distancias[aux] >= distancias[k]) {
+                menor = distancias[k]; //posicionActual = posicion[k]
+              }
+            }
+
+            sumas.push(menor);
+          }
+
+          for (var j = 0; j < this.nodos.length; j++) {
+            if (matrix[i][j] == menor) {
+              posicionActual = j;
+            }
+          }
+
+          console.log("menor", menor);
+          console.log("posicionActual", posicionActual); //console.log("no visitados",nodosNoVisitados);
+          //i=posicionActual-1
+          //nodosVisitados.push(nodosNoVisitados[i])
+          //console.log("no visitados",nodosNoVisitados[i].id);
+
+          console.log("sumas", sumas);
+        } // if(nodosNoVisitados[i].id==i){
+        //         nodosVisitados.push(nodosNoVisitados[i])
+        //         console.log("visitados",nodosVisitados);
+        //         nodosNoVisitados.splice(i,1)
+        // }
+
+
+        con++;
+      }
+
+      for (var i = 0; i < sumas.length; i++) {
+        distanciaAcumulada = distanciaAcumulada + sumas[i];
+      }
+
+      console.log("acumulada", distanciaAcumulada); // var distanciaAnterior =0
+      // if(distanciaAcumulada>=distanciaAnterior){
+      //     distanciaAcumulada=distanciaAnterior
+      // }
+    },
+    verificarVisitados: function verificarVisitados(noVisitados, visitados, j) {
+      for (var i = 0; i < this.nodos.length; i++) {
+        if (noVisitados[i].id == j) {
+          visitados.push(noVisitados[i]);
+          noVisitados[i].pop();
         }
       }
     },
@@ -120979,8 +121065,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

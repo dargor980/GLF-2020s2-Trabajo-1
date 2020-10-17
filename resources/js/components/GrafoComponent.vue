@@ -373,7 +373,7 @@ export default {
             aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'4',value:'1'},{from:'2',to:'3',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'}],
              */
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            aristas:[{from:'1',to:'2',label:'5'},{from:'1',to:'3',label:'12'},{from:'1',to:'4',label:'3'},{from:'1',to:'5',label:'1'},{from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'11'},{from:'3',to:'4',label:'7'},{from:'3',to:'5',label:'1'},{from:'3',to:'6',label:'1'},{from:'3',to:'7',label:'1'},{from:'3',to:'8',label:'1'},{from:'4',to:'7',label:'8'},{from:'4',to:'8',label:'1'},{from:'5',to:'6',label:'1'},{from:'5',to:'7',label:'1'},{from:'6',to:'7',label:'3'},{from:'7',to:'8',label:'1'},{from:'7',to:'7',label:'2'}],
+            aristas:[{from:'1',to:'2',label:'5'},{from:'1',to:'3',label:'12'},{from:'1',to:'4',label:'3'},{from:'1',to:'5',label:'1'},{from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'11'},{from:'3',to:'4',label:'7'},{from:'3',to:'5',label:'0'},{from:'3',to:'6',label:'2'},{from:'3',to:'7',label:'1'},{from:'3',to:'8',label:'1'},{from:'4',to:'7',label:'8'},{from:'4',to:'8',label:'5'},{from:'5',to:'6',label:'2'},{from:'5',to:'7',label:'4'},{from:'6',to:'7',label:'3'},{from:'7',to:'8',label:'1'},{from:'7',to:'7',label:'2'}],
             matrixCaminos:[],
             euler:'',
             hamilton:[],
@@ -393,7 +393,9 @@ export default {
         }
     }, 
     created(){
-        this.kruskal()
+        //this.kruskal()
+        //this.matrizCostos()
+        this.caminoCorto2(1)
     },
 
     
@@ -594,7 +596,6 @@ export default {
             this.controlanalisis=5;
         },
 
-        
         matrizAdyacencia(){  // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
             let matrix=[]; 
             var n = this.nodos.length;
@@ -619,13 +620,13 @@ export default {
             return matrix;        
         },
 
-        matrizAdyacenciaDirigido(){   //Función que genera la matriz de adyacencias de un grafo simple Dirigido.
-            let matrix=[];
-            for(var i=0; i<this.nodos.length; i++){
-                matrix[i]=new Array(this.nodos.length);
-            }
-            for(var i=0; i<this.nodos.length; i++){
-                for(var j=0; j<this.nodos.length;j++){
+        matrizAdyacenciaDirigido()   //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
+        {
+            let matrix=this.crearMatriz()
+            for(var i=0; i<this.nodos.length; i++)
+            {
+                for(var j=0; j<this.nodos.length;j++)
+                {
                     matrix[i][j]=0;
                 }
             }
@@ -852,7 +853,7 @@ export default {
             {
                 for(var j=0; j<this.nodos.length;j++)
                 {
-                    matrix[i][j]=0;
+                    matrix[i][j]=null;
                 }
             }
             for(var i=0; i<this.aristas.length;i++)
@@ -861,6 +862,13 @@ export default {
                 var n2=this.aristas[i].to;
                 matrix[n1-1][n2-1]=parseInt(this.aristas[i].label);
             }
+            // for(var j=0; j<this.nodos.length; j++){
+            //     for(var k =0; k<this.nodos.length;k++){
+            //         if (matrix[j][k]==0){
+            //             matrix[j][k]=null
+            //         }
+            //     }
+            // }
             console.log(matrix);
             return matrix;
         },
@@ -895,6 +903,89 @@ export default {
             }
         },
     
+        caminoCorto2(id_nodo){
+            var matrix = this.matrizCostos()
+            var nodosNoVisitados = this.nodos
+            console.log(this.nodos[0].id);
+            var nodosVisitados = []
+            var distancias = []
+            var nodoInicio = id_nodo-1
+            var sumas = []
+            var distanciaAcumulada=0
+            var posicionActual=0
+            // console.log("aqui1");
+            //console.log("no visitados",nodosNoVisitados[0].id);
+            var con=0
+            while(con<this.nodos.length){
+                for (var i = nodoInicio; i <this.nodos.length; i++){
+                    distancias=[]
+                    // console.log("aqui2");
+                    for (var j = 0; j<this.nodos.length; j++ ){
+                            // console.log("aqui3");
+                            if(matrix[i][j]!=null){
+                                // console.log("aqui4");
+                                distancias.push(matrix[i][j])
+                                //posicion.push(j)
+                            }
+                    }
+                    console.log("distancias nodo",i," ",distancias);
+                    //console.log("posicion",posicion);
+                    if(distancias.length > 0){
+                        var aux = 0
+                        var menor = 0
+                        for(var k=0; k < distancias.length ; k++){
+                            if (distancias[aux]>=distancias[k]){
+                                menor = distancias[k]
+                                //posicionActual = posicion[k]
+                            }
+                        }
+                        sumas.push(menor)    
+                    }
+                    for(var j=0;j<this.nodos.length;j++){
+                        if(matrix[i][j]==menor){
+                            posicionActual=j
+                        }
+                    }
+
+                    console.log("menor",menor);
+                    console.log("posicionActual",posicionActual);
+                    //console.log("no visitados",nodosNoVisitados);
+                    //i=posicionActual-1
+                    //nodosVisitados.push(nodosNoVisitados[i])
+                    //console.log("no visitados",nodosNoVisitados[i].id);
+                    
+                    console.log("sumas",sumas);
+                }
+                // if(nodosNoVisitados[i].id==i){
+                //         nodosVisitados.push(nodosNoVisitados[i])
+                //         console.log("visitados",nodosVisitados);
+                //         nodosNoVisitados.splice(i,1)
+                // }
+                con++
+
+            }
+            
+            for(var i=0; i<sumas.length; i++){
+                distanciaAcumulada=distanciaAcumulada + sumas[i]
+            }
+            console.log("acumulada",distanciaAcumulada);
+            // var distanciaAnterior =0
+            // if(distanciaAcumulada>=distanciaAnterior){
+            //     distanciaAcumulada=distanciaAnterior
+
+            // }
+        },
+
+        verificarVisitados(noVisitados,visitados,j){
+            for(var i=0; i<this.nodos.length;i++){
+                if(noVisitados[i].id==j){
+                    visitados.push(noVisitados[i])
+                    noVisitados[i].pop()
+                }
+            }
+        },
+
+
 /*
         kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
             var agm = [];
@@ -1119,5 +1210,6 @@ export default {
 
 
     },
+
 }
 </script>
