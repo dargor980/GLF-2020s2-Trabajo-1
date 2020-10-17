@@ -63,13 +63,62 @@
                                     <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
                                 </form>
                             </div>
-                            <!--/implementación preliminar. Modificar estilos --> 
-                            <div class="col-md-5 card cardaux mr-3" v-if="option===2">
-                                <div>
-                                    <h3> opcion 2</h3>
+                        </div>
+                         <!--/implementación preliminar. Modificar estilos --> 
+                            <div class="mr-3 mt-3" v-if="option===2">
+                                <div class="ml-2">
+                                    <h3 class="mt-2">Grafo simple dirigido</h3> 
+                                    <hr>
+                                    <div class="row text-center">
+                                        <div class="col-md-4">
+                                            <button class="btn btn-success" @click="createNode">Añadir nodo</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
+                                        </div>
+                                    </div>
+
+                                        <div v-if="create" class="my-3">
+                                            <div>
+                                                <form @submit.prevent="crearNodo">
+                                                    <div class="form-group">
+                                                        <label for="id">ingrese el id: </label> 
+                                                        <input type="number" min="1" v-model="nodo.id" name="id" class="form-control"> 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="label">ingrese nombre:</label> 
+                                                        <input type="text" v-model="nodo.label" name="label" class="form-control"> 
+                                                    </div>
+
+                                                    <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                                                </form>       
+                                            </div>
+                                        </div>
+
+                                        <div v-if="createAris" class="my-3">
+                                            <form @submit.prevent="crearArista">
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo desde el cual sale la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaDirigido.from" class="form-control"> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingrese nodo al cual llega la arista:</label>
+                                                    <input type="number" min="1" v-model="aristaDirigido.to" class="form-control"> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ingrese el peso de la arista: </label>
+                                                    <input type="number" min="0" v-model="aristaDirigido.value" class="form-control">  <!--peso de la arista en caso de ser etiquetado  -->
+                                                </div>
+                                        
+                                                <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
+                                                <button class="btn btn-success btn-sm" @click="drawGrafo">dibujar</button>
+                                            </form>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="grafo1 col-md-5 card cardaux ml-3">
@@ -209,6 +258,7 @@ export default {
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
             nodo:{id:'', label:''},
             arista:{from:'',to:'',value:''},
+            aristaDirigido:{from:'', to:'', value:''},
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
             aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
@@ -261,10 +311,6 @@ export default {
             this.drawGrafo();
         },
         
-        selectGrafo()
-        {
-
-        },
 
         drawGrafo(){  //función que toma los nodos y aristas y procede a graficarlos en el container
             var container= document.getElementById("grafo");
@@ -276,6 +322,20 @@ export default {
             var network= new vis.Network(container,data,options);
             var djasd = this.matrizAdyacencia()
             console.log(djasd);
+        },
+
+        drawGrafoDirigido(){
+            var container= document.getElementById("grafo");
+            var data= {nodes:this.nodos,
+                       edges:this.aristas};
+            var options ={
+                height: 520 + 'px',
+                edges:{
+                    arrows:'to',
+                }
+            }
+            var network= new vis.Network(container,data,options);
+            
         },
 
         createNode()  //funcion para el control del flujo de vistas 
@@ -316,22 +376,49 @@ export default {
         
         crearArista(){ // agrega conexion entre nodos
 
-            if(this.arista.from==='' || this.arista.to==='') //verifica que los extremos de la arista no estén vacíos.
+            if(this.option===1)
             {
-                alert('Debe ingresar los extremos de la arista.');
-                return;
-            }
-            for(var i=0; i<this.aristas.length;i++)
-            {
-                if(this.arista.from===this.aristas[i].from && this.arista.to===this.aristas[i].to)
+
+                if(this.arista.from==='' || this.arista.to==='') //verifica que los extremos de la arista no estén vacíos.
                 {
-                    alert('ya existe la arista. Igrese otra');
+                    alert('Debe ingresar los extremos de la arista.');
                     return;
                 }
+                for(var i=0; i<this.aristas.length;i++)
+                {
+                    if(this.arista.from===this.aristas[i].from && this.arista.to===this.aristas[i].to)
+                    {
+                        alert('ya existe la arista. Igrese otra');
+                        return;
+                    }
+                }
+                this.aristas.push(this.arista);
+                this.arista={from:'',to:'',value:'0'}
+                this.drawGrafo();
             }
-            this.aristas.push(this.arista);
-            this.arista={from:'',to:'',value:'0'}
-            this.drawGrafo();
+            
+            if(this.option===2)
+            {
+                if(this.aristaDirigido.from==='' || this.aristaDirigido.to==='')
+                {
+                    alert('Debe ingresar los extremos de la arista.');
+                    return;
+                }
+                for(var i=0; i<this.aristas.length;i++)
+                {
+                    if(this.aristaDirigido.from===this.aristas[i].from && this.aristaDirigido.to === this.aristas[i].to)
+                    {
+                        alert('ya existe la arista. Igrese otra');
+                        return;
+                    }
+                }
+                this.aristas.push(this.aristaDirigido);
+                this.aristaDirigido={from:'', to:'', arrows:'to'};
+                this.drawGrafoDirigido();
+                var ady= this.matrizAdyacenciaDirigido();
+                console.log(ady);
+            }
+            
             for(var i=0;i<this.aristas.length;i++) // test de la funcion 
             {
                 // console.log(this.aristas[i].from); // desde donde sale la aritsa
@@ -388,25 +475,24 @@ export default {
                 matrix[n2-1][n1-1]=1;
             } 
             console.log(matrix);
-            return matrix;
-            
+            return matrix;        
         },
 
-        matrizAdyacenciaDirigido(n,e)   //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
+        matrizAdyacenciaDirigido()   //FUnción que genera la matriz de adyacencias de un grafo simple Dirigido.
         {
             let matrix=[];
-            for(var i=0; i<n; i++)
+            for(var i=0; i<this.nodos.length; i++)
             {
-                matrix[i]=new Array(n);
+                matrix[i]=new Array(this.nodos.length);
             }
-            for(var i=0; i<n; i++)
+            for(var i=0; i<this.nodos.length; i++)
             {
-                for(var j=0; j<n;j++)
+                for(var j=0; j<this.nodos.length;j++)
                 {
-                    matriz[i][j]=0;
+                    matrix[i][j]=0;
                 }
             }
-            for(var i=0; i<e;i++)
+            for(var i=0; i<this.aristas.length;i++)
             {
                 var n1=this.aristas[i].from;
                 var n2=this.aristas[i].to;
