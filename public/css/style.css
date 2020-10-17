@@ -108,5 +108,7 @@ a:hover{
 
 .info{
     background-color: rgba(108,117,125,1.0);
+    border-color:  #090e11;
+    color: #e7e7e7;
 }
 
