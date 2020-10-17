@@ -147,7 +147,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Ingrese el peso de la arista: </label>
-                                                    <input type="number" v-model="aristaEtiquetadaDirigida.value" class="form-control">
+                                                    <input type="number" v-model="aristaEtiquetadaDirigida.label" class="form-control">
                                                 </div>
                                         
                                                 <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
@@ -163,7 +163,7 @@
                             <!--OPCION 4: GRAFO NO DIRIGIDO ETIQUETADO-->
                             <div class="mr-3 mt-3" v-if="option===4">
                                 <div class="ml-2">
-                                    <h3 class="mt-2">Grafo Dirigido no Etiquetado</h3>
+                                    <h3 class="mt-2">Grafo No Dirigido Etiquetado</h3>
                                     <hr>
 
                                         <div class="row text-center">
@@ -201,7 +201,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Ingrese el peso de la arista: </label>
-                                                    <input type="number" v-model="aristaEtiquetada.value" class="form-control">
+                                                    <input type="number" v-model="aristaEtiquetada.label" class="form-control">
                                                 </div>
                                         
                                                 <button class="btn btn-success btn-sm" type="submit" >Agregar</button>
@@ -350,11 +350,11 @@ export default {
     data(){
         return{
             /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
-            nodo:{id:'', label:''},
-            arista:{from:'',to:''},  //arista  no dirigida
-            aristaDirigido:{from:'', to:''}, //arista e dirigida
-            aristaEtiquetada:{from:'', to:'', value:''}, //arista  etiquetada no dirigida
-            aristaEtiquetadaDirigida:{from:'', to:'', value:''}, //arista etiquetada dirigida.
+            nodo:{id:'', label:'', color:'#ff0000'},
+            arista:{from:'',to:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}},  //arista  no dirigida
+            aristaDirigido:{from:'', to:'', color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista e dirigida
+            aristaEtiquetada:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista  etiquetada no dirigida
+            aristaEtiquetadaDirigida:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista etiquetada dirigida.
 
             nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
             aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
@@ -428,7 +428,7 @@ export default {
                 height: 520 + 'px',
                 edges:{
                     arrows:'to',
-                }
+                },
             }
             var network= new vis.Network(container,data,options);
             
@@ -474,7 +474,7 @@ export default {
             }
             this.nodo.label=this.nodo.id;
             this.nodos.push(this.nodo);
-            this.nodo={id:'', label:''}
+            this.nodo={id:'', label:'',color:'#ff0000'}
             this.drawGrafo();
             for(var i=0;i<this.nodos.length;i++) // test de la funcion 
             {
@@ -502,7 +502,7 @@ export default {
                     }
                 }
                 this.aristas.push(this.arista);
-                this.arista={from:'',to:'',value:'0'}
+                this.arista={from:'',to:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}};
                 this.drawGrafo();
             }
             
@@ -522,7 +522,7 @@ export default {
                     }
                 }
                 this.aristas.push(this.aristaDirigido);
-                this.aristaDirigido={from:'', to:'', arrows:'to'};
+                this.aristaDirigido={from:'', to:'', color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}};
                 this.drawGrafoDirigido();
                 var ady= this.matrizAdyacenciaDirigido();
                 console.log(ady);
@@ -530,7 +530,7 @@ export default {
 
             if(this.option===3)
             {
-                if(this.aristaEtiquetadaDirigida.from==='' || this.aristaEtiquetadaDirigida.to==='' || this.aristaEtiquetadaDirigida.value==='')
+                if(this.aristaEtiquetadaDirigida.from==='' || this.aristaEtiquetadaDirigida.to==='' || this.aristaEtiquetadaDirigida.label==='')
                 {
                     alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
                     return;
@@ -542,17 +542,18 @@ export default {
                         alert("La arista ya existe. Ingrese otra");
                         return;
                     }
-                    this.aristas.push(this.aristaEtiquetadaDirigida);
-                    this.aristaEtiquetadaDirigida={from:'', to:'', value:'', arrows:'to'};
-                    this.drawGrafoDirigido();
-                    var ady= this.matrizAdyacenciaDirigido();
-                    console.log(ady);  //muestra la matriz de adyacencia
+                    
                 }
+                this.aristas.push(this.aristaEtiquetadaDirigida);
+                this.aristaEtiquetadaDirigida={from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}};
+                this.drawGrafoDirigido();
+                var ady= this.matrizAdyacenciaDirigido();
+                console.log(ady);  //muestra la matriz de adyacencia
             }
 
             if(this.option===4)
             {
-                if(this.aristaEtiquetada.from==='' || this.aristaEtiquetada.to==='' || this.aristaEtiquetada.value==='')
+                if(this.aristaEtiquetada.from==='' || this.aristaEtiquetada.to==='' || this.aristaEtiquetada.label==='')
                 {
                     alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
                     return;
@@ -564,12 +565,13 @@ export default {
                         alert("La arista ya existe. Ingrese otra");
                         return;
                     }
-                    this.aristas.push(this.aristaEtiquetada);
-                    this.aristaEtiquetada={from:'', to:'', value:''};
-                    this.drawGrafoEtiquetadoNoDirigido();
-                    var ady=this.matrizAdyacencia();
-                    console.log(ady); //impresion de la matriz adyacencia.
+                    
                 }
+                this.aristas.push(this.aristaEtiquetada);
+                this.aristaEtiquetada={from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}};
+                this.drawGrafoEtiquetadoNoDirigido();
+                var ady=this.matrizAdyacencia();
+                console.log(ady); //impresion de la matriz adyacencia.
 
             }
             

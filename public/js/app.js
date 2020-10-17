@@ -2261,28 +2261,53 @@ __webpack_require__.r(__webpack_exports__);
       /*Variables que almacenan los datos del grafo (nodos, aristas y sus respectivos datos) */
       nodo: {
         id: '',
-        label: ''
+        label: '',
+        color: '#ff0000'
       },
       arista: {
         from: '',
-        to: ''
+        to: '',
+        color: {
+          color: 'rgb(0,0,0)'
+        },
+        font: {
+          color: 'rgb(255,255,255)'
+        }
       },
       //arista  no dirigida
       aristaDirigido: {
         from: '',
-        to: ''
+        to: '',
+        color: {
+          color: 'rgb(0,0,0)'
+        },
+        font: {
+          color: 'rgb(255,255,255)'
+        }
       },
       //arista e dirigida
       aristaEtiquetada: {
         from: '',
         to: '',
-        value: ''
+        label: '',
+        color: {
+          color: 'rgb(0,0,0)'
+        },
+        font: {
+          color: 'rgb(255,255,255)'
+        }
       },
       //arista  etiquetada no dirigida
       aristaEtiquetadaDirigida: {
         from: '',
         to: '',
-        value: ''
+        label: '',
+        color: {
+          color: 'rgb(0,0,0)'
+        },
+        font: {
+          color: 'rgb(255,255,255)'
+        }
       },
       //arista etiquetada dirigida.
       nodos: [{
@@ -2487,7 +2512,8 @@ __webpack_require__.r(__webpack_exports__);
       this.nodos.push(this.nodo);
       this.nodo = {
         id: '',
-        label: ''
+        label: '',
+        color: '#ff0000'
       };
       this.drawGrafo();
 
@@ -2516,7 +2542,12 @@ __webpack_require__.r(__webpack_exports__);
         this.arista = {
           from: '',
           to: '',
-          value: '0'
+          color: {
+            color: 'rgb(0,0,0)'
+          },
+          font: {
+            color: 'rgb(255,255,255)'
+          }
         };
         this.drawGrafo();
       }
@@ -2538,7 +2569,12 @@ __webpack_require__.r(__webpack_exports__);
         this.aristaDirigido = {
           from: '',
           to: '',
-          arrows: 'to'
+          color: {
+            color: 'rgb(0,0,0)'
+          },
+          font: {
+            color: 'rgb(255,255,255)'
+          }
         };
         this.drawGrafoDirigido();
         var ady = this.matrizAdyacenciaDirigido();
@@ -2546,7 +2582,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.option === 3) {
-        if (this.aristaEtiquetadaDirigida.from === '' || this.aristaEtiquetadaDirigida.to === '' || this.aristaEtiquetadaDirigida.value === '') {
+        if (this.aristaEtiquetadaDirigida.from === '' || this.aristaEtiquetadaDirigida.to === '' || this.aristaEtiquetadaDirigida.label === '') {
           alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
           return;
         }
@@ -2556,22 +2592,27 @@ __webpack_require__.r(__webpack_exports__);
             alert("La arista ya existe. Ingrese otra");
             return;
           }
-
-          this.aristas.push(this.aristaEtiquetadaDirigida);
-          this.aristaEtiquetadaDirigida = {
-            from: '',
-            to: '',
-            value: '',
-            arrows: 'to'
-          };
-          this.drawGrafoDirigido();
-          var ady = this.matrizAdyacenciaDirigido();
-          console.log(ady); //muestra la matriz de adyacencia
         }
+
+        this.aristas.push(this.aristaEtiquetadaDirigida);
+        this.aristaEtiquetadaDirigida = {
+          from: '',
+          to: '',
+          label: '',
+          color: {
+            color: 'rgb(0,0,0)'
+          },
+          font: {
+            color: 'rgb(255,255,255)'
+          }
+        };
+        this.drawGrafoDirigido();
+        var ady = this.matrizAdyacenciaDirigido();
+        console.log(ady); //muestra la matriz de adyacencia
       }
 
       if (this.option === 4) {
-        if (this.aristaEtiquetada.from === '' || this.aristaEtiquetada.to === '' || this.aristaEtiquetada.value === '') {
+        if (this.aristaEtiquetada.from === '' || this.aristaEtiquetada.to === '' || this.aristaEtiquetada.label === '') {
           alert("extremos de aristas o peso no indicado. Rellene todos los campos antes de continuar");
           return;
         }
@@ -2581,17 +2622,23 @@ __webpack_require__.r(__webpack_exports__);
             alert("La arista ya existe. Ingrese otra");
             return;
           }
-
-          this.aristas.push(this.aristaEtiquetada);
-          this.aristaEtiquetada = {
-            from: '',
-            to: '',
-            value: ''
-          };
-          this.drawGrafoEtiquetadoNoDirigido();
-          var ady = this.matrizAdyacencia();
-          console.log(ady); //impresion de la matriz adyacencia.
         }
+
+        this.aristas.push(this.aristaEtiquetada);
+        this.aristaEtiquetada = {
+          from: '',
+          to: '',
+          label: '',
+          color: {
+            color: 'rgb(0,0,0)'
+          },
+          font: {
+            color: 'rgb(255,255,255)'
+          }
+        };
+        this.drawGrafoEtiquetadoNoDirigido();
+        var ady = this.matrizAdyacencia();
+        console.log(ady); //impresion de la matriz adyacencia.
       }
 
       for (var i = 0; i < this.aristas.length; i++) // test de la funcion 
@@ -101649,15 +101696,15 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.aristaEtiquetadaDirigida.value,
+                                      value: _vm.aristaEtiquetadaDirigida.label,
                                       expression:
-                                        "aristaEtiquetadaDirigida.value"
+                                        "aristaEtiquetadaDirigida.label"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   attrs: { type: "number" },
                                   domProps: {
-                                    value: _vm.aristaEtiquetadaDirigida.value
+                                    value: _vm.aristaEtiquetadaDirigida.label
                                   },
                                   on: {
                                     input: function($event) {
@@ -101666,7 +101713,7 @@ var render = function() {
                                       }
                                       _vm.$set(
                                         _vm.aristaEtiquetadaDirigida,
-                                        "value",
+                                        "label",
                                         $event.target.value
                                       )
                                     }
@@ -101703,7 +101750,7 @@ var render = function() {
               ? _c("div", { staticClass: "mr-3 mt-3" }, [
                   _c("div", { staticClass: "ml-2" }, [
                     _c("h3", { staticClass: "mt-2" }, [
-                      _vm._v("Grafo Dirigido no Etiquetado")
+                      _vm._v("Grafo No Dirigido Etiquetado")
                     ]),
                     _vm._v(" "),
                     _c("hr"),
@@ -101900,14 +101947,14 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.aristaEtiquetada.value,
-                                      expression: "aristaEtiquetada.value"
+                                      value: _vm.aristaEtiquetada.label,
+                                      expression: "aristaEtiquetada.label"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   attrs: { type: "number" },
                                   domProps: {
-                                    value: _vm.aristaEtiquetada.value
+                                    value: _vm.aristaEtiquetada.label
                                   },
                                   on: {
                                     input: function($event) {
@@ -101916,7 +101963,7 @@ var render = function() {
                                       }
                                       _vm.$set(
                                         _vm.aristaEtiquetada,
-                                        "value",
+                                        "label",
                                         $event.target.value
                                       )
                                     }
