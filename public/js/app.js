@@ -2975,41 +2975,34 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    kruskalplantilla: function kruskalplantilla() {
-      //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
-      var agm = [];
 
-      var arbol = _.map(this.nodos, function (nodo) {
-        return [nodo];
-      });
-
-      var aristasSort = _.sortBy(this.aristas, function (arista) {
-        return -parseInt(arista.label);
-      });
-
-      while (arbol.length > 1) {
-        var arista = aristasSort.pop();
-        var n1 = parseInt(arista.from),
-            n2 = parseInt(arista.to);
-
-        var t1 = _.filter(arbol, function (linea) {
-          return _.include(linea, n1);
-        });
-
-        var t2 = _.filter(arbol, function (linea) {
-          return _.include(linea, n2);
-        });
-
-        if (t1 != t2) {
-          arbol = _.without(arbol, t1[0], t2[0]);
-          arbol.push(_.union(t1[0], t2[0]));
-          agm.push(arista);
-        }
-      }
-
-      console.log(agm);
-      return agm;
-    },
+    /*
+            kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
+                var agm = [];
+                var arbol = _.map(this.nodos, function(nodo) { return [nodo]; });
+                var aristasSort = _.sortBy(this.aristas, function(arista) { return -parseInt(arista.label); });
+                while(arbol.length > 1) {
+                    var arista = aristasSort.pop();
+                    var n1 = parseInt(arista.from);
+                    var n2 = parseInt(arista.to);
+    
+                    var t1 = _.filter(arbol, function(linea) {
+                        return _.include(linea, n1);
+                    });
+                        
+                    var t2 = _.filter(arbol, function(linea) {
+                        return _.include(linea, n2);
+                    });
+    
+                    if (t1 != t2) {
+                        arbol = _.without(arbol, t1[0], t2[0]);
+                        arbol.push(_.union(t1[0], t2[0]));
+                        agm.push(arista);
+                    }
+                }
+                console.log(agm)
+                return agm;
+            },  */
     kruskal: function kruskal() {
       var agm = [];
       var vertices = this.nodos;
@@ -3019,6 +3012,34 @@ __webpack_require__.r(__webpack_exports__);
         console.log(element.label);
       });
       this.aristasOrdenadas(aristas1);
+
+      while (vertices.length > 1) {
+        var arista = aristas1.pop();
+        var nodo1 = parseInt(arista.from);
+        console.log("nodo 1", nodo1);
+        var nodo2 = parseInt(arista.to);
+
+        var rama1 = _.filter(vertices, function (linea) {
+          return _.include(linea, nodo1);
+        });
+
+        var rama2 = _.filter(vertices, function (linea) {
+          return _.include(linea, nodo2);
+        });
+
+        if (rama1 != rama2) {
+          console.log('ya entraste u//w//u');
+          vertices = _.without(vertices, rama1.id, rama2.id);
+          vertices.pop(_.union(rama1.id, rama2.id));
+          agm.push(arista);
+        }
+      }
+
+      console.log('arbol generado:');
+      agm.forEach(function (element) {
+        console.log('from:', element.from);
+        console.log('to', element.to);
+      });
     },
     aristasOrdenadas: function aristasOrdenadas(aristas1) {
       aristas1 = _.sortBy(aristas1, function (wea) {
@@ -120958,8 +120979,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

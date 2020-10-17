@@ -863,7 +863,6 @@ export default {
             }
             console.log(matrix);
             return matrix;
-
         },
 
         caminoCorto(nodo_inicial){  //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
@@ -896,15 +895,15 @@ export default {
             }
         },
     
-
+/*
         kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
             var agm = [];
             var arbol = _.map(this.nodos, function(nodo) { return [nodo]; });
             var aristasSort = _.sortBy(this.aristas, function(arista) { return -parseInt(arista.label); });
             while(arbol.length > 1) {
                 var arista = aristasSort.pop();
-                var n1 = parseInt(arista.from),
-                    n2 = parseInt(arista.to);
+                var n1 = parseInt(arista.from);
+                var n2 = parseInt(arista.to);
 
                 var t1 = _.filter(arbol, function(linea) {
                     return _.include(linea, n1);
@@ -922,7 +921,7 @@ export default {
             }
             console.log(agm)
             return agm;
-        },
+        },  */
 
         kruskal(){
             var agm=[];
@@ -933,6 +932,31 @@ export default {
                 console.log(element.label)
             });
             this.aristasOrdenadas(aristas1);
+            while(vertices.length >1)
+            {
+                var arista= aristas1.pop();
+                var nodo1= parseInt(arista.from)
+                console.log("nodo 1",nodo1);
+                var nodo2= parseInt(arista.to)
+
+                var rama1= _.filter(vertices, function(linea){return _.include(linea,nodo1);});
+
+                var rama2= _.filter(vertices, function(linea){return _.include(linea,nodo2);});
+
+                if(rama1 != rama2)
+                {
+                    console.log('ya entraste u//w//u');
+                    vertices= _.without(vertices, rama1.id, rama2.id);
+                    vertices.pop(_.union(rama1.id,rama2.id));
+                    agm.push(arista);
+                }
+            }
+            console.log('arbol generado:');
+            agm.forEach(element => {
+                console.log('from:',element.from);
+                console.log('to',element.to);
+            });
+            
         },
 
         aristasOrdenadas(aristas1){
