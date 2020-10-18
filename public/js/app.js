@@ -2265,6 +2265,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2384,7 +2387,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         from: '3',
         to: '5',
-        label: '0'
+        label: '1'
       }, {
         from: '3',
         to: '6',
@@ -2394,16 +2397,16 @@ __webpack_require__.r(__webpack_exports__);
         to: '7',
         label: '1'
       }, {
-        from: '3',
-        to: '8',
+        from: '8',
+        to: '3',
         label: '1'
       }, {
         from: '4',
         to: '7',
         label: '8'
       }, {
-        from: '4',
-        to: '8',
+        from: '8',
+        to: '4',
         label: '5'
       }, {
         from: '5',
@@ -2418,8 +2421,8 @@ __webpack_require__.r(__webpack_exports__);
         to: '7',
         label: '3'
       }, {
-        from: '7',
-        to: '8',
+        from: '8',
+        to: '7',
         label: '1'
       }, {
         from: '7',
@@ -2433,6 +2436,12 @@ __webpack_require__.r(__webpack_exports__);
       matrizcostos: [],
       Adyacencia: [],
       caminoPrim: [],
+      dij: {
+        vertice1: '',
+        distanciaAcumulada: '',
+        vertice_anterior: '',
+        visitado: ''
+      },
 
       /*variables de control */
       addgrafo: false,
@@ -2444,8 +2453,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.prim(); //this.matrizCostos()
-    //this.caminoCorto2(1)
+    //this.prim()
+    //this.matrizCostos()
+    this.caminoCorto2(1);
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -2939,125 +2949,99 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < this.aristas.length; i++) {
         var n1 = this.aristas[i].from;
         var n2 = this.aristas[i].to;
-        matrix[n1 - 1][n2 - 1] = parseInt(this.aristas[i].label);
-      } // for(var j=0; j<this.nodos.length; j++){
-      //     for(var k =0; k<this.nodos.length;k++){
-      //         if (matrix[j][k]==0){
-      //             matrix[j][k]=null
-      //         }
-      //     }
-      // }
-
+        matrix[n1 - 1][n2 - 1] = parseInt(this.aristas[i].label); //matrix[n2-1][n1-1]=parseInt(this.aristas[i].label);//caso matriz no dirigida
+      }
 
       console.log(matrix);
       return matrix;
     },
-    caminoCorto: function caminoCorto(nodo_inicial) {
-      //Función que analiza el camino mínimo desde un nodo inicial a uno final. Basado en el algoritmo de Dikjstra.
-      var vertices = this.nodos;
-      var distancias = new Array(this.nodos.length);
-      var ady = this.matrizAdyacencia();
-      var x = {
-        distanciaAcumulada: 0,
-        origen: null
-      };
-      var actual = nodo_inicial;
-      var finalizado = [];
-      finalizado.push(nodo_inicial);
-
-      while (vertices.length !== 0) {
-        for (var i = 0; i < this.nodos.length; i++) {
-          for (var j = 0; j < this.nodos.length; j++) {
-            if (ady[i][j] !== null) {
-              x = {
-                distanciaAcumulada: distanciaAcumulada + ady[i][j],
-                origen: actual
-              };
-            }
-
-            vertices.splice(i, 1);
-          }
+    buscarNodoD: function buscarNodoD(idNodo, d) {
+      for (var i = 0; i < d.length; i++) {
+        if (d[i][0] == idNodo) {
+          return i;
         }
       }
     },
-    caminoCorto2: function caminoCorto2(id_nodo) {
-      var matrix = this.matrizCostos();
-      var nodosNoVisitados = this.nodos;
-      console.log(this.nodos[0].id);
-      var nodosVisitados = [];
-      var distancias = [];
-      var nodoInicio = id_nodo - 1;
-      var sumas = [];
-      var distanciaAcumulada = 0;
-      var posicionActual = 0; // console.log("aqui1");
-      //console.log("no visitados",nodosNoVisitados[0].id);
+    caminoCorto2: function caminoCorto2(id_nodo, id_nodo_final) {
+      if (this.conexo()) {
+        //var nodoInicio = id_nodo-1
+        var matrix = this.matrizCostos();
+        var maximo = 0;
+        var dijs = [];
+        var visitados = [];
 
-      var con = 0;
-
-      while (con < this.nodos.length) {
-        for (var i = nodoInicio; i < this.nodos.length; i++) {
-          distancias = []; // console.log("aqui2");
-
+        for (var i = 0; i < this.nodos.length; i++) {
           for (var j = 0; j < this.nodos.length; j++) {
-            // console.log("aqui3");
             if (matrix[i][j] != null) {
-              // console.log("aqui4");
-              distancias.push(matrix[i][j]); //posicion.push(j)
+              maximo = maximo + matrix[i][j];
+            }
+          }
+        }
+
+        console.log("maximo ", maximo); //console.log(dijs);       
+
+        for (var k = 0; k < this.nodos.length; k++) {
+          var aux = new Array(4);
+          console.log("aux antes", aux);
+          aux[0] = this.nodos[k].id;
+          aux[1] = maximo;
+          aux[2] = null;
+          aux[3] = 0;
+          console.log("aux despues", aux);
+          console.log("dijs", dijs);
+          dijs.push(aux);
+        }
+
+        var posIn = this.buscarNodoD(id_nodo, dijs);
+        console.log("posIn", posIn);
+        dijs[posIn][1] = 0;
+        dijs[posIn][2] = id_nodo;
+
+        while (visitados.length < dijs.length) {
+          var menor = maximo;
+          var posMen = -1;
+
+          for (var d = 0; d < dijs.length; d++) {
+            console.log("dijs[d][1]", dijs[d][1]);
+
+            if (dijs[d][3] != 1 && dijs[d][1] <= menor) {
+              menor = dijs[d][1];
+              posMen = d;
             }
           }
 
-          console.log("distancias nodo", i, " ", distancias); //console.log("posicion",posicion);
+          console.log("posmen", posMen);
+          dijs[posMen][3] = 1;
+          visitados.push(dijs[posMen][0]);
+          console.log("visit", visitados);
 
-          if (distancias.length > 0) {
-            var aux = 0;
-            var menor = 0;
+          if (visitados.length < dijs.length && menor != maximo) {
+            for (var f = 0; f < this.nodos.length; f++) {
+              console.log("posmen", posMen);
 
-            for (var k = 0; k < distancias.length; k++) {
-              if (distancias[aux] >= distancias[k]) {
-                menor = distancias[k]; //posicionActual = posicion[k]
+              if (matrix[posMen][f] != null && dijs[f][3] != 1) {
+                var suma = dijs[posMen][1] + matrix[posMen][f];
+                console.log("matrix[posMen][f]", matrix[posMen][f]);
+                console.log("dijs[posMen][1]", dijs[posMen][1]);
+                console.log("suma", suma);
+                console.log("dijs[f][1]", dijs[f][1]);
+
+                if (suma < dijs[f][1]) {
+                  dijs[f][1] = suma;
+                  dijs[f][2] = dijs[posMen][0];
+                }
               }
             }
-
-            sumas.push(menor);
           }
 
-          for (var j = 0; j < this.nodos.length; j++) {
-            if (matrix[i][j] == menor) {
-              posicionActual = j;
-            }
-          }
-
-          console.log("menor", menor);
-          console.log("posicionActual", posicionActual); //console.log("no visitados",nodosNoVisitados);
-          //i=posicionActual-1
-          //nodosVisitados.push(nodosNoVisitados[i])
-          //console.log("no visitados",nodosNoVisitados[i].id);
-
-          console.log("sumas", sumas);
-        } // if(nodosNoVisitados[i].id==i){
-        //         nodosVisitados.push(nodosNoVisitados[i])
-        //         console.log("visitados",nodosVisitados);
-        //         nodosNoVisitados.splice(i,1)
-        // }
-
-
-        con++;
+          console.log("dijs final", dijs);
+        }
       }
-
-      for (var i = 0; i < sumas.length; i++) {
-        distanciaAcumulada = distanciaAcumulada + sumas[i];
-      }
-
-      console.log("acumulada", distanciaAcumulada); // var distanciaAnterior =0
-      // if(distanciaAcumulada>=distanciaAnterior){
-      //     distanciaAcumulada=distanciaAnterior
-      // }
     },
     verificarVisitados: function verificarVisitados(noVisitados, visitados, j) {
       for (var i = 0; i < this.nodos.length; i++) {
         if (noVisitados[i].id == j) {
           visitados.push(noVisitados[i]);
-          noVisitados[i].pop();
         }
       }
     },
@@ -3122,16 +3106,6 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    aristasOrdenadas: function aristasOrdenadas(aristas1) {
-      aristas1 = _.sortBy(aristas1, function (wea) {
-        return parseInt(wea.label);
-      });
-      console.log("la wea ordenada");
-      aristas1.forEach(function (element) {
-        console.log(element.label);
-      });
-      return aristas1;
-    },
     flujoMaximo: function flujoMaximo() {
       var menor = 1; //capacidad minima entre las ramas
 
@@ -3157,7 +3131,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return acumulado;
     },
-    camino: function camino() {},
     multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //Multiplica 
     {
       var res = [];
@@ -107692,13 +107665,7 @@ var render = function() {
                 staticClass: "card cardaux3 col-md-10 rounded-bottom",
                 attrs: { id: "caminocorto" }
               },
-              [
-                _c("div", { staticClass: "container" }, [
-                  _vm._v(
-                    "\n                    CASO 2: CAMINO MAS CORTO\n                "
-                  )
-                ])
-              ]
+              [_vm._m(2)]
             )
           : _vm._e(),
         _vm._v(" "),
@@ -107925,6 +107892,21 @@ var staticRenderFns = [
       _c("b", [
         _vm._v(
           "Matriz de caminos = Matriz Identidad + Matriz Adyacencia + Matriz Adyacencia^2 + ... + Matriz Adyacencia^(n-1)"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _vm._v(
+        "\n                    CASO 2: CAMINO MAS CORTO\n                    "
+      ),
+      _c("div", [
+        _vm._v(
+          "\n                        mostrar camino mas corto en funcion camino corto\n                    "
         )
       ])
     ])
@@ -121063,8 +121045,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
