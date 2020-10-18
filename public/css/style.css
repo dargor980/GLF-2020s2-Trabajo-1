@@ -120,3 +120,7 @@ a:hover{
 .image-parent{
     background-color: rgba(108,117,125,0.0);
 }
+
+.list-group-item:hover{
+    background-color: rgb(160, 166, 170);
+}

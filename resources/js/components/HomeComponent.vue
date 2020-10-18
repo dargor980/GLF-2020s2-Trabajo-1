@@ -12,16 +12,16 @@
                         <li class="list-group-item analisis collapsed info textocolor" data-toggle="collapse" data-target="#Grafosimple" aria-expanded="false" aria-controls="Grafosimple">
                             Grafo Simple
                         </li>
-                        <li class="list-group-item analisis collapsed  info textocolor" data-toggle="collapse" data-target="#Multigrafo" aria-expanded="false" aria-controls="Multigrafo">
+                        <li class="list-group-item analisis collapsed info textocolor" data-toggle="collapse" data-target="#Multigrafo" aria-expanded="false" aria-controls="Multigrafo">
                             Multigrafo
                         </li>
-                        <li class="list-group-item analisis info textocolor" data-toggle="collapse" data-target="#Grafodirigido" aria-expanded="false" aria-controls="Gradodirigido">
+                        <li class="list-group-item analisis collapsed info textocolor" data-toggle="collapse" data-target="#Grafodirigido" aria-expanded="false" aria-controls="Gradodirigido">
                             Grafo Dirigido
                         </li>
-                        <li class="list-group-item analisis info textocolor" data-toggle="collapse" data-target="#Multigrafodirigido" aria-expanded="false" aria-controls="Multigrafodirigido">
+                        <li class="list-group-item analisis collapsed info textocolor" data-toggle="collapse" data-target="#Multigrafodirigido" aria-expanded="false" aria-controls="Multigrafodirigido">
                             Multigrafo Dirigido
                         </li>
-                        <li class="list-group-item analisis info textocolor" data-toggle="collapse" data-target="#Grafoetiquetado" aria-expanded="false" aria-controls="Grafoetiquetado">
+                        <li class="list-group-item analisis collapsed info textocolor" data-toggle="collapse" data-target="#Grafoetiquetado" aria-expanded="false" aria-controls="Grafoetiquetado">
                             Grafo Etiquetado
                         </li>
                     </ul>

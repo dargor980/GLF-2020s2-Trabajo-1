@@ -108018,7 +108018,7 @@ var staticRenderFns = [
                     "li",
                     {
                       staticClass:
-                        "list-group-item analisis collapsed  info textocolor",
+                        "list-group-item analisis collapsed info textocolor",
                       attrs: {
                         "data-toggle": "collapse",
                         "data-target": "#Multigrafo",
@@ -108036,7 +108036,8 @@ var staticRenderFns = [
                   _c(
                     "li",
                     {
-                      staticClass: "list-group-item analisis info textocolor",
+                      staticClass:
+                        "list-group-item analisis collapsed info textocolor",
                       attrs: {
                         "data-toggle": "collapse",
                         "data-target": "#Grafodirigido",
@@ -108054,7 +108055,8 @@ var staticRenderFns = [
                   _c(
                     "li",
                     {
-                      staticClass: "list-group-item analisis info textocolor",
+                      staticClass:
+                        "list-group-item analisis collapsed info textocolor",
                       attrs: {
                         "data-toggle": "collapse",
                         "data-target": "#Multigrafodirigido",
@@ -108072,7 +108074,8 @@ var staticRenderFns = [
                   _c(
                     "li",
                     {
-                      staticClass: "list-group-item analisis info textocolor",
+                      staticClass:
+                        "list-group-item analisis collapsed info textocolor",
                       attrs: {
                         "data-toggle": "collapse",
                         "data-target": "#Grafoetiquetado",
@@ -121065,8 +121068,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
