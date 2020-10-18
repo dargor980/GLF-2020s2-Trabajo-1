@@ -3126,30 +3126,47 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    flujoMaximo: function flujoMaximo() {
-      var menor = 1; //capacidad minima entre las ramas
-
-      var rama;
-      var camino;
-      var acumulado = 0;
-
-      if (this.camino(this.inicio, this.destino)) {
-        camino = this.caminoflujo();
+    flujoMaximo: function flujoMaximo(inicio, _final) {
+      var matriz_caminos = [],
+          camino = [];
+      var visitados = [];
+      var matrizAdy = this.matrizAdyacenciaDirigido();
+      this.buscarCaminos(matriz_caminos, camino, matrizAdy, inicio - 1, _final, visitados);
+    },
+    existe: function existe(vertices, e) {
+      if (vertices == null) {
+        return false;
       }
 
-      for (var i = 0; i < camino.length; i++) {
-        if (camino[i].value < menor) {
-          menor = camino[i].value;
-          rama = camino[i];
+      for (var i = 0; i < vertices.length; i++) {
+        if (vertices[i] == e) {
+          return true;
         }
       }
 
-      for (var i = 0; i < caminos.length; i++) {
-        caminos[i].value = caminos[i].value - rama.value;
-        acumulado = acumulado + caminos[i].value;
-      }
+      return false;
+    },
+    buscarCaminos: function buscarCaminos(matriz, array, adyacencia, inicio, fin, visitados) {
+      console.log("inicio - ", inicio, "- fin - ", fin);
 
-      return acumulado;
+      for (var i = 0; i < this.nodos.length; i++) {
+        if (adyacencia[inicio][i] == 1) {
+          if (inicio != fin && this.existe(visitados, i) == false) {
+            console.log("inicio", inicio);
+            array.push(this.nodos[i].id);
+            adyacencia[inicio][i] = 0;
+            visitados.push(inicio);
+            matriz.push(this.buscarCaminos(matriz, array, adyacencia, i, fin, visitados));
+          } else {
+            if (inicio == fin) {
+              console.log("llego al final de la wea");
+              array.push(this.nodos[i].id);
+              console.log(array);
+              return array;
+            }
+          }
+        }
+      }
     },
     multiplicarMatriz: function multiplicarMatriz(matrizA, matrizB) //Multiplica 
     {
@@ -3276,6 +3293,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -108504,57 +108532,64 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "navbar-brand fredoka textocolor" }, [
-              _vm._v("Trabajo Unidad 1: Grafos")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "collapse navbar-collapse justify-content-end" },
-              [
-                _c(
-                  "ul",
-                  { staticClass: "navbar-nav ml-md-auto d-none d-md-flex" },
-                  [
-                    _c("li", { staticClass: "nav-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link lato textocolor",
-                          attrs: { href: "#" },
-                          on: { click: _vm.mostrarHome }
-                        },
-                        [_vm._v("Home")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link lato textocolor",
-                          attrs: { href: "#" },
-                          on: { click: _vm.mostrarGrafo }
-                        },
-                        [_vm._v("Grafos")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link lato textocolor",
-                          attrs: { href: "#" },
-                          on: { click: _vm.mostrarIntegrantes }
-                        },
-                        [_vm._v("Integrantes")]
-                      )
-                    ])
-                  ]
-                )
-              ]
-            )
+            _c("div", { staticClass: "row container-fluid" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-8 justify-content-end float-right" },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "collapse navbar-collapse float-right",
+                      attrs: { id: "navbarText" }
+                    },
+                    [
+                      _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+                        _c("li", { staticClass: "nav-item active" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link lato textocolor",
+                              attrs: { href: "#" },
+                              on: { click: _vm.mostrarHome }
+                            },
+                            [_vm._v("Home")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item active" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link lato textocolor",
+                              attrs: { href: "#" },
+                              on: { click: _vm.mostrarGrafo }
+                            },
+                            [_vm._v("Grafos")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item active" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link lato textocolor",
+                              attrs: { href: "#" },
+                              on: { click: _vm.mostrarIntegrantes }
+                            },
+                            [_vm._v("Integrantes")]
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            ])
           ])
         ]
       ),
@@ -108568,7 +108603,40 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "navbar-brand fredoka textocolor" }, [
+        _vm._v("Trabajo Unidad 1: Grafos")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "navbar navbar-expand-lg float-right" }, [
+      _c(
+        "button",
+        {
+          staticClass: "navbar-toggler bg-light",
+          attrs: {
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#navbarText",
+            "aria-controls": "navbarToggleExternalContent",
+            "aria-expanded": "false",
+            "aria-label": "Toggle navigation"
+          }
+        },
+        [_c("span", { staticClass: "navbar-toggler-icon textocolor" })]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -121087,8 +121155,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
