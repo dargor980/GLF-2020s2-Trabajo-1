@@ -2432,6 +2432,7 @@ __webpack_require__.r(__webpack_exports__);
       eleccion: '',
       matrizcostos: [],
       Adyacencia: [],
+      caminoPrim: [],
 
       /*variables de control */
       addgrafo: false,
@@ -2443,9 +2444,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    //this.kruskal()
-    //this.matrizCostos()
-    this.caminoCorto2(1);
+    this.prim(); //this.matrizCostos()
+    //this.caminoCorto2(1)
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -3061,71 +3061,66 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
+    arrayControl: function arrayControl(largo) {
+      var array = [];
 
-    /*
-            kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
-                var agm = [];
-                var arbol = _.map(this.nodos, function(nodo) { return [nodo]; });
-                var aristasSort = _.sortBy(this.aristas, function(arista) { return -parseInt(arista.label); });
-                while(arbol.length > 1) {
-                    var arista = aristasSort.pop();
-                    var n1 = parseInt(arista.from);
-                    var n2 = parseInt(arista.to);
-    
-                    var t1 = _.filter(arbol, function(linea) {
-                        return _.include(linea, n1);
-                    });
-                        
-                    var t2 = _.filter(arbol, function(linea) {
-                        return _.include(linea, n2);
-                    });
-    
-                    if (t1 != t2) {
-                        arbol = _.without(arbol, t1[0], t2[0]);
-                        arbol.push(_.union(t1[0], t2[0]));
-                        agm.push(arista);
-                    }
-                }
-                console.log(agm)
-                return agm;
-            },  */
-    kruskal: function kruskal() {
-      var agm = [];
-      var vertices = this.nodos;
-      var aristas1 = this.aristas;
-      console.log("la wea sin ordenar");
-      aristas1.forEach(function (element) {
-        console.log(element.label);
-      });
-      this.aristasOrdenadas(aristas1);
-
-      while (vertices.length > 1) {
-        var arista = aristas1.pop();
-        var nodo1 = parseInt(arista.from);
-        console.log("nodo 1", nodo1);
-        var nodo2 = parseInt(arista.to);
-
-        var rama1 = _.filter(vertices, function (linea) {
-          return _.include(linea, nodo1);
-        });
-
-        var rama2 = _.filter(vertices, function (linea) {
-          return _.include(linea, nodo2);
-        });
-
-        if (rama1 != rama2) {
-          console.log('ya entraste u//w//u');
-          vertices = _.without(vertices, rama1.id, rama2.id);
-          vertices.pop(_.union(rama1.id, rama2.id));
-          agm.push(arista);
-        }
+      for (var i = 0; i < largo; i++) {
+        array.push(0);
       }
 
-      console.log('arbol generado:');
-      agm.forEach(function (element) {
-        console.log('from:', element.from);
-        console.log('to', element.to);
-      });
+      return array;
+    },
+    buscarPos: function buscarPos(vertices, e) {
+      for (var i = 0; i < vertices.length; i++) {
+        if (vertices[i] == e) {
+          return i;
+        }
+      }
+    },
+    prim: function prim() {
+      if (this.conexo()) {
+        var agm = [];
+        var vertices = [];
+        this.nodos.forEach(function (element) {
+          vertices.push(element.id);
+        });
+        console.log("vertices", vertices);
+        var control = this.arrayControl(this.nodos.length);
+
+        var aristas1 = _.sortBy(this.aristas, function (indice) {
+          return parseInt(indice.label);
+        });
+
+        aristas1.forEach(function (element) {
+          console.log(element.label, element.from, element.to);
+        });
+        var inicio = aristas1[0].from,
+            posicion = 0;
+        control[0] = 1;
+        console.log('control:', control);
+        /* this.llenarAristas(); */
+
+        while (agm.length < this.nodos.length - 1) {
+          for (var i = 0; i < aristas1.length; i++) {
+            if (control[this.buscarPos(vertices, aristas1[i].from)] != control[this.buscarPos(vertices, aristas1[i].to)]) {
+              agm.push(aristas1[i]);
+              control[this.buscarPos(vertices, aristas1[i].from)] = 1;
+              control[this.buscarPos(vertices, aristas1[i].to)] = 1;
+              i = aristas1.length + 3;
+            }
+          }
+        }
+
+        console.log('arbol generado:');
+        agm.forEach(function (element) {
+          console.log('from:', element.from);
+          console.log('to', element.to);
+        });
+        this.caminoPrim = agm;
+        return true;
+      } else {
+        return false;
+      }
     },
     aristasOrdenadas: function aristasOrdenadas(aristas1) {
       aristas1 = _.sortBy(aristas1, function (wea) {
@@ -121068,8 +121063,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\xampp\Proyectos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

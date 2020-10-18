@@ -380,6 +380,7 @@ export default {
             eleccion:'',
             matrizcostos:[],
             Adyacencia:[],
+            caminoPrim:[],
             
 
 
@@ -393,9 +394,9 @@ export default {
         }
     }, 
     created(){
-        //this.kruskal()
+        this.prim()
         //this.matrizCostos()
-        this.caminoCorto2(1)
+        //this.caminoCorto2(1)
     },
 
     
@@ -986,67 +987,59 @@ export default {
         },
 
 
-/*
-        kruskalplantilla(){ //Función que retorna el árbol generador mínimo a través de la implementación del algoritmo de Kruskal.
-            var agm = [];
-            var arbol = _.map(this.nodos, function(nodo) { return [nodo]; });
-            var aristasSort = _.sortBy(this.aristas, function(arista) { return -parseInt(arista.label); });
-            while(arbol.length > 1) {
-                var arista = aristasSort.pop();
-                var n1 = parseInt(arista.from);
-                var n2 = parseInt(arista.to);
+        arrayControl(largo){
+            var array=[];
+            for(var i=0; i<largo; i++){
+                array.push(0);
+            }
+            return array;
+        },
 
-                var t1 = _.filter(arbol, function(linea) {
-                    return _.include(linea, n1);
-                });
-                    
-                var t2 = _.filter(arbol, function(linea) {
-                    return _.include(linea, n2);
-                });
-
-                if (t1 != t2) {
-                    arbol = _.without(arbol, t1[0], t2[0]);
-                    arbol.push(_.union(t1[0], t2[0]));
-                    agm.push(arista);
+        buscarPos(vertices, e){
+            for(var i=0; i<vertices.length; i++){
+                if(vertices[i]==e){
+                    return i;
                 }
             }
-            console.log(agm)
-            return agm;
-        },  */
+        },
 
-        kruskal(){
-            var agm=[];
-            var vertices= this.nodos;
-            var aristas1= this.aristas;
-            console.log("la wea sin ordenar");
-            aristas1.forEach(element => {
-                console.log(element.label)
-            });
-            this.aristasOrdenadas(aristas1);
-            while(vertices.length >1)
-            {
-                var arista= aristas1.pop();
-                var nodo1= parseInt(arista.from)
-                console.log("nodo 1",nodo1);
-                var nodo2= parseInt(arista.to)
-
-                var rama1= _.filter(vertices, function(linea){return _.include(linea,nodo1);});
-
-                var rama2= _.filter(vertices, function(linea){return _.include(linea,nodo2);});
-
-                if(rama1 != rama2)
-                {
-                    console.log('ya entraste u//w//u');
-                    vertices= _.without(vertices, rama1.id, rama2.id);
-                    vertices.pop(_.union(rama1.id,rama2.id));
-                    agm.push(arista);
+        prim(){
+            if(this.conexo()){
+                var agm=[];
+                var vertices= [];
+                this.nodos.forEach(element => {
+                    vertices.push(element.id);
+                });
+                console.log("vertices", vertices)
+                var control=this.arrayControl(this.nodos.length);
+                let aristas1= _.sortBy(this.aristas, function(indice){return parseInt(indice.label);});
+                aristas1.forEach(element => {
+                    console.log(element.label, element.from, element.to)
+                });
+                var inicio=aristas1[0].from, posicion=0;
+                control[0]=1;
+                console.log('control:', control);
+                /* this.llenarAristas(); */
+                while(agm.length<this.nodos.length-1){
+                    for(var i=0; i<aristas1.length; i++){
+                        if(control[this.buscarPos(vertices, aristas1[i].from)] != control[this.buscarPos(vertices, aristas1[i].to)]){
+                            agm.push(aristas1[i]);
+                            control[this.buscarPos(vertices, aristas1[i].from)]=1;
+                            control[this.buscarPos(vertices, aristas1[i].to)]=1;
+                            i=aristas1.length+3;
+                        }
+                    }
                 }
+                console.log('arbol generado:');
+                agm.forEach(element => {
+                    console.log('from:',element.from);
+                    console.log('to',element.to);
+                });
+                this.caminoPrim=agm;
+                return true;
+            }else{
+                return false;
             }
-            console.log('arbol generado:');
-            agm.forEach(element => {
-                console.log('from:',element.from);
-                console.log('to',element.to);
-            });
             
         },
 
