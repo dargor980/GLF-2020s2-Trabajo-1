@@ -1053,7 +1053,11 @@ export default {
             
         },
 
-        flujoMaximo(){
+        flujoMaximo(inicio, final){
+            var matriz_caminos=[], camino=[];
+            var visitados=[];
+            var matrizAdy=this.matrizAdyacenciaDirigido();
+            this.buscarCaminos(matriz_caminos, camino, matrizAdy, inicio-1, final, visitados);
 
             var menor=1; //capacidad minima entre las ramas
             var rama;
@@ -1065,22 +1069,34 @@ export default {
             {
                 camino=this.caminoflujo();
             }
-            for(var i=0; i<camino.length;i++)
-            {
-                if(camino[i].value<menor)
-                {
-                    menor=camino[i].value;
-                    rama=camino[i];
+            for(var i=0; i<vertices.length; i++){
+                if(vertices[i]==e){
+                    return true;
                 }
             }
-            for(var i=0; i<caminos.length;i++)
-            {
-                caminos[i].value=caminos[i].value-rama.value;
-                acumulado=acumulado+caminos[i].value;
+            return false;
+        },
+
+        buscarCaminos(matriz, array, adyacencia, inicio, fin, visitados){
+            console.log("inicio - ", inicio,"- fin - ", fin);
+            for(let i=0; i<this.nodos.length; i++){
+                if(adyacencia[inicio][i]==1){
+                    if(inicio!=fin && this.existe(visitados, i)==false){
+                        console.log("inicio", inicio);
+                        array.push(this.nodos[i].id);
+                        adyacencia[inicio][i]=0;
+                        visitados.push(inicio);
+                        matriz.push(this.buscarCaminos(matriz, array, adyacencia, i, fin, visitados));
+                    }else{
+                        if(inicio==fin){
+                            console.log("llego al final de la wea");
+                            array.push(this.nodos[i].id);
+                            console.log(array);
+                            return array;
+                        }
+                    }
+                }
             }
-
-            return acumulado;
-
         },
 
         multiplicarMatriz(matrizA,matrizB)//Multiplica 
