@@ -2282,6 +2282,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3132,8 +3134,10 @@ __webpack_require__.r(__webpack_exports__);
       var rama;
       var camino;
       var acumulado = 0;
+      var inicio = 1;
+      var fin = 7;
 
-      if (this.camino(this.inicio, this.destino)) {
+      if (this.camino(inicio, destino)) {
         camino = this.caminoflujo();
       }
 
@@ -107866,13 +107870,11 @@ var render = function() {
                 _vm._v("Arbol Generador")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "row text-center mb-3" }, [
                 _c("div", { staticClass: "col-md-4" }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4 justify-content-center" }, [
-                  _c("div", { staticClass: "justify-content-center" }, [
+                _c("div", { staticClass: "col-md-4 align-items-center" }, [
+                  _c("div", { staticClass: "text-center" }, [
                     _c(
                       "button",
                       {
@@ -107882,7 +107884,9 @@ var render = function() {
                       [_vm._v("Mostrar Árbol")]
                     )
                   ])
-                ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" })
               ])
             ])
           : _vm._e(),
@@ -107950,7 +107954,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
-      _c("div", { attrs: { id: "arbol" } })
+      _c("h3", { staticClass: "text-center fredoka my-3" }, [
+        _vm._v("Árbol Mínimo Generado")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grafo1 my-3", attrs: { id: "arbol" } })
     ])
   }
 ]
@@ -121087,8 +121095,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Luciano\Desktop\2020-2\Grafos y lenguajes formales\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

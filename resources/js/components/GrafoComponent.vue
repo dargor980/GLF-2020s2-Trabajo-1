@@ -346,14 +346,16 @@
                 <!-- CASO 5: ARBOL GENERADOR -->
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==5">
                     <h3 class="text-center fredoka textocolor my-3">Arbol Generador</h3>
-                    <div class="row" >
+                    <div class="row text-center mb-3">
+                        
                         <div class="col-md-4"></div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 justify-content-center">
-                            <div class="justify-content-center">
+                        <div class="col-md-4 align-items-center">
+                            <div class="text-center">
                                 <button class="btn btn-dark" @click="drawArbol" >Mostrar Árbol</button>
                             </div>
                         </div>
+                        <div class="col-md-4"></div>
+                        
                         
                     </div>
                     
@@ -361,8 +363,8 @@
                 </div>
                 <div id="arbolgenerador" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==5">
                     <div class="container">
-                        
-                        <div id="arbol">
+                        <h3 class="text-center fredoka my-3">Árbol Mínimo Generado</h3>
+                        <div id="arbol" class="grafo1 my-3">
                         </div>
                     </div>
                 </div>
@@ -1057,7 +1059,9 @@ export default {
             var rama;
             var camino;
             var acumulado=0;
-            if(this.camino(this.inicio,this.destino))
+            var inicio=1;
+            var fin=7;
+            if(this.camino(inicio,destino))
             {
                 camino=this.caminoflujo();
             }
