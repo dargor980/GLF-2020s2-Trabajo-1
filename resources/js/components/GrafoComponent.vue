@@ -23,7 +23,7 @@
                                     <button class="btn btn-success" @click="createNode">Añadir nodo</button>
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-success" @click="createArista">Añadir arista</button>
+                                    <button type="button" class="btn btn-success" @click="createArista">Añadir arista</button>
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-danger" @click="delAndClear">Eliminar Grafo</button>
@@ -346,10 +346,24 @@
                 <!-- CASO 5: ARBOL GENERADOR -->
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==5">
                     <h3 class="text-center fredoka textocolor my-3">Arbol Generador</h3>
+                    <div class="row" >
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 justify-content-center">
+                            <div class="justify-content-center">
+                                <button class="btn btn-dark" @click="drawArbol" >Mostrar Árbol</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    
                 </div>
                 <div id="arbolgenerador" class="card cardaux3 col-md-10 rounded-bottom" v-if="controlanalisis==5">
                     <div class="container">
-                        ARBOL GENERADO
+                        
+                        <div id="arbol">
+                        </div>
                     </div>
                 </div>
                 <!-- / CASO 5: ARBOL GENERADOR -->
@@ -388,7 +402,7 @@ export default {
             matrizcostos:[],
             Adyacencia:[],
             caminoPrim:[],
-            dij:{vertice1:'',distanciaAcumulada:'',vertice_anterior:'',visitado:''},
+            
             
 
 
@@ -402,9 +416,9 @@ export default {
         }
     }, 
     created(){
-        //this.prim()
+        this.prim()
         //this.matrizCostos()
-        this.caminoCorto2(1)
+        //this.caminoCorto2(1)
     },
 
     
@@ -431,6 +445,19 @@ export default {
             var djasd = this.matrizAdyacencia()
             console.log(djasd);
         },
+
+        drawArbol(){  //función que toma los nodos y aristas y procede a graficarlos en el container
+            var container= document.getElementById("arbol");
+            var data={nodes:this.nodos,
+                      edges:this.caminoPrim};
+            var options = {
+                height: 520 + 'px',
+            };
+            var network= new vis.Network(container,data,options);
+            
+        },
+
+
 
         drawGrafoDirigido(){
             var container= document.getElementById("grafo");
@@ -603,6 +630,7 @@ export default {
 
         mostrarOp5(){
             this.controlanalisis=5;
+            this.drawArbol();
         },
 
         matrizAdyacencia(){  // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas

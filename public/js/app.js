@@ -2268,6 +2268,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2436,12 +2450,6 @@ __webpack_require__.r(__webpack_exports__);
       matrizcostos: [],
       Adyacencia: [],
       caminoPrim: [],
-      dij: {
-        vertice1: '',
-        distanciaAcumulada: '',
-        vertice_anterior: '',
-        visitado: ''
-      },
 
       /*variables de control */
       addgrafo: false,
@@ -2453,9 +2461,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    //this.prim()
-    //this.matrizCostos()
-    this.caminoCorto2(1);
+    this.prim(); //this.matrizCostos()
+    //this.caminoCorto2(1)
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -2479,6 +2486,18 @@ __webpack_require__.r(__webpack_exports__);
       var network = new vis.Network(container, data, options);
       var djasd = this.matrizAdyacencia();
       console.log(djasd);
+    },
+    drawArbol: function drawArbol() {
+      //función que toma los nodos y aristas y procede a graficarlos en el container
+      var container = document.getElementById("arbol");
+      var data = {
+        nodes: this.nodos,
+        edges: this.caminoPrim
+      };
+      var options = {
+        height: 520 + 'px'
+      };
+      var network = new vis.Network(container, data, options);
     },
     drawGrafoDirigido: function drawGrafoDirigido() {
       var container = document.getElementById("grafo");
@@ -2675,6 +2694,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarOp5: function mostrarOp5() {
       this.controlanalisis = 5;
+      this.drawArbol();
     },
     matrizAdyacencia: function matrizAdyacencia() {
       // Función que genera la matriz de adyacencia de un grafo simple no dirigido. n: numero de vértices; e: número de aristas
@@ -106570,6 +106590,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
+                          attrs: { type: "button" },
                           on: { click: _vm.createArista }
                         },
                         [_vm._v("Añadir arista")]
@@ -107843,6 +107864,25 @@ var render = function() {
           ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
               _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
                 _vm._v("Arbol Generador")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4 justify-content-center" }, [
+                  _c("div", { staticClass: "justify-content-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-dark",
+                        on: { click: _vm.drawArbol }
+                      },
+                      [_vm._v("Mostrar Árbol")]
+                    )
+                  ])
+                ])
               ])
             ])
           : _vm._e(),
@@ -107854,13 +107894,7 @@ var render = function() {
                 staticClass: "card cardaux3 col-md-10 rounded-bottom",
                 attrs: { id: "arbolgenerador" }
               },
-              [
-                _c("div", { staticClass: "container" }, [
-                  _vm._v(
-                    "\n                    ARBOL GENERADO\n                "
-                  )
-                ])
-              ]
+              [_vm._m(3)]
             )
           : _vm._e()
       ])
@@ -107909,6 +107943,14 @@ var staticRenderFns = [
           "\n                        mostrar camino mas corto en funcion camino corto\n                    "
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { attrs: { id: "arbol" } })
     ])
   }
 ]
