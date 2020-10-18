@@ -2284,6 +2284,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2452,6 +2470,10 @@ __webpack_require__.r(__webpack_exports__);
       matrizcostos: [],
       Adyacencia: [],
       caminoPrim: [],
+      dijkstra: [],
+      caminodijs: [],
+      inicio: '',
+      esConexo: '',
 
       /*variables de control */
       addgrafo: false,
@@ -2500,6 +2522,10 @@ __webpack_require__.r(__webpack_exports__);
         height: 520 + 'px'
       };
       var network = new vis.Network(container, data, options);
+    },
+    mostrarArbol: function mostrarArbol() {
+      this.showArbol = true;
+      this.drawArbol();
     },
     drawGrafoDirigido: function drawGrafoDirigido() {
       var container = document.getElementById("grafo");
@@ -2683,6 +2709,7 @@ __webpack_require__.r(__webpack_exports__);
       this.controlanalisis = 1;
       this.matrizCaminos();
       this.Adyacencia = this.matrizAdyacencia();
+      this.esConexo = this.conexo();
     },
     mostrarOp2: function mostrarOp2() {
       this.controlanalisis = 2;
@@ -2984,7 +3011,21 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    caminoCorto2: function caminoCorto2(id_nodo, id_nodo_final) {
+    existe: function existe() {
+      for (var i = 0; i < this.nodos.length; i++) {
+        if (this.nodos[i].id === this.inicio) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    caminoCorto2: function caminoCorto2() {
+      if (!this.existe()) {
+        alert("id Inválido. Reintente nuevamente.");
+        return;
+      }
+
       if (this.conexo()) {
         //var nodoInicio = id_nodo-1
         var matrix = this.matrizCostos();
@@ -3014,10 +3055,10 @@ __webpack_require__.r(__webpack_exports__);
           dijs.push(aux);
         }
 
-        var posIn = this.buscarNodoD(id_nodo, dijs);
+        var posIn = this.buscarNodoD(this.inicio, dijs);
         console.log("posIn", posIn);
         dijs[posIn][1] = 0;
-        dijs[posIn][2] = id_nodo;
+        dijs[posIn][2] = this.inicio;
 
         while (visitados.length < dijs.length) {
           var menor = maximo;
@@ -3057,7 +3098,11 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           console.log("dijs final", dijs);
+          this.dijkstra = dijs;
+          this.caminodijs = visitados;
         }
+      } else {
+        return false;
       }
     },
     verificarVisitados: function verificarVisitados(noVisitados, visitados, j) {
@@ -3128,7 +3173,12 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    flujoMaximo: function flujoMaximo() {
+    flujoMaximo: function flujoMaximo(inicio, _final) {
+      var matriz_caminos = [],
+          camino = [];
+      var visitados = [];
+      var matrizAdy = this.matrizAdyacenciaDirigido();
+      this.buscarCaminos(matriz_caminos, camino, matrizAdy, inicio - 1, _final, visitados);
       var menor = 1; //capacidad minima entre las ramas
 
       var rama;
@@ -107631,6 +107681,10 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(1),
                     _vm._v(" "),
+                    _vm.esConexo
+                      ? _c("div", [_vm._m(2)])
+                      : _c("div", [_vm._m(3)]),
+                    _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
                         _c(
@@ -107717,7 +107771,64 @@ var render = function() {
                 staticClass: "card cardaux3 col-md-10 rounded-bottom",
                 attrs: { id: "caminocorto" }
               },
-              [_vm._m(2)]
+              [
+                _c("div", { staticClass: "container" }, [
+                  _vm._v(
+                    "\n                    CASO 2: CAMINO MAS CORTO\n                    "
+                  ),
+                  _c("div", [
+                    _vm._v(
+                      "\n                        mostrar camino mas corto en funcion camino corto\n\n                        "
+                    ),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.caminoCorto2($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("label", [_vm._v("Ingrese id de nodo de inicio: ")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.inicio,
+                              expression: "inicio"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number", min: "1" },
+                          domProps: { value: _vm.inicio },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.inicio = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("button", [_vm._v("Consultar")])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.caminodijs) +
+                        "\n                    "
+                    )
+                  ])
+                ])
+              ]
             )
           : _vm._e(),
         _vm._v(" "),
@@ -107894,7 +108005,7 @@ var render = function() {
         _vm.controlanalisis == 5
           ? _c("div", { staticClass: "cardaux2 col-md-10" }, [
               _c("h3", { staticClass: "text-center fredoka textocolor my-3" }, [
-                _vm._v("Arbol Generador")
+                _vm._v("Árbol Generador")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row text-center mb-3" }, [
@@ -107906,7 +108017,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-dark",
-                        on: { click: _vm.drawArbol }
+                        on: { click: _vm.mostrarArbol }
                       },
                       [_vm._v("Mostrar Árbol")]
                     )
@@ -107925,7 +108036,7 @@ var render = function() {
                 staticClass: "card cardaux3 col-md-10 rounded-bottom",
                 attrs: { id: "arbolgenerador" }
               },
-              [_vm._m(3)]
+              [_vm._m(4)]
             )
           : _vm._e()
       ])
@@ -107965,16 +108076,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _vm._v(
-        "\n                    CASO 2: CAMINO MAS CORTO\n                    "
-      ),
-      _c("div", [
-        _vm._v(
-          "\n                        mostrar camino mas corto en funcion camino corto\n                    "
-        )
-      ])
-    ])
+    return _c("h5", [_vm._v("Este grafo "), _c("b", [_vm._v("es Conexo")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", [_vm._v("Este grafo "), _c("b", [_vm._v("no es Conexo")])])
   },
   function() {
     var _vm = this

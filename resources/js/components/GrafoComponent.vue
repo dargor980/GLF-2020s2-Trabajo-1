@@ -243,6 +243,13 @@
                             <div class="text-center my-3">
                                 <b>Matriz de caminos = Matriz Identidad + Matriz Adyacencia + Matriz Adyacencia^2 + ... + Matriz Adyacencia^(n-1)</b> 
                             </div>
+                            
+                            <div v-if="esConexo">
+                                <h5>Este grafo <b>es Conexo</b></h5> 
+                            </div>
+                            <div v-else>
+                                <h5>Este grafo <b>no es Conexo</b></h5> 
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="text-center fredoka textocolor my-3">Matriz de Adyacencia</h4>
@@ -279,6 +286,17 @@
                         CASO 2: CAMINO MAS CORTO
                         <div>
                             mostrar camino mas corto en funcion camino corto
+
+                            <form @submit.prevent="caminoCorto2">
+                                <label>Ingrese id de nodo de inicio: </label>
+                                <input type="number" min="1" v-model="inicio" class="form-control">
+                        
+                                <button>Consultar</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            {{caminodijs}}
                         </div>
                     </div>
                 </div>
@@ -345,13 +363,13 @@
 
                 <!-- CASO 5: ARBOL GENERADOR -->
                 <div class="cardaux2 col-md-10" v-if="controlanalisis==5">
-                    <h3 class="text-center fredoka textocolor my-3">Arbol Generador</h3>
+                    <h3 class="text-center fredoka textocolor my-3">Árbol Generador</h3>
                     <div class="row text-center mb-3">
                         
                         <div class="col-md-4"></div>
                         <div class="col-md-4 align-items-center">
                             <div class="text-center">
-                                <button class="btn btn-dark" @click="drawArbol" >Mostrar Árbol</button>
+                                <button class="btn btn-dark" @click="mostrarArbol" >Mostrar Árbol</button>
                             </div>
                         </div>
                         <div class="col-md-4"></div>
@@ -404,7 +422,10 @@ export default {
             matrizcostos:[],
             Adyacencia:[],
             caminoPrim:[],
-            
+            dijkstra:[],
+            caminodijs:[],
+            inicio:'',
+            esConexo:'',
             
 
 
@@ -459,6 +480,11 @@ export default {
             
         },
 
+        mostrarArbol()
+        {
+            this.showArbol=true;
+            this.drawArbol();
+        },
 
 
         drawGrafoDirigido(){
@@ -615,6 +641,7 @@ export default {
             this.controlanalisis=1;
             this.matrizCaminos();
             this.Adyacencia=this.matrizAdyacencia();
+            this.esConexo=this.conexo();
         },
 
         mostrarOp2(){
@@ -915,7 +942,22 @@ export default {
             }
         },
 
-        caminoCorto2(id_nodo,id_nodo_final){
+        existe(){
+            for(var i=0; i<this.nodos.length;i++)
+            {
+                if(this.nodos[i].id===this.inicio)
+                {
+                    return true;
+                }
+            }
+            return false;
+        },
+        caminoCorto2(){
+           if(!this.existe())
+           {
+               alert("id Inválido. Reintente nuevamente.");
+               return;
+           }
            if(this.conexo()){
                //var nodoInicio = id_nodo-1
                var matrix = this.matrizCostos()
@@ -944,10 +986,10 @@ export default {
                     console.log("dijs",dijs);
                     dijs.push(aux);
                 }
-                let posIn = this.buscarNodoD(id_nodo,dijs);
+                let posIn = this.buscarNodoD(this.inicio,dijs);
                 console.log("posIn",posIn);
                 dijs[posIn][1]=0
-                dijs[posIn][2]=id_nodo
+                dijs[posIn][2]=this.inicio
                 
                 while(visitados.length<dijs.length){
                     let menor = maximo 
@@ -983,8 +1025,15 @@ export default {
                     }
                     
                     console.log("dijs final",dijs);
+                    this.dijkstra=dijs;
+                    this.caminodijs=visitados;
                 }
             }
+            else
+            {
+                return false;
+            }
+            
             
         },
 
