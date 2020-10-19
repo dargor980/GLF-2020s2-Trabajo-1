@@ -23,7 +23,7 @@
         </div>
         <div class="row justify-content-center">
                 <div class="col-md-5 card cardaux ml-3 mt-4">
-                <h3 class="text-center fredoka my-2">Luciano Grande Morales</h3>
+                <h3 class="text-center fredoka my-2">Luciano Grandi Morales</h3>
                 <div class="mb-3" >
                     <ul>
                         <li>luciano.grandim@utem.cl</li>

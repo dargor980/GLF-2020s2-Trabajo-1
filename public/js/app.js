@@ -108553,7 +108553,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-5 card cardaux ml-3 mt-4" }, [
           _c("h3", { staticClass: "text-center fredoka my-2" }, [
-            _vm._v("Luciano Grande Morales")
+            _vm._v("Luciano Grandi Morales")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-3" }, [
