@@ -285,7 +285,7 @@
                     <div class="container">
                         CASO 2: CAMINO MAS CORTO
                         <div>
-                            mostrar camino mas corto en funcion camino corto
+                            mostrar camino más corto en función camino corto
 
                             <form @submit.prevent="caminoCorto2">
                                 <label>Ingrese id de nodo de inicio: </label>
@@ -296,7 +296,19 @@
                         </div>
 
                         <div>
-                            {{caminodijs}}
+                            Los caminos mínimos desde el nodo de inicio son:
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <div v-for="(item,index) in printdijkstra" :key="index">
+                                          <b> camino n° {{index+1}}:</b> {{inicio}}
+                                        <span v-for="(elemento,indice) in item" :key="indice">
+                                            {{elemento}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>         
                         </div>
                     </div>
                 </div>
@@ -424,7 +436,9 @@ export default {
             caminoPrim:[],
             dijkstra:[],
             caminodijs:[],
+            printdijkstra:[],
             inicio:'',
+            iniciodijs:'',
             esConexo:'',
             
 
@@ -953,6 +967,7 @@ export default {
             return false;
         },
         caminoCorto2(){
+           this.printdijkstra=[];
            if(!this.existe())
            {
                alert("id Inválido. Reintente nuevamente.");
@@ -1023,19 +1038,80 @@ export default {
                         }       
 
                     }
-                    
                     console.log("dijs final",dijs);
                     this.dijkstra=dijs;
-                    this.caminodijs=visitados;
+                    
                 }
             }
             else
             {
                 return false;
             }
-            
+            this.caminosDijkstra()
             
         },
+
+        caminosDijkstra()
+        {
+            console.log("funcion caminosDijkstra");
+            var caminos=[];
+            var  pesos=[]
+            for(var i=0; i<this.dijkstra.length;i++)
+            {   
+                var  camino=[]
+                pesos.push(this.dijkstra[i][1])
+                console.log(pesos);
+                if(this.dijkstra[i][0]!=this.inicio)
+                {
+                    console.log("entro if");
+                    var nodo_actual=i;
+                    if(this.dijkstra[nodo_actual][2]!=null)
+                    {
+                        while(this.dijkstra[nodo_actual][0]!=this.inicio)
+                        {
+                            camino.push(this.dijkstra[nodo_actual][0])
+                            nodo_actual=this.buscarNodoD(this.dijkstra[nodo_actual][2],this.dijkstra)
+                        }
+
+                    }
+                    else
+                    {
+                        camino.push(null);
+                        
+                    }
+                }
+                else{
+                    camino.push(this.inicio)
+                }
+                console.log('camino: ',camino);
+                caminos.push(camino);
+            }
+            console.log("caminos: ", caminos);
+            this.mostrarDijkstra(caminos,pesos)
+        },
+
+        mostrarDijkstra(caminos,pesos)
+        {
+            console.log("mostrarDijstra");
+            for(var i=0; i<caminos.length;i++)
+            {
+                if(caminos[i][0]==this.inicio){
+                    console.log("nodo inicial", caminos[i][0]);
+                }
+                else{
+                    if(caminos[i][0]==null)
+                    {
+                        console.log("no se puede llegar", caminos[i][0]);
+                    }
+                    else{
+                        var aux=caminos[i].reverse();
+                        console.log(this.inicio, aux);
+                        this.printdijkstra.push(aux);
+                    }
+                }
+            }
+        },
+
 
         verificarVisitados(noVisitados,visitados,j){
             for(var i=0; i<this.nodos.length;i++){

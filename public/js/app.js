@@ -2302,6 +2302,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2472,7 +2484,9 @@ __webpack_require__.r(__webpack_exports__);
       caminoPrim: [],
       dijkstra: [],
       caminodijs: [],
+      printdijkstra: [],
       inicio: '',
+      iniciodijs: '',
       esConexo: '',
 
       /*variables de control */
@@ -3021,6 +3035,8 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     caminoCorto2: function caminoCorto2() {
+      this.printdijkstra = [];
+
       if (!this.existe()) {
         alert("id Inválido. Reintente nuevamente.");
         return;
@@ -3099,10 +3115,61 @@ __webpack_require__.r(__webpack_exports__);
 
           console.log("dijs final", dijs);
           this.dijkstra = dijs;
-          this.caminodijs = visitados;
         }
       } else {
         return false;
+      }
+
+      this.caminosDijkstra();
+    },
+    caminosDijkstra: function caminosDijkstra() {
+      console.log("funcion caminosDijkstra");
+      var caminos = [];
+      var pesos = [];
+
+      for (var i = 0; i < this.dijkstra.length; i++) {
+        var camino = [];
+        pesos.push(this.dijkstra[i][1]);
+        console.log(pesos);
+
+        if (this.dijkstra[i][0] != this.inicio) {
+          console.log("entro if");
+          var nodo_actual = i;
+
+          if (this.dijkstra[nodo_actual][2] != null) {
+            while (this.dijkstra[nodo_actual][0] != this.inicio) {
+              camino.push(this.dijkstra[nodo_actual][0]);
+              nodo_actual = this.buscarNodoD(this.dijkstra[nodo_actual][2], this.dijkstra);
+            }
+          } else {
+            camino.push(null);
+          }
+        } else {
+          camino.push(this.inicio);
+        }
+
+        console.log('camino: ', camino);
+        caminos.push(camino);
+      }
+
+      console.log("caminos: ", caminos);
+      this.mostrarDijkstra(caminos, pesos);
+    },
+    mostrarDijkstra: function mostrarDijkstra(caminos, pesos) {
+      console.log("mostrarDijstra");
+
+      for (var i = 0; i < caminos.length; i++) {
+        if (caminos[i][0] == this.inicio) {
+          console.log("nodo inicial", caminos[i][0]);
+        } else {
+          if (caminos[i][0] == null) {
+            console.log("no se puede llegar", caminos[i][0]);
+          } else {
+            var aux = caminos[i].reverse();
+            console.log(this.inicio, aux);
+            this.printdijkstra.push(aux);
+          }
+        }
       }
     },
     verificarVisitados: function verificarVisitados(noVisitados, visitados, j) {
@@ -107778,7 +107845,7 @@ var render = function() {
                   ),
                   _c("div", [
                     _vm._v(
-                      "\n                        mostrar camino mas corto en funcion camino corto\n\n                        "
+                      "\n                        mostrar camino más corto en función camino corto\n\n                        "
                     ),
                     _c(
                       "form",
@@ -107822,10 +107889,45 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.caminodijs) +
-                        "\n                    "
-                    )
+                      "\n                        Los caminos mínimos desde el nodo de inicio son:\n                        "
+                    ),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-md-4" },
+                        _vm._l(_vm.printdijkstra, function(item, index) {
+                          return _c(
+                            "div",
+                            { key: index },
+                            [
+                              _c("b", [
+                                _vm._v(" camino n° " + _vm._s(index + 1) + ":")
+                              ]),
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.inicio) +
+                                  "\n                                    "
+                              ),
+                              _vm._l(item, function(elemento, indice) {
+                                return _c("span", { key: indice }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(elemento) +
+                                      "\n                                    "
+                                  )
+                                ])
+                              })
+                            ],
+                            2
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" })
+                    ])
                   ])
                 ])
               ]
@@ -120994,14 +121096,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!****************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GrafoComponent_vue_vue_type_template_id_19aec86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=template&id=19aec86e& */ "./resources/js/components/GrafoComponent.vue?vue&type=template&id=19aec86e&");
 /* harmony import */ var _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -121031,7 +121134,7 @@ component.options.__file = "resources/js/components/GrafoComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
