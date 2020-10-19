@@ -330,30 +330,48 @@
                                             <form @submit.prevent="graficarCircuitoEuleriano">
                                                 <label>Ingrese id de nodo de inicio: </label>
                                                 <input type="number" min="1" v-model="eleccion" class="form-control">
-                                                <button>Consultar</button>
+                                                <div class="justify-content-center">
+                                                    <button class="btn btn-success m-3">Consultar</button>
+                                                </div>
                                             </form>
                                         </div>
                                         
-                                        <div>
+                                        <div class="mb-4">
+                                            Este es el ciclo Euleriano
                                             {{arregloEuleriano}}
                                         </div>
                                     </div>
                                     <div v-else-if="!euler">
-                                        Este grafo no es Euleriano.
+                                        Este Grafo no es Euleriano.
                                     </div>
                                 </div>
-    
-                                <div class="form-group">
-                                    <form @submit.prevent="isHamiltoniano">
-                                        <label>Ingrese id de nodo de inicio: </label>
-                                        <input type="number" min="1" v-model="eleccion" class="form-control">
-                                        <button>Consultar</button>
-                                    </form>
+                                <div v-if="controlanalisis==3">
+                                    <div v-if="isHamiltoniano">
+                                        Este Grafo es Hamiltoniano.
+                                        <div class="form-group">
+                                            <form @submit.prevent="isHamiltoniano">
+                                                <label>Ingrese id de nodo de inicio: </label>
+                                                <input type="number" min="1" v-model="eleccion" class="form-control">
+                                                <div class="justify-content-center">
+                                                    <button class="btn btn-success m-3">Consultar</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    <div class="mb-4">
+                                        Este es el ciclo Hamiltoniano
+                                        {{hamilton}}
+                                    </div>
+                                    </div>
+                                    <div v-else-if="!isHamiltoniano">
+                                        Este Grafo no es Hamiltoniano.
+                                    </div>
+
                                 </div>
 
                                 <div >
                                     
-                                    <!-- {{arregloEuleriano}} -->
+                                    
                                 </div>
 
                             </div>
@@ -414,19 +432,9 @@ export default {
             aristaDirigido:{from:'', to:'', color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista e dirigida
             aristaEtiquetada:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista  etiquetada no dirigida
             aristaEtiquetadaDirigida:{from:'', to:'', label:'',color:{color:'rgb(0,0,0)'},font:{color:'rgb(255,255,255)'}}, //arista etiquetada dirigida.
-
-            /* hamiltonianonodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            hamiltonianoaristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
-             */
-            /* nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],
-            aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'4',value:'1'},{from:'2',to:'3',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'}],
-             */
-            nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-            aristas:[{from:'1',to:'2',label:'5'},{from:'1',to:'3',label:'12'},{from:'1',to:'4',label:'3'},{from:'1',to:'5',label:'1'},
-            {from:'2',to:'3',label:'1'},{from:'2',to:'4',label:'11'},{from:'3',to:'4',label:'7'},{from:'3',to:'5',label:'1'},
-            {from:'3',to:'6',label:'2'},{from:'3',to:'7',label:'1'},{from:'8',to:'3',label:'1'},{from:'4',to:'7',label:'8'},
-            {from:'8',to:'4',label:'5'},{from:'5',to:'6',label:'2'},{from:'5',to:'7',label:'4'},{from:'6',to:'7',label:'3'},
-            {from:'8',to:'7',label:'1'},{from:'7',to:'7',label:'2'}],
+            
+            nodos:[],   
+            aristas:[],
             matrixCaminos:[],
             euler:'',
             hamilton:[],
@@ -454,8 +462,7 @@ export default {
     }, 
     created(){
         this.prim()
-        //this.matrizCostos()
-        //this.caminoCorto2(1)
+        
     },
 
     
@@ -941,7 +948,7 @@ export default {
                 var n1=this.aristas[i].from;
                 var n2=this.aristas[i].to;
                 matrix[n1-1][n2-1]=parseInt(this.aristas[i].label);
-                //matrix[n2-1][n1-1]=parseInt(this.aristas[i].label);//caso matriz no dirigida
+                
             }
             
             console.log(matrix);
@@ -974,7 +981,7 @@ export default {
                return;
            }
            if(this.conexo()){
-               //var nodoInicio = id_nodo-1
+               
                var matrix = this.matrizCostos()
                var maximo=0;
                let dijs = [];
@@ -1154,7 +1161,7 @@ export default {
                 var inicio=aristas1[0].from, posicion=0;
                 control[0]=1;
                 console.log('control:', control);
-                /* this.llenarAristas(); */
+               
                 while(agm.length<this.nodos.length-1){
                     for(var i=0; i<aristas1.length; i++){
                         if(control[this.buscarPos(vertices, aristas1[i].from)] != control[this.buscarPos(vertices, aristas1[i].to)]){

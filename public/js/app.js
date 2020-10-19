@@ -2314,6 +2314,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2369,112 +2387,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       //arista etiquetada dirigida.
-
-      /* hamiltonianonodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'},{id:'7', label:'7'},{id:'8', label:'8'}],   
-      hamiltonianoaristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'3',value:'1'},{from:'1',to:'4',value:'1'},{from:'1',to:'5',value:'1'},{from:'2',to:'3',value:'1'},{from:'2',to:'4',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'3',to:'7',value:'1'},{from:'3',to:'8',value:'1'},{from:'4',to:'7',value:'1'},{from:'4',to:'8',value:'1'},{from:'5',to:'6',value:'1'},{from:'5',to:'7',value:'1'},{from:'6',to:'7',value:'1'},{from:'7',to:'8',value:'1'}],
-       */
-
-      /* nodos:[{id:'1', label:'1'},{id:'2', label:'2'},{id:'3', label:'3'},{id:'4', label:'4'},{id:'5', label:'5'},{id:'6', label:'6'}],
-      aristas:[{from:'1',to:'2',value:'1'},{from:'1',to:'4',value:'1'},{from:'2',to:'3',value:'1'},{from:'3',to:'4',value:'1'},{from:'3',to:'5',value:'1'},{from:'3',to:'6',value:'1'},{from:'4',to:'5',value:'1'},{from:'4',to:'6',value:'1'}],
-       */
-      nodos: [{
-        id: '1',
-        label: '1'
-      }, {
-        id: '2',
-        label: '2'
-      }, {
-        id: '3',
-        label: '3'
-      }, {
-        id: '4',
-        label: '4'
-      }, {
-        id: '5',
-        label: '5'
-      }, {
-        id: '6',
-        label: '6'
-      }, {
-        id: '7',
-        label: '7'
-      }, {
-        id: '8',
-        label: '8'
-      }],
-      aristas: [{
-        from: '1',
-        to: '2',
-        label: '5'
-      }, {
-        from: '1',
-        to: '3',
-        label: '12'
-      }, {
-        from: '1',
-        to: '4',
-        label: '3'
-      }, {
-        from: '1',
-        to: '5',
-        label: '1'
-      }, {
-        from: '2',
-        to: '3',
-        label: '1'
-      }, {
-        from: '2',
-        to: '4',
-        label: '11'
-      }, {
-        from: '3',
-        to: '4',
-        label: '7'
-      }, {
-        from: '3',
-        to: '5',
-        label: '1'
-      }, {
-        from: '3',
-        to: '6',
-        label: '2'
-      }, {
-        from: '3',
-        to: '7',
-        label: '1'
-      }, {
-        from: '8',
-        to: '3',
-        label: '1'
-      }, {
-        from: '4',
-        to: '7',
-        label: '8'
-      }, {
-        from: '8',
-        to: '4',
-        label: '5'
-      }, {
-        from: '5',
-        to: '6',
-        label: '2'
-      }, {
-        from: '5',
-        to: '7',
-        label: '4'
-      }, {
-        from: '6',
-        to: '7',
-        label: '3'
-      }, {
-        from: '8',
-        to: '7',
-        label: '1'
-      }, {
-        from: '7',
-        to: '7',
-        label: '2'
-      }],
+      nodos: [],
+      aristas: [],
       matrixCaminos: [],
       euler: '',
       hamilton: [],
@@ -2499,8 +2413,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.prim(); //this.matrizCostos()
-    //this.caminoCorto2(1)
+    this.prim();
   },
   methods: {
     llamarHam: function llamarHam() {
@@ -108005,14 +107918,14 @@ var render = function() {
                                           }
                                         }),
                                         _vm._v(" "),
-                                        _c("button", [_vm._v("Consultar")])
+                                        _vm._m(4)
                                       ]
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("div", [
+                                  _c("div", { staticClass: "mb-4" }, [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                        Este es el ciclo Euleriano\n                                        " +
                                         _vm._s(_vm.arregloEuleriano) +
                                         "\n                                    "
                                     )
@@ -108021,55 +107934,82 @@ var render = function() {
                               : !_vm.euler
                               ? _c("div", [
                                   _vm._v(
-                                    "\n                                    Este grafo no es Euleriano.\n                                "
+                                    "\n                                    Este Grafo no es Euleriano.\n                                "
                                   )
                                 ])
                               : _vm._e()
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "form",
-                          {
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.isHamiltoniano($event)
-                              }
-                            }
-                          },
-                          [
-                            _c("label", [
-                              _vm._v("Ingrese id de nodo de inicio: ")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.eleccion,
-                                  expression: "eleccion"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "number", min: "1" },
-                              domProps: { value: _vm.eleccion },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.eleccion = $event.target.value
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("button", [_vm._v("Consultar")])
-                          ]
-                        )
-                      ]),
+                      _vm.controlanalisis == 3
+                        ? _c("div", [
+                            _vm.isHamiltoniano
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                                    Este Grafo es Hamiltoniano.\n                                    "
+                                  ),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.isHamiltoniano($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("label", [
+                                          _vm._v(
+                                            "Ingrese id de nodo de inicio: "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.eleccion,
+                                              expression: "eleccion"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: { type: "number", min: "1" },
+                                          domProps: { value: _vm.eleccion },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.eleccion = $event.target.value
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm._m(5)
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "mb-4" }, [
+                                    _vm._v(
+                                      "\n                                    Este es el ciclo Hamiltoniano\n                                    " +
+                                        _vm._s(_vm.hamilton) +
+                                        "\n                                "
+                                    )
+                                  ])
+                                ])
+                              : !_vm.isHamiltoniano
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                                    Este Grafo no es Hamiltoniano.\n                                "
+                                  )
+                                ])
+                              : _vm._e()
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("div")
                     ])
@@ -108138,7 +108078,7 @@ var render = function() {
                 staticClass: "card cardaux3 col-md-10 rounded-bottom",
                 attrs: { id: "arbolgenerador" }
               },
-              [_vm._m(4)]
+              [_vm._m(6)]
             )
           : _vm._e()
       ])
@@ -108185,6 +108125,26 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", [_vm._v("Este grafo "), _c("b", [_vm._v("no es Conexo")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "justify-content-center" }, [
+      _c("button", { staticClass: "btn btn-success m-3" }, [
+        _vm._v("Consultar")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "justify-content-center" }, [
+      _c("button", { staticClass: "btn btn-success m-3" }, [
+        _vm._v("Consultar")
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -121096,15 +121056,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!****************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GrafoComponent_vue_vue_type_template_id_19aec86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=template&id=19aec86e& */ "./resources/js/components/GrafoComponent.vue?vue&type=template&id=19aec86e&");
 /* harmony import */ var _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrafoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _GrafoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -121134,7 +121093,7 @@ component.options.__file = "resources/js/components/GrafoComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/GrafoComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121373,8 +121332,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\crist\Desktop\Cursos\Grafos\GLF-2020s2-Trabajo-1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/GLF-2020s2–Trabajo-1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
